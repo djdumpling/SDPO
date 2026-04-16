@@ -1,0 +1,72 @@
+defaults:
+  - sdpo
+  - _self_
+
+# Rubric prompts with two stories can be long.
+# MAX_PROMPT_LENGTH=4096
+# MAX_RESPONSE_LENGTH=4096
+# MAX_FEEDBACK_LENGTH=8192  (successful rubric demonstration)
+# TEMPLATE_LENGTH=512
+# MAX_MODEL_LEN = TEMPLATE_LENGTH + MAX_PROMPT_LENGTH + MAX_FEEDBACK_LENGTH + MAX_RESPONSE_LENGTH
+max_model_len: 16896
+
+data:
+  max_prompt_length: 4096
+  max_response_length: 4096
+  train_batch_size: 16
+
+actor_rollout_ref:
+  actor:
+    ppo_mini_batch_size: 16
+    policy_loss:
+      loss_mode: sdpo
+    self_distillation:
+      # Rubric reprompts can include a full successful rubric as demonstration
+      max_reprompt_len: 12288
+      is_clip: 2.0
+      # Reward is 0-1, margin mode centers at 0.5.
+      # 0.7 requires meaningful chosen>rejected separation.
+      success_reward_threshold: 0.7
+      # Don't show the model its own rubric as the demonstration
+      dont_reprompt_on_self_success: True
+      remove_thinking_from_demonstration: True
+      # Use judge analysis as feedback for failed rubrics
+      include_environment_feedback: True
+      environment_feedback_only_without_solution: False
+      # JSD balances mode-seeking and mode-covering
+      alpha: 0.5
+      full_logit_distillation: True
+      distillation_topk: 100
+      distillation_add_tail: True
+      teacher_regularization: ema
+      teacher_update_rate: 0.05
+      # Rubric-specific reprompt templates
+      reprompt_template: "{prompt}{solution}{feedback}\n\nGenerate a rubric for this task. Produce an <analysis> block followed by a <rubric> block."
+      solution_template: "\nHere is a rubric that successfully discriminated the preferred from the non-preferred response:\n\n{successful_previous_attempt}\n\n"
+      feedback_template: "\nFeedback on your previous rubric attempt:\n\n{feedback_raw}\n\n"
+    optim:
+      lr: 5e-6
+  rollout:
+    # Fewer rollouts than math/code since each requires 2+ judge API calls
+    n: 4
+    temperature: 0.7
+    calculate_log_probs: True
+
+algorithm:
+  adv_estimator: grpo
+  norm_adv_by_std_in_grpo: False
+  rollout_correction:
+    rollout_is: token
+    rollout_is_threshold: 2.0
+
+# Use BatchRewardManager with our custom compute_score function
+reward_model:
+  reward_manager: batch
+
+custom_reward_function:
+  path: environments/dpo_to_rupo_verl/reward_fn.py
+  name: compute_score
+
+trainer:
+  val_before_train: False
+  test_freq: 5
