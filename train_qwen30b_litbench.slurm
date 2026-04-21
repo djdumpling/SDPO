@@ -10,7 +10,7 @@
 #SBATCH --output=logs/%x-%j.out
 #SBATCH --error=logs/%x-%j.err
 
-set -euo pipefail
+set -eo pipefail
 
 REPO_ROOT="${REPO_ROOT:-/home/aw2295/scratch_pi_btk22/aw2295/sdpo/rubric-policy-optimization}"
 CONDA_ENV="${CONDA_ENV:-sdpo}"
