@@ -18,13 +18,22 @@ CONDA_ENV="${CONDA_ENV:-sdpo}"
 JUDGE_MODEL_HF="Qwen/Qwen3-4B-Instruct-2507"
 JUDGE_PORT=8000
 
-source "$HOME/.bashrc"
+# Load conda via Bouchet's Lmod.
+source /etc/profile.d/modules.sh 2>/dev/null || source /etc/profile 2>/dev/null || true
+module load miniconda
 conda activate "$CONDA_ENV"
 
+# Optional .env (wandb key, judge overrides, etc.).
 if [[ -f "$REPO_ROOT/.env" ]]; then
   set -a
   source "$REPO_ROOT/.env"
   set +a
+fi
+
+# If no wandb key, run offline so training doesn't crash on auth.
+if [[ -z "${WANDB_API_KEY:-}" ]]; then
+  echo "WARNING: WANDB_API_KEY not set; using WANDB_MODE=offline."
+  export WANDB_MODE=offline
 fi
 
 cd "$REPO_ROOT/SDPO"
@@ -33,9 +42,20 @@ mkdir -p logs
 export HF_HOME="${HF_HOME:-$REPO_ROOT/.hf_cache}"
 mkdir -p "$HF_HOME"
 
+echo "=== Job env ==="
+echo "JOB_ID=${SLURM_JOB_ID:-manual}"
+echo "NODE=$(hostname)"
+echo "CONDA_PREFIX=$CONDA_PREFIX"
+echo "CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-<unset>}"
+echo "HF_HOME=$HF_HOME"
+echo "WANDB_API_KEY=${WANDB_API_KEY:+set}${WANDB_API_KEY:-UNSET}"
+echo "WANDB_ENTITY=${WANDB_ENTITY:-<default>}"
+echo "WANDB_MODE=${WANDB_MODE:-online}"
+echo "==============="
+
 nvidia-smi
 
-# GPUs 0-3 for training, GPU 4 for the judge vLLM server.
+# Judge: Qwen3-4B on GPU index 4.
 CUDA_VISIBLE_DEVICES=4 python -m vllm.entrypoints.openai.api_server \
   --model "$JUDGE_MODEL_HF" \
   --host 127.0.0.1 \
