@@ -7,8 +7,8 @@
 #SBATCH --cpus-per-task=40
 #SBATCH --mem=640G
 #SBATCH --time=24:00:00
-#SBATCH --output=logs/%x-%j.out
-#SBATCH --error=logs/%x-%j.err
+#SBATCH --output=/home/aw2295/scratch_pi_btk22/aw2295/sdpo/rubric-policy-optimization/SDPO/logs/%x-%j.out
+#SBATCH --error=/home/aw2295/scratch_pi_btk22/aw2295/sdpo/rubric-policy-optimization/SDPO/logs/%x-%j.err
 
 set -eo pipefail
 
@@ -48,7 +48,7 @@ echo "NODE=$(hostname)"
 echo "CONDA_PREFIX=$CONDA_PREFIX"
 echo "CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-<unset>}"
 echo "HF_HOME=$HF_HOME"
-echo "WANDB_API_KEY=${WANDB_API_KEY:+set}${WANDB_API_KEY:-UNSET}"
+if [[ -n "${WANDB_API_KEY:-}" ]]; then echo "WANDB_API_KEY=SET"; else echo "WANDB_API_KEY=UNSET"; fi
 echo "WANDB_ENTITY=${WANDB_ENTITY:-<default>}"
 echo "WANDB_MODE=${WANDB_MODE:-online}"
 echo "==============="
