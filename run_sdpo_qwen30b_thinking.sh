@@ -67,7 +67,7 @@ actor_rollout_ref.actor.self_distillation.distillation_topk=100 \
 actor_rollout_ref.actor.self_distillation.dont_reprompt_on_self_success=True \
 actor_rollout_ref.actor.optim.lr_warmup_steps=10 \
 actor_rollout_ref.rollout.val_kwargs.n=8 \
-ray_kwargs.ray_init.include_dashboard=False"
++ray_kwargs.ray_init.include_dashboard=False"
 
 echo "----------------------------------------------------------------"
 echo "Starting SDPO Rubric Training (Qwen3-30B-A3B-Thinking + LoRA)"
