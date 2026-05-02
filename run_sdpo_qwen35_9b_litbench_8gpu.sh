@@ -91,7 +91,8 @@ EXP_NAME="SDPO-RUPO-bs${TRAIN_BATCH_SIZE}-n${ROLLOUT_N}-alpha${ALPHA}-lr${LR}-lo
 ARGS="data.train_batch_size=$TRAIN_BATCH_SIZE \
 data.train_files=[$TRAIN_DATA/train.parquet] \
 data.val_files=[$EVAL_DATA/test.parquet] \
-data.apply_chat_template_kwargs={enable_thinking:true} \
+data.apply_chat_template_kwargs={enable_thinking:false} \
+data.max_response_length=8192 \
 trainer.group_name=SDPO-rupo \
 trainer.n_gpus_per_node=$N_GPUS_PER_NODE \
 trainer.nnodes=$NNODES \
