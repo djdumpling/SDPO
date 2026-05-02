@@ -237,6 +237,60 @@ def _get_judge_max_tokens() -> int:
     return int(os.environ.get("JUDGE_MAX_TOKENS", "4096"))
 
 
+def _env_bool(name: str, default: bool | None = None) -> bool | None:
+    """Parse an optional boolean environment variable."""
+    value = os.environ.get(name)
+    if value is None or value == "":
+        return default
+    return value.strip().lower() in {"1", "true", "yes", "y", "on"}
+
+
+def _get_judge_extra_body() -> dict[str, Any] | None:
+    """Build vLLM-specific request options for the judge endpoint."""
+    enable_thinking = _env_bool("JUDGE_ENABLE_THINKING", None)
+    if enable_thinking is None:
+        return None
+    return {"chat_template_kwargs": {"enable_thinking": enable_thinking}}
+
+
+def _format_diagnostics(solution_str: str, rubric_text: str | None = None) -> dict[str, Any]:
+    """Return cheap parser diagnostics that can be aggregated by the trainer."""
+    return {
+        "rubric_open_seen": int("<rubric>" in solution_str),
+        "rubric_close_seen": int("</rubric>" in solution_str),
+        "analysis_open_seen": int("<analysis>" in solution_str),
+        "analysis_close_seen": int("</analysis>" in solution_str),
+        "think_open_seen": int("<think>" in solution_str),
+        "think_close_seen": int("</think>" in solution_str),
+        "response_char_count": len(solution_str),
+        "rubric_char_count": len(rubric_text or ""),
+    }
+
+
+def _format_progress_reward(solution_str: str) -> float:
+    """Return a small shaping reward for malformed thinking-mode outputs."""
+    cap = float(os.environ.get("RUBRIC_FORMAT_REWARD_MAX", "0.0"))
+    if cap <= 0.0:
+        return 0.0
+    progress = 0.0
+    if "<think>" in solution_str and "</think>" in solution_str:
+        progress += 0.2
+    if "<analysis>" in solution_str:
+        progress += 0.15
+    if "<analysis>" in solution_str and "</analysis>" in solution_str:
+        progress += 0.15
+    if "<rubric>" in solution_str:
+        progress += 0.25
+    if "<rubric>" in solution_str and "</rubric>" in solution_str:
+        progress += 0.25
+    return cap * min(progress, 1.0)
+
+
+def _missing_judge_scores() -> dict[str, float]:
+    """Return placeholder judge score fields for samples that never get scored."""
+    return {"chosen_score": float("nan"), "rejected_score": float("nan")}
+
+
 async def _run_judge_call(
     client: AsyncOpenAI,
     semaphore: asyncio.Semaphore,
@@ -251,12 +305,13 @@ async def _run_judge_call(
         messages.append({"role": "system", "content": system_prompt})
     messages.append({"role": "user", "content": judge_prompt})
 
+    extra_body = _get_judge_extra_body()
+    request_kwargs = {"model": model, "messages": messages, "max_completion_tokens": max_tokens}
+    if extra_body is not None:
+        request_kwargs["extra_body"] = extra_body
+
     async with semaphore:
-        response = await client.chat.completions.create(
-            model=model,
-            messages=messages,
-            max_completion_tokens=max_tokens,
-        )
+        response = await client.chat.completions.create(**request_kwargs)
     content = response.choices[0].message.content
     if not content:
         raise RuntimeError("Judge returned empty content.")
@@ -282,15 +337,24 @@ async def _score_one_sample(
     """Score one policy response by running the judge on chosen and rejected."""
 
     reward_type = extra_info.get("judge_reward_type", "margin")
+    diagnostics = _format_diagnostics(solution_str)
 
     # 1. Parse rubric from policy output
     rubric_text = extract_rubric_text(solution_str)
     if rubric_text is None:
+        format_reward = _format_progress_reward(solution_str)
         return {
-            "score": 0.0,
+            **diagnostics,
+            **_missing_judge_scores(),
+            "score": format_reward,
             "feedback": "Rubric extraction failed. Your response must contain <rubric>...</rubric> XML.",
             "rubric_parse_success": 0,
+            "format_reward": format_reward,
+            "judge_called": 0,
+            "judge_error": 0,
+            "judge_score_parse_success": 0,
         }
+    diagnostics = _format_diagnostics(solution_str, rubric_text)
 
     # 2. Parse ground truth
     try:
@@ -300,22 +364,50 @@ async def _score_one_sample(
         rejected_text = str(payload["rejected"]).strip()
     except (json.JSONDecodeError, KeyError, TypeError) as e:
         return {
+            **diagnostics,
+            **_missing_judge_scores(),
             "score": 0.0,
             "feedback": f"Ground truth parse error: {e}",
             "rubric_parse_success": 1,
+            "format_reward": 0.0,
+            "judge_called": 0,
+            "judge_error": 0,
+            "judge_score_parse_success": 0,
         }
 
     # 3. Route to scalar or structured scoring
-    if reward_type in _CRITERIA_REWARD_TYPES:
-        return await _score_criteria(
-            client, semaphore, model, max_tokens,
-            prompt_text, chosen_text, rejected_text, rubric_text, reward_type,
-        )
-    else:
-        return await _score_scalar(
-            client, semaphore, model, max_tokens,
-            prompt_text, chosen_text, rejected_text, rubric_text, reward_type,
-        )
+    try:
+        if reward_type in _CRITERIA_REWARD_TYPES:
+            result = await _score_criteria(
+                client, semaphore, model, max_tokens,
+                prompt_text, chosen_text, rejected_text, rubric_text, reward_type,
+            )
+        else:
+            result = await _score_scalar(
+                client, semaphore, model, max_tokens,
+                prompt_text, chosen_text, rejected_text, rubric_text, reward_type,
+            )
+    except Exception as e:
+        return {
+            **diagnostics,
+            **_missing_judge_scores(),
+            "score": 0.0,
+            "feedback": f"Judge error: {e}",
+            "rubric_parse_success": 1,
+            "format_reward": 0.0,
+            "judge_called": 1,
+            "judge_error": 1,
+            "judge_score_parse_success": 0,
+        }
+
+    return {
+        **diagnostics,
+        "format_reward": 0.0,
+        "judge_called": 1,
+        "judge_error": 0,
+        "judge_score_parse_success": 1,
+        **result,
+    }
 
 
 async def _score_scalar(
@@ -367,6 +459,7 @@ async def _score_criteria(
     inspection = inspect_structured_rubric(rubric_text)
     if not inspection.valid:
         return {
+            **_missing_judge_scores(),
             "score": 0.0,
             "feedback": (
                 f"Structured rubric is invalid: criteria={inspection.criterion_count} "
@@ -374,6 +467,10 @@ async def _score_criteria(
                 "The rubric must have 2+ criteria with positive integer weights summing to 100."
             ),
             "rubric_parse_success": 1,
+            "format_reward": 0.0,
+            "judge_called": 0,
+            "judge_error": 0,
+            "judge_score_parse_success": 0,
         }
 
     criteria = list(inspection.criteria)
@@ -483,12 +580,18 @@ def compute_score(
         results = await asyncio.gather(*tasks, return_exceptions=True)
 
         scored: list[dict[str, Any]] = []
-        for result in results:
+        for i, result in enumerate(results):
             if isinstance(result, Exception):
                 scored.append({
+                    **_format_diagnostics(solution_strs[i]),
+                    **_missing_judge_scores(),
                     "score": 0.0,
                     "feedback": f"Judge error: {result}",
                     "rubric_parse_success": 0,
+                    "format_reward": 0.0,
+                    "judge_called": 0,
+                    "judge_error": 1,
+                    "judge_score_parse_success": 0,
                 })
             else:
                 scored.append(result)

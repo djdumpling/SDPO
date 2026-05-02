@@ -72,6 +72,23 @@ from verl.workers.config import FSDPEngineConfig
 from verl.workers.utils.padding import left_right_2_no_padding, no_padding_2_padding
 
 
+def _build_reward_extra_metrics(reward_extra_infos_dict: dict[str, list]) -> dict[str, float]:
+    """Aggregate numeric reward extras so parser and judge failures are visible in logs."""
+    metrics: dict[str, float] = {}
+    for key, values in reward_extra_infos_dict.items():
+        numeric_values: list[float] = []
+        for value in values:
+            if isinstance(value, (bool, int, float, np.integer, np.floating)):
+                numeric_value = float(value)
+                if np.isfinite(numeric_value):
+                    numeric_values.append(numeric_value)
+        if not numeric_values:
+            continue
+        array = np.asarray(numeric_values, dtype=np.float64)
+        metrics[f"reward_extra/{key}/mean"] = float(array.mean())
+    return metrics
+
+
 @dataclass
 class ResourcePoolManager:
     """
@@ -1791,6 +1808,7 @@ class RayPPOTrainer:
                             metrics.update(self_distillation_metrics)
 
                         if reward_extra_infos_dict:
+                            metrics.update(_build_reward_extra_metrics(reward_extra_infos_dict))
                             batch.non_tensor_batch.update({k: np.array(v) for k, v in reward_extra_infos_dict.items()})
 
                         # compute rewards. apply_kl_penalty if available

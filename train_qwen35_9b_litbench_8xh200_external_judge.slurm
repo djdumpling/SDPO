@@ -21,6 +21,10 @@ EVAL_DATA="${EVAL_DATA:-datasets/dpo_to_rupo_litbench_ha_with_baseline_absolute}
 JUDGE_MODEL_HF="${JUDGE_MODEL_HF:-$POLICY_MODEL_HF}"
 JUDGE_PORT="${JUDGE_PORT:-8000}"
 OPENAI_API_KEY="${OPENAI_API_KEY:-EMPTY}"
+JUDGE_TP_SIZE="${JUDGE_TP_SIZE:-2}"
+JUDGE_GPU_MEMORY_UTILIZATION="${JUDGE_GPU_MEMORY_UTILIZATION:-0.55}"
+JUDGE_MAX_MODEL_LEN="${JUDGE_MAX_MODEL_LEN:-16384}"
+JUDGE_ENABLE_THINKING="${JUDGE_ENABLE_THINKING:-false}"
 
 if [[ ! -f "$VENV_PATH/bin/activate" ]]; then
   echo "Missing uv virtualenv at $VENV_PATH."
@@ -43,6 +47,10 @@ fi
 
 OPENAI_API_KEY="${OPENAI_API_KEY:-EMPTY}"
 JUDGE_MODEL_HF="${JUDGE_MODEL_HF:-$POLICY_MODEL_HF}"
+JUDGE_TP_SIZE="${JUDGE_TP_SIZE:-2}"
+JUDGE_GPU_MEMORY_UTILIZATION="${JUDGE_GPU_MEMORY_UTILIZATION:-0.55}"
+JUDGE_MAX_MODEL_LEN="${JUDGE_MAX_MODEL_LEN:-16384}"
+JUDGE_ENABLE_THINKING="${JUDGE_ENABLE_THINKING:-false}"
 
 # If no wandb key is present, run offline so training does not crash on auth.
 if [[ -z "${WANDB_API_KEY:-}" ]]; then
@@ -66,6 +74,10 @@ echo "HF_HOME=$HF_HOME"
 echo "POLICY_MODEL_HF=$POLICY_MODEL_HF"
 echo "JUDGE_MODEL_HF=$JUDGE_MODEL_HF"
 echo "JUDGE_PORT=$JUDGE_PORT"
+echo "JUDGE_TP_SIZE=$JUDGE_TP_SIZE"
+echo "JUDGE_GPU_MEMORY_UTILIZATION=$JUDGE_GPU_MEMORY_UTILIZATION"
+echo "JUDGE_MAX_MODEL_LEN=$JUDGE_MAX_MODEL_LEN"
+echo "JUDGE_ENABLE_THINKING=$JUDGE_ENABLE_THINKING"
 echo "DATASET_NAME=$DATASET_NAME"
 echo "TRAIN_DATA=$TRAIN_DATA"
 echo "EVAL_DATA=$EVAL_DATA"
@@ -85,15 +97,15 @@ fi
 
 nvidia-smi
 
-# Judge: Qwen3.5-9B on GPU indexes 0 and 1.
+# Judge: OpenAI-compatible vLLM server on GPU indexes 0 and 1.
 CUDA_VISIBLE_DEVICES=0,1 python -m vllm.entrypoints.openai.api_server \
   --model "$JUDGE_MODEL_HF" \
   --served-model-name "$JUDGE_MODEL_HF" \
   --host 127.0.0.1 \
   --port "$JUDGE_PORT" \
-  --tensor-parallel-size 2 \
-  --gpu-memory-utilization 0.6 \
-  --max-model-len 16384 \
+  --tensor-parallel-size "$JUDGE_TP_SIZE" \
+  --gpu-memory-utilization "$JUDGE_GPU_MEMORY_UTILIZATION" \
+  --max-model-len "$JUDGE_MAX_MODEL_LEN" \
   > "logs/judge-${SLURM_JOB_ID:-manual}.log" 2>&1 &
 JUDGE_PID=$!
 
@@ -125,6 +137,7 @@ fi
 export OPENAI_BASE_URL="http://127.0.0.1:${JUDGE_PORT}/v1"
 export OPENAI_API_KEY
 export JUDGE_MODEL="$JUDGE_MODEL_HF"
+export JUDGE_ENABLE_THINKING
 export CUDA_VISIBLE_DEVICES=2,3,4,5,6,7
 export N_GPUS_PER_NODE=6
 export TP_SIZE="${TP_SIZE:-1}"
