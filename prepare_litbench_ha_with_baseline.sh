@@ -2,6 +2,9 @@
 
 # Convert the exact LitBench-with-baseline Hugging Face dataset into the parquet
 # directories expected by the Qwen3.5-9B SDPO launcher.
+#
+# Assumes the SDPO virtualenv is already active. Use python directly so uv does
+# not re-resolve optional project extras during data preparation.
 
 set -eo pipefail
 
@@ -16,13 +19,13 @@ echo "Train output: $TRAIN_DATA"
 echo "Eval output: $EVAL_DATA"
 echo "----------------------------------------------------------------"
 
-uv run --active python -m environments.dpo_to_rupo_verl.preprocess_dataset \
+python -m environments.dpo_to_rupo_verl.preprocess_dataset \
   --dataset_name "$DATASET_NAME" \
   --policy_prompt_mode pair \
   --judge_reward_type margin \
   --output_dir "$TRAIN_DATA"
 
-uv run --active python -m environments.dpo_to_rupo_verl.preprocess_dataset \
+python -m environments.dpo_to_rupo_verl.preprocess_dataset \
   --dataset_name "$DATASET_NAME" \
   --policy_prompt_mode pair \
   --judge_reward_type absolute \
