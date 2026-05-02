@@ -42,9 +42,9 @@ ALPHA=${ALPHA:-0.5}
 LORA_RANK=${LORA_RANK:-32}
 LORA_ALPHA=${LORA_ALPHA:-32}
 
-# Use all eight training GPUs by default. Override TP_SIZE only if the cluster
-# launcher or model engine requires a different rollout tensor-parallel shape.
-TP_SIZE=${TP_SIZE:-8}
+# Keep tensor parallelism small for the 9B model so the remaining GPUs can be
+# used for data-parallel work without unnecessary cross-GPU communication.
+TP_SIZE=${TP_SIZE:-2}
 export N_GPUS_PER_NODE=${N_GPUS_PER_NODE:-8}
 export NNODES=${NNODES:-1}
 
@@ -101,7 +101,7 @@ EXP_NAME="SDPO-RUPO-bs${TRAIN_BATCH_SIZE}-n${ROLLOUT_N}-alpha${ALPHA}-lr${LR}-lo
 ARGS="data.train_batch_size=$TRAIN_BATCH_SIZE \
 data.train_files=[$TRAIN_DATA/train.parquet] \
 data.val_files=[$EVAL_DATA/test.parquet] \
-data.apply_chat_template_kwargs={enable_thinking:false} \
+data.apply_chat_template_kwargs={enable_thinking:true} \
 trainer.group_name=SDPO-rupo \
 trainer.n_gpus_per_node=$N_GPUS_PER_NODE \
 trainer.nnodes=$NNODES \

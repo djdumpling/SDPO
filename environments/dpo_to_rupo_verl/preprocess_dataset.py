@@ -2,7 +2,7 @@
 
 Usage:
     python -m environments.dpo_to_rupo_verl.preprocess_dataset \
-        --dataset_name sumuks/litbench-ha \
+        --dataset_name sumuks/litbench-ha-with-baseline \
         --policy_prompt_mode pair \
         --judge_reward_type margin \
         --output_dir datasets/dpo_to_rupo
@@ -134,7 +134,7 @@ def make_map_fn(
 
         user_content = build_policy_prompt(prompt_text, candidate_a, candidate_b, policy_prompt_mode)
 
-        # Build ground truth payload — the reward function uses this to recover
+        # Build ground truth payload. The reward function uses this to recover
         # the preference pair for judge scoring.
         ground_truth = json.dumps(
             {"prompt": prompt_text, "chosen": chosen_text, "rejected": rejected_text},
@@ -195,7 +195,7 @@ def preprocess(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Convert DPO datasets to verl parquet for SDPO rubric training.")
-    parser.add_argument("--dataset_name", type=str, default="sumuks/litbench-ha", help="HuggingFace dataset name.")
+    parser.add_argument("--dataset_name", type=str, default="sumuks/litbench-ha-with-baseline", help="HuggingFace dataset name.")
     parser.add_argument("--policy_prompt_mode", type=str, default="pair", choices=["pair", "prompt_only"])
     parser.add_argument("--judge_reward_type", type=str, default="margin")
     parser.add_argument("--randomize_order", type=bool, default=True)
