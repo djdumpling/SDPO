@@ -99,7 +99,6 @@ actor_rollout_ref.rollout.n=$ROLLOUT_N \
 actor_rollout_ref.rollout.tensor_model_parallel_size=$TP_SIZE \
 actor_rollout_ref.rollout.gpu_memory_utilization=0.7 \
 actor_rollout_ref.model.path=$MODEL_PATH \
-+actor_rollout_ref.model.override_config.attn_implementation=sdpa \
 actor_rollout_ref.model.lora_rank=$LORA_RANK \
 actor_rollout_ref.model.lora_alpha=$LORA_ALPHA \
 actor_rollout_ref.model.target_modules=all-linear \
