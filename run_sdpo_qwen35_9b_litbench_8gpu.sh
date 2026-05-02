@@ -126,7 +126,6 @@ actor_rollout_ref.rollout.log_prob_max_token_len_per_gpu=$LOG_PROB_MAX_TOKEN_LEN
 actor_rollout_ref.model.path=$MODEL_PATH \
 actor_rollout_ref.model.lora_rank=$LORA_RANK \
 actor_rollout_ref.model.lora_alpha=$LORA_ALPHA \
-actor_rollout_ref.model.target_modules=all-linear \
 actor_rollout_ref.actor.ppo_mini_batch_size=$TRAIN_BATCH_SIZE \
 actor_rollout_ref.actor.ppo_max_token_len_per_gpu=$PPO_MAX_TOKEN_LEN_PER_GPU \
 actor_rollout_ref.actor.optim.lr=$LR \

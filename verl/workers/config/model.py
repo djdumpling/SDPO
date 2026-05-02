@@ -78,7 +78,10 @@ class HFModelConfig(BaseConfig):
     # fsdp lora related. We may setup a separate config later
     lora_rank: int = 0
     lora_alpha: int = 16
-    target_modules: Optional[str] = "all-linear"
+    # Typed as Any so OmegaConf accepts both `"all-linear"` and an explicit
+    # list like `[q_proj, k_proj, ...]`. OmegaConf does not support
+    # `Union[str, list[str]]` in structured-config schemas.
+    target_modules: Any = "all-linear"
 
     exclude_modules: Optional[str] = None
 

@@ -16,6 +16,17 @@ data:
   train_batch_size: 16
 
 actor_rollout_ref:
+  model:
+    # Restrict LoRA to Qwen3's attention + MLP linears. `all-linear` (the parent
+    # default) also wraps the LM head, which corrupts vLLM's rollout outputs.
+    target_modules:
+      - q_proj
+      - k_proj
+      - v_proj
+      - o_proj
+      - gate_proj
+      - up_proj
+      - down_proj
   actor:
     ppo_mini_batch_size: 16
     policy_loss:
