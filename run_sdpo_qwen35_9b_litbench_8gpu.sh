@@ -4,12 +4,7 @@
 #
 # Usage:
 #   # 1. Preprocess LitBench twice so training and eval can use different reward shaping.
-#   uv run --active python -m environments.dpo_to_rupo_verl.preprocess_dataset \
-#       --dataset_name sumuks/litbench-ha-with-baseline --policy_prompt_mode pair \
-#       --judge_reward_type margin --output_dir datasets/dpo_to_rupo_litbench_ha_with_baseline_margin
-#   uv run --active python -m environments.dpo_to_rupo_verl.preprocess_dataset \
-#       --dataset_name sumuks/litbench-ha-with-baseline --policy_prompt_mode pair \
-#       --judge_reward_type absolute --output_dir datasets/dpo_to_rupo_litbench_ha_with_baseline_absolute
+#   ./prepare_litbench_ha_with_baseline.sh
 #
 #   # 2. Start a vLLM OpenAI-compatible Qwen3.5-9B judge endpoint elsewhere and export:
 #   #      OPENAI_BASE_URL=http://<judge-host>:8000/v1
@@ -82,10 +77,7 @@ fi
 if [[ ! -f "$PROJECT_ROOT/$TRAIN_DATA/train.parquet" || ! -f "$PROJECT_ROOT/$EVAL_DATA/test.parquet" ]]; then
     echo "Missing preprocessed LitBench parquet files."
     echo "Run these from $PROJECT_ROOT:"
-    echo "  uv run --active python -m environments.dpo_to_rupo_verl.preprocess_dataset \\"
-    echo "      --dataset_name $DATASET_NAME --policy_prompt_mode pair --judge_reward_type margin --output_dir $TRAIN_DATA"
-    echo "  uv run --active python -m environments.dpo_to_rupo_verl.preprocess_dataset \\"
-    echo "      --dataset_name $DATASET_NAME --policy_prompt_mode pair --judge_reward_type absolute --output_dir $EVAL_DATA"
+    echo "  ./prepare_litbench_ha_with_baseline.sh"
     exit 1
 fi
 

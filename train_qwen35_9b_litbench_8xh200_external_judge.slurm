@@ -1,10 +1,11 @@
 #!/bin/bash
 #SBATCH --job-name=sdpo-qwen35-9b-litbench
+#SBATCH --partition=gpu_h200
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --gpus=h200:8
 #SBATCH --cpus-per-task=64
-#SBATCH --mem=1024G
+#SBATCH --mem=0
 #SBATCH --time=24:00:00
 #SBATCH --output=/root/rubric-policy-optimization/SDPO/logs/%x-%j.out
 #SBATCH --error=/root/rubric-policy-optimization/SDPO/logs/%x-%j.err
@@ -25,9 +26,11 @@ OPENAI_API_KEY="${OPENAI_API_KEY:-EMPTY}"
 
 if [[ ! -f "$VENV_PATH/bin/activate" ]]; then
   echo "Missing uv virtualenv at $VENV_PATH."
-  echo "Create it on the training node before submitting, for example:"
+  echo "Install SDPO dependencies on the training node before submitting."
+  echo "One known-good path is the repo's SDPO install instructions, then create this uv environment:"
   echo "  cd $REPO_ROOT/SDPO"
-  echo "  uv sync"
+  echo "  uv venv .venv"
+  echo "  source .venv/bin/activate"
   exit 1
 fi
 
@@ -87,10 +90,7 @@ echo "==============="
 if [[ ! -f "$TRAIN_DATA/train.parquet" || ! -f "$EVAL_DATA/test.parquet" ]]; then
   echo "Missing preprocessed LitBench parquet files."
   echo "Run these from $REPO_ROOT/SDPO before submitting:"
-  echo "  uv run --active python -m environments.dpo_to_rupo_verl.preprocess_dataset \\"
-  echo "      --dataset_name $DATASET_NAME --policy_prompt_mode pair --judge_reward_type margin --output_dir $TRAIN_DATA"
-  echo "  uv run --active python -m environments.dpo_to_rupo_verl.preprocess_dataset \\"
-  echo "      --dataset_name $DATASET_NAME --policy_prompt_mode pair --judge_reward_type absolute --output_dir $EVAL_DATA"
+  echo "  ./prepare_litbench_ha_with_baseline.sh"
   exit 1
 fi
 
