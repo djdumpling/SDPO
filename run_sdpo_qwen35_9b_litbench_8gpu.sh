@@ -24,22 +24,22 @@ TRAIN_DATA="${TRAIN_DATA:-datasets/dpo_to_rupo_litbench_ha_with_baseline_margin}
 EVAL_DATA="${EVAL_DATA:-datasets/dpo_to_rupo_litbench_ha_with_baseline_absolute}"
 MODEL_PATH="${MODEL_PATH:-Qwen/Qwen3-8B}"
 
-# Thinking-mode rollouts are much longer than non-thinking rubric outputs. Keep
-# the default effective rollout count at 24 samples per step on six train GPUs.
-TRAIN_BATCH_SIZE=${TRAIN_BATCH_SIZE:-6}
+# Non-thinking rubric generation should emit final XML directly. Batch 12 keeps
+# the effective rollout count at 48 samples per step on six train GPUs.
+TRAIN_BATCH_SIZE=${TRAIN_BATCH_SIZE:-12}
 ROLLOUT_N=${ROLLOUT_N:-4}
 LR=${LR:-5e-6}
 ALPHA=${ALPHA:-0.5}
 
-# Longer responses give Qwen room to close thinking and still emit final XML.
-# The rollout context is intentionally bounded to avoid over-growing KV cache.
-ENABLE_THINKING="${ENABLE_THINKING:-true}"
+# Disable Qwen thinking mode for the policy path. The model should produce the
+# public <analysis> block and <rubric> block without hidden thinking tokens.
+ENABLE_THINKING="${ENABLE_THINKING:-false}"
 MAX_PROMPT_LENGTH=${MAX_PROMPT_LENGTH:-4096}
-MAX_RESPONSE_LENGTH=${MAX_RESPONSE_LENGTH:-8192}
-MAX_REPROMPT_LEN=${MAX_REPROMPT_LEN:-16384}
-MAX_MODEL_LEN=${MAX_MODEL_LEN:-24576}
-ROLLOUT_MAX_MODEL_LEN=${ROLLOUT_MAX_MODEL_LEN:-16384}
-ROLLOUT_MAX_NUM_BATCHED_TOKENS=${ROLLOUT_MAX_NUM_BATCHED_TOKENS:-24576}
+MAX_RESPONSE_LENGTH=${MAX_RESPONSE_LENGTH:-4096}
+MAX_REPROMPT_LEN=${MAX_REPROMPT_LEN:-12288}
+MAX_MODEL_LEN=${MAX_MODEL_LEN:-16384}
+ROLLOUT_MAX_MODEL_LEN=${ROLLOUT_MAX_MODEL_LEN:-12288}
+ROLLOUT_MAX_NUM_BATCHED_TOKENS=${ROLLOUT_MAX_NUM_BATCHED_TOKENS:-16384}
 ROLLOUT_MAX_NUM_SEQS=${ROLLOUT_MAX_NUM_SEQS:-64}
 ROLLOUT_GPU_MEMORY_UTILIZATION=${ROLLOUT_GPU_MEMORY_UTILIZATION:-0.55}
 PPO_MAX_TOKEN_LEN_PER_GPU=${PPO_MAX_TOKEN_LEN_PER_GPU:-32768}
@@ -52,7 +52,7 @@ LORA_RANK=${LORA_RANK:-32}
 LORA_ALPHA=${LORA_ALPHA:-32}
 
 # Keep tensor parallelism off by default for the 8B/9B dense model on H200s so
-# six rollout replicas can share the long thinking workload.
+# six rollout replicas can share the non-thinking rollout workload.
 TP_SIZE=${TP_SIZE:-1}
 export N_GPUS_PER_NODE=${N_GPUS_PER_NODE:-6}
 export NNODES=${NNODES:-1}
@@ -66,9 +66,9 @@ export JUDGE_ENABLE_THINKING="${JUDGE_ENABLE_THINKING:-false}"
 export JUDGE_MAX_CONCURRENT="${JUDGE_MAX_CONCURRENT:-32}"
 export JUDGE_MAX_TOKENS="${JUDGE_MAX_TOKENS:-1024}"
 export JUDGE_TIMEOUT="${JUDGE_TIMEOUT:-900}"
-export RUBRIC_FORMAT_REWARD_MAX="${RUBRIC_FORMAT_REWARD_MAX:-0.1}"
+export RUBRIC_FORMAT_REWARD_MAX="${RUBRIC_FORMAT_REWARD_MAX:-0.0}"
 
-SUFFIX=${1:-"qwen35_9b_litbench_ha_with_baseline_local_judge"}
+SUFFIX=${1:-"qwen3_8b_litbench_ha_with_baseline_local_judge_nonthinking"}
 
 # -----------------------------------------------------------------------------
 # Setup

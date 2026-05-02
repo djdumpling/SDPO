@@ -98,17 +98,6 @@ def write_rowgrouped_large(ds: datasets.Dataset, path: str, rows_per_group: int 
 # Row mapping
 # ---------------------------------------------------------------------------
 
-THINKING_SYSTEM_PROMPT_APPENDIX = """
-
-Thinking-mode output contract
-- Use the model's thinking channel for private scratch work when it is available.
-- Close any `<think>` block before emitting the final XML.
-- The final answer must contain exactly one closed `<analysis>...</analysis>` block followed by one closed `<rubric>...</rubric>` block.
-- Keep the final `<analysis>` concise. Put detailed private reasoning in the thinking channel, not in the final XML.
-- Always finish the closing `</rubric>` tag before the response ends.
-"""
-
-
 def _parse_bool(value: str | bool) -> bool:
     """Parse shell-friendly boolean values from CLI arguments."""
     if isinstance(value, bool):
@@ -121,32 +110,19 @@ def _parse_bool(value: str | bool) -> bool:
     raise argparse.ArgumentTypeError(f"Expected a boolean value, got {value!r}.")
 
 
-def _make_thinking_aware_system_prompt(system_prompt: str) -> str:
-    """Adjust the policy prompt so hidden thinking and final XML do not compete."""
-    private_analysis_instruction = "1. First reason privately inside `<analysis>...</analysis>`."
-    final_analysis_instruction = (
-        "1. Use the model's thinking channel for private scratch work if it is available. "
-        "After thinking, write a concise public `<analysis>...</analysis>` summary."
-    )
-    system_prompt = system_prompt.replace(private_analysis_instruction, final_analysis_instruction)
-    return system_prompt.rstrip() + THINKING_SYSTEM_PROMPT_APPENDIX
-
-
 def _get_system_prompt(
     policy_prompt_mode: str,
     judge_reward_type: str,
     custom_system_prompt: str | None,
-    enable_thinking_prompt: bool,
 ) -> str:
     """Return the system prompt for the policy model."""
     if custom_system_prompt:
-        base = custom_system_prompt
-    else:
-        base = DEFAULT_PAIR_SYSTEM_PROMPT if policy_prompt_mode == "pair" else DEFAULT_PROMPT_ONLY_SYSTEM_PROMPT
+        return custom_system_prompt
 
+    base = DEFAULT_PAIR_SYSTEM_PROMPT if policy_prompt_mode == "pair" else DEFAULT_PROMPT_ONLY_SYSTEM_PROMPT
     if judge_reward_type in CRITERIA_REWARD_TYPES:
-        base = base + CRITERIA_RUBRIC_FORMAT_APPENDIX
-    return _make_thinking_aware_system_prompt(base) if enable_thinking_prompt else base
+        return base + CRITERIA_RUBRIC_FORMAT_APPENDIX
+    return base
 
 
 def make_map_fn(
@@ -210,12 +186,11 @@ def preprocess(
     judge_reward_type: str = "margin",
     randomize_order: bool = True,
     custom_system_prompt: str | None = None,
-    enable_thinking_prompt: bool = False,
     output_dir: str = "datasets/dpo_to_rupo",
 ) -> None:
     os.makedirs(output_dir, exist_ok=True)
 
-    system_prompt = _get_system_prompt(policy_prompt_mode, judge_reward_type, custom_system_prompt, enable_thinking_prompt)
+    system_prompt = _get_system_prompt(policy_prompt_mode, judge_reward_type, custom_system_prompt)
 
     for split in ("train", "test"):
         print(f"Loading {dataset_name} split={split}...")
@@ -236,7 +211,6 @@ if __name__ == "__main__":
     parser.add_argument("--policy_prompt_mode", type=str, default="pair", choices=["pair", "prompt_only"])
     parser.add_argument("--judge_reward_type", type=str, default="margin")
     parser.add_argument("--randomize_order", type=_parse_bool, default=True)
-    parser.add_argument("--enable_thinking_prompt", type=_parse_bool, default=False)
     parser.add_argument("--output_dir", type=str, default="datasets/dpo_to_rupo")
     args = parser.parse_args()
 
@@ -245,6 +219,5 @@ if __name__ == "__main__":
         policy_prompt_mode=args.policy_prompt_mode,
         judge_reward_type=args.judge_reward_type,
         randomize_order=args.randomize_order,
-        enable_thinking_prompt=args.enable_thinking_prompt,
         output_dir=args.output_dir,
     )

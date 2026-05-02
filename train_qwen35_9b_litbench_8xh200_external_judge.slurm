@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=sdpo-qwen35-9b-litbench
+#SBATCH --job-name=sdpo-qwen3-8b-litbench-nonthink
 #SBATCH --partition=gpu_h200
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
