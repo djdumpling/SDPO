@@ -98,6 +98,11 @@ fi
 nvidia-smi
 
 # Judge: OpenAI-compatible vLLM server on GPU indexes 0 and 1.
+# - --max-num-seqs caps concurrent decode batches so the judge's KV cache
+#   pressure stays predictable when the policy floods it during rollout.
+# - --generation-config vllm ignores the model's generation_config.json so our
+#   per-request sampling params (max_tokens, temperature) actually take effect.
+#   Without this Qwen3's defaults silently override our settings.
 CUDA_VISIBLE_DEVICES=0,1 python -m vllm.entrypoints.openai.api_server \
   --model "$JUDGE_MODEL_HF" \
   --served-model-name "$JUDGE_MODEL_HF" \
@@ -106,6 +111,8 @@ CUDA_VISIBLE_DEVICES=0,1 python -m vllm.entrypoints.openai.api_server \
   --tensor-parallel-size "$JUDGE_TP_SIZE" \
   --gpu-memory-utilization "$JUDGE_GPU_MEMORY_UTILIZATION" \
   --max-model-len "$JUDGE_MAX_MODEL_LEN" \
+  --max-num-seqs 32 \
+  --generation-config vllm \
   > "logs/judge-${SLURM_JOB_ID:-manual}.log" 2>&1 &
 JUDGE_PID=$!
 

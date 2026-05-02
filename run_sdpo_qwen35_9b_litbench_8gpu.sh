@@ -42,6 +42,21 @@ ROLLOUT_MAX_MODEL_LEN=${ROLLOUT_MAX_MODEL_LEN:-12288}
 ROLLOUT_MAX_NUM_BATCHED_TOKENS=${ROLLOUT_MAX_NUM_BATCHED_TOKENS:-16384}
 ROLLOUT_MAX_NUM_SEQS=${ROLLOUT_MAX_NUM_SEQS:-64}
 ROLLOUT_GPU_MEMORY_UTILIZATION=${ROLLOUT_GPU_MEMORY_UTILIZATION:-0.55}
+# `dummy` (verl default) inits vLLM with random weights and expects a runtime
+# FSDP -> vLLM weight sync. That sync was not populating the rollout engine in
+# our setup (rollouts emitted multilingual gibberish; rollout_log_ppl pinned at
+# ln(vocab_size)). Force a real disk load so vLLM has correct base weights from
+# step 0. `safetensors` is more explicit than `auto` and matches Qwen3-8B's
+# on-disk format.
+ROLLOUT_LOAD_FORMAT=${ROLLOUT_LOAD_FORMAT:-safetensors}
+
+# Checkpoint and validation cadence. ppo_trainer.yaml defaults save_freq to -1
+# (never save) and sdpo_rupo.yaml hard-codes test_freq=5 (every 5 steps -> very
+# expensive). Override both. data.val_batch_size chunks the val set; null would
+# evaluate the entire set in one giant batch.
+SAVE_FREQ=${SAVE_FREQ:-50}
+TEST_FREQ=${TEST_FREQ:-50}
+VAL_BATCH_SIZE=${VAL_BATCH_SIZE:-12}
 PPO_MAX_TOKEN_LEN_PER_GPU=${PPO_MAX_TOKEN_LEN_PER_GPU:-32768}
 LOG_PROB_MAX_TOKEN_LEN_PER_GPU=${LOG_PROB_MAX_TOKEN_LEN_PER_GPU:-32768}
 ROLLOUT_DATA_DIR=${ROLLOUT_DATA_DIR:-null}
@@ -116,6 +131,9 @@ trainer.group_name=SDPO-rupo \
 trainer.n_gpus_per_node=$N_GPUS_PER_NODE \
 trainer.nnodes=$NNODES \
 trainer.rollout_data_dir=$ROLLOUT_DATA_DIR \
+trainer.save_freq=$SAVE_FREQ \
+trainer.test_freq=$TEST_FREQ \
+data.val_batch_size=$VAL_BATCH_SIZE \
 actor_rollout_ref.rollout.n=$ROLLOUT_N \
 actor_rollout_ref.rollout.tensor_model_parallel_size=$TP_SIZE \
 actor_rollout_ref.rollout.gpu_memory_utilization=$ROLLOUT_GPU_MEMORY_UTILIZATION \
@@ -123,6 +141,7 @@ actor_rollout_ref.rollout.max_model_len=$ROLLOUT_MAX_MODEL_LEN \
 actor_rollout_ref.rollout.max_num_batched_tokens=$ROLLOUT_MAX_NUM_BATCHED_TOKENS \
 actor_rollout_ref.rollout.max_num_seqs=$ROLLOUT_MAX_NUM_SEQS \
 actor_rollout_ref.rollout.log_prob_max_token_len_per_gpu=$LOG_PROB_MAX_TOKEN_LEN_PER_GPU \
+actor_rollout_ref.rollout.load_format=$ROLLOUT_LOAD_FORMAT \
 actor_rollout_ref.model.path=$MODEL_PATH \
 actor_rollout_ref.model.lora_rank=$LORA_RANK \
 actor_rollout_ref.model.lora_alpha=$LORA_ALPHA \
@@ -150,6 +169,8 @@ echo "Rollout KV: gpu util $ROLLOUT_GPU_MEMORY_UTILIZATION  max batched tokens $
 echo "Judge endpoint: $OPENAI_BASE_URL"
 echo "Judge model: $JUDGE_MODEL  judge thinking: $JUDGE_ENABLE_THINKING"
 echo "Format reward max: $RUBRIC_FORMAT_REWARD_MAX  rollout dump: $ROLLOUT_DATA_DIR"
+echo "Rollout load format: $ROLLOUT_LOAD_FORMAT"
+echo "Save freq: $SAVE_FREQ  test freq: $TEST_FREQ  val batch size: $VAL_BATCH_SIZE"
 echo "----------------------------------------------------------------"
 
 bash "$PROJECT_ROOT/training/verl_training.sh" "$EXP_NAME" "$CONFIG_NAME" "$TRAIN_DATA" $ARGS
