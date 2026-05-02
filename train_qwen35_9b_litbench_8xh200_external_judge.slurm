@@ -18,10 +18,8 @@ POLICY_MODEL_HF="${POLICY_MODEL_HF:-Qwen/Qwen3.5-9B}"
 DATASET_NAME="${DATASET_NAME:-sumuks/litbench-ha-with-baseline}"
 TRAIN_DATA="${TRAIN_DATA:-datasets/dpo_to_rupo_litbench_ha_with_baseline_margin}"
 EVAL_DATA="${EVAL_DATA:-datasets/dpo_to_rupo_litbench_ha_with_baseline_absolute}"
-# The judge is the same Qwen3.5-9B model served from a separate inference box.
-# OPENAI_BASE_URL is only the OpenAI-compatible vLLM API URL, not an OpenAI model.
-JUDGE_MODEL="${JUDGE_MODEL:-$POLICY_MODEL_HF}"
-OPENAI_BASE_URL="${OPENAI_BASE_URL:-${JUDGE_BASE_URL:-}}"
+JUDGE_MODEL_HF="${JUDGE_MODEL_HF:-$POLICY_MODEL_HF}"
+JUDGE_PORT="${JUDGE_PORT:-8000}"
 OPENAI_API_KEY="${OPENAI_API_KEY:-EMPTY}"
 
 if [[ ! -f "$VENV_PATH/bin/activate" ]]; then
@@ -36,24 +34,15 @@ fi
 
 source "$REPO_ROOT/SDPO/.venv/bin/activate"
 
-# Optional .env can carry WANDB_API_KEY, OPENAI_BASE_URL, JUDGE_MODEL, etc.
+# Optional .env can carry WANDB_API_KEY, JUDGE_MAX_CONCURRENT, model overrides, etc.
 if [[ -f "$REPO_ROOT/.env" ]]; then
   set -a
   source "$REPO_ROOT/.env"
   set +a
 fi
 
-OPENAI_BASE_URL="${OPENAI_BASE_URL:-${JUDGE_BASE_URL:-}}"
 OPENAI_API_KEY="${OPENAI_API_KEY:-EMPTY}"
-JUDGE_MODEL="${JUDGE_MODEL:-$POLICY_MODEL_HF}"
-
-if [[ -z "$OPENAI_BASE_URL" ]]; then
-  echo "Missing external judge endpoint."
-  echo "Set OPENAI_BASE_URL, for example:"
-  echo "  export OPENAI_BASE_URL=http://<judge-host>:8000/v1"
-  echo "  export JUDGE_MODEL=$JUDGE_MODEL"
-  exit 1
-fi
+JUDGE_MODEL_HF="${JUDGE_MODEL_HF:-$POLICY_MODEL_HF}"
 
 # If no wandb key is present, run offline so training does not crash on auth.
 if [[ -z "${WANDB_API_KEY:-}" ]]; then
@@ -75,11 +64,11 @@ echo "PYTHON=$(command -v python)"
 echo "CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-<unset>}"
 echo "HF_HOME=$HF_HOME"
 echo "POLICY_MODEL_HF=$POLICY_MODEL_HF"
+echo "JUDGE_MODEL_HF=$JUDGE_MODEL_HF"
+echo "JUDGE_PORT=$JUDGE_PORT"
 echo "DATASET_NAME=$DATASET_NAME"
 echo "TRAIN_DATA=$TRAIN_DATA"
 echo "EVAL_DATA=$EVAL_DATA"
-echo "OPENAI_BASE_URL=$OPENAI_BASE_URL"
-echo "JUDGE_MODEL=$JUDGE_MODEL"
 if [[ -n "${WANDB_API_KEY:-}" ]]; then echo "WANDB_API_KEY=SET"; else echo "WANDB_API_KEY=UNSET"; fi
 echo "WANDB_ENTITY=${WANDB_ENTITY:-<default>}"
 echo "WANDB_MODE=${WANDB_MODE:-online}"
@@ -94,20 +83,50 @@ if [[ ! -f "$TRAIN_DATA/train.parquet" || ! -f "$EVAL_DATA/test.parquet" ]]; the
   exit 1
 fi
 
-echo "Checking external judge endpoint..."
-if ! curl -s --max-time 10 "${OPENAI_BASE_URL%/}/models" > /dev/null; then
-  echo "External judge endpoint did not answer at ${OPENAI_BASE_URL%/}/models."
-  echo "Start the judge server first, and make sure OPENAI_BASE_URL includes /v1."
+nvidia-smi
+
+# Judge: Qwen3.5-9B on GPU indexes 0 and 1.
+CUDA_VISIBLE_DEVICES=0,1 python -m vllm.entrypoints.openai.api_server \
+  --model "$JUDGE_MODEL_HF" \
+  --served-model-name "$JUDGE_MODEL_HF" \
+  --host 127.0.0.1 \
+  --port "$JUDGE_PORT" \
+  --tensor-parallel-size 2 \
+  --gpu-memory-utilization 0.9 \
+  --max-model-len 16384 \
+  > "logs/judge-${SLURM_JOB_ID:-manual}.log" 2>&1 &
+JUDGE_PID=$!
+
+cleanup() {
+  echo "Stopping judge (pid=$JUDGE_PID)..."
+  kill "$JUDGE_PID" 2>/dev/null || true
+  wait "$JUDGE_PID" 2>/dev/null || true
+}
+trap cleanup EXIT
+
+echo "Waiting for judge server on port $JUDGE_PORT..."
+for i in $(seq 1 120); do
+  if curl -s --max-time 2 "http://127.0.0.1:${JUDGE_PORT}/v1/models" > /dev/null; then
+    echo "Judge ready after ${i} attempts."
+    break
+  fi
+  if ! kill -0 "$JUDGE_PID" 2>/dev/null; then
+    echo "Judge process died before becoming ready. See logs/judge-${SLURM_JOB_ID:-manual}.log"
+    exit 1
+  fi
+  sleep 5
+done
+
+if ! curl -s --max-time 2 "http://127.0.0.1:${JUDGE_PORT}/v1/models" > /dev/null; then
+  echo "Judge failed to come up within 10 minutes."
   exit 1
 fi
 
-nvidia-smi
-
-export OPENAI_BASE_URL
+export OPENAI_BASE_URL="http://127.0.0.1:${JUDGE_PORT}/v1"
 export OPENAI_API_KEY
-export JUDGE_MODEL
-export CUDA_VISIBLE_DEVICES="${CUDA_VISIBLE_DEVICES:-0,1,2,3,4,5,6,7}"
-export N_GPUS_PER_NODE=8
+export JUDGE_MODEL="$JUDGE_MODEL_HF"
+export CUDA_VISIBLE_DEVICES=2,3,4,5,6,7
+export N_GPUS_PER_NODE=6
 export TP_SIZE="${TP_SIZE:-2}"
 export MODEL_PATH="$POLICY_MODEL_HF"
 export DATASET_NAME

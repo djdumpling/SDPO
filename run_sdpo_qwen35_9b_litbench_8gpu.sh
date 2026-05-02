@@ -6,12 +6,11 @@
 #   # 1. Preprocess LitBench twice so training and eval can use different reward shaping.
 #   ./prepare_litbench_ha_with_baseline.sh
 #
-#   # 2. Start a vLLM OpenAI-compatible Qwen3.5-9B judge endpoint elsewhere and export:
-#   #      OPENAI_BASE_URL=http://<judge-host>:8000/v1
-#   #      JUDGE_MODEL=Qwen/Qwen3.5-9B
+#   # 2. Submit the Slurm wrapper. It starts a local vLLM judge on two GPUs
+#   #    and trains on the other six GPUs.
 #
 #   # 3. Run training from this directory or submit:
-#   #      train_qwen35_9b_litbench_8xh200_external_judge.slurm
+#   #      the 8xH200 Slurm wrapper.
 
 # -----------------------------------------------------------------------------
 # Configuration
@@ -25,26 +24,26 @@ TRAIN_DATA="${TRAIN_DATA:-datasets/dpo_to_rupo_litbench_ha_with_baseline_margin}
 EVAL_DATA="${EVAL_DATA:-datasets/dpo_to_rupo_litbench_ha_with_baseline_absolute}"
 MODEL_PATH="${MODEL_PATH:-Qwen/Qwen3.5-9B}"
 
-# Conservative defaults for 9B dense on 8 H200s. Increase train batch only after
-# a short smoke run confirms memory and judge throughput are stable.
-TRAIN_BATCH_SIZE=${TRAIN_BATCH_SIZE:-16}
+# Conservative defaults for 9B dense with 6 training H200s. With ROLLOUT_N=4,
+# batch 18 produces 72 rollout samples, which divides cleanly across 6 GPUs.
+TRAIN_BATCH_SIZE=${TRAIN_BATCH_SIZE:-18}
 ROLLOUT_N=${ROLLOUT_N:-4}
 LR=${LR:-5e-6}
 ALPHA=${ALPHA:-0.5}
 
-# LoRA keeps the full-node run memory-predictable while still letting all eight
-# GPUs participate in rollout and actor work.
+# LoRA keeps the split-node run memory-predictable while the Slurm wrapper uses
+# two GPUs for judging and six GPUs for rollout and actor work.
 LORA_RANK=${LORA_RANK:-32}
 LORA_ALPHA=${LORA_ALPHA:-32}
 
 # Keep tensor parallelism small for the 9B model so the remaining GPUs can be
 # used for data-parallel work without unnecessary cross-GPU communication.
 TP_SIZE=${TP_SIZE:-2}
-export N_GPUS_PER_NODE=${N_GPUS_PER_NODE:-8}
+export N_GPUS_PER_NODE=${N_GPUS_PER_NODE:-6}
 export NNODES=${NNODES:-1}
 
-# The reward function talks to an external vLLM endpoint serving Qwen3.5-9B.
-# OPENAI_BASE_URL is the API compatibility variable expected by the OpenAI client.
+# The reward function talks to the OpenAI-compatible vLLM judge endpoint. The
+# Slurm wrapper starts this locally before invoking this training launcher.
 export OPENAI_BASE_URL="${OPENAI_BASE_URL:-${JUDGE_BASE_URL:-}}"
 export OPENAI_API_KEY="${OPENAI_API_KEY:-EMPTY}"
 export JUDGE_MODEL="${JUDGE_MODEL:-$MODEL_PATH}"
@@ -52,7 +51,7 @@ export JUDGE_MAX_CONCURRENT="${JUDGE_MAX_CONCURRENT:-64}"
 export JUDGE_MAX_TOKENS="${JUDGE_MAX_TOKENS:-4096}"
 export JUDGE_TIMEOUT="${JUDGE_TIMEOUT:-900}"
 
-SUFFIX=${1:-"qwen35_9b_litbench_ha_with_baseline_external_judge"}
+SUFFIX=${1:-"qwen35_9b_litbench_ha_with_baseline_local_judge"}
 
 # -----------------------------------------------------------------------------
 # Setup
@@ -65,10 +64,9 @@ export PYTHONPATH=$PROJECT_ROOT:$PYTHONPATH
 export USER=${USER:-$(whoami)}
 
 if [[ -z "$OPENAI_BASE_URL" ]]; then
-    echo "Missing external judge endpoint."
-    echo "Set OPENAI_BASE_URL, for example:"
-    echo "  export OPENAI_BASE_URL=http://<judge-host>:8000/v1"
-    echo "  export JUDGE_MODEL=$JUDGE_MODEL"
+    echo "Missing judge endpoint."
+    echo "Run through the 8xH200 Slurm wrapper,"
+    echo "or export OPENAI_BASE_URL before invoking this helper directly."
     exit 1
 fi
 
@@ -104,6 +102,7 @@ actor_rollout_ref.model.path=$MODEL_PATH \
 actor_rollout_ref.model.lora_rank=$LORA_RANK \
 actor_rollout_ref.model.lora_alpha=$LORA_ALPHA \
 actor_rollout_ref.model.target_modules=all-linear \
+actor_rollout_ref.actor.ppo_mini_batch_size=$TRAIN_BATCH_SIZE \
 actor_rollout_ref.actor.optim.lr=$LR \
 actor_rollout_ref.actor.self_distillation.alpha=$ALPHA \
 actor_rollout_ref.actor.self_distillation.distillation_topk=100 \
