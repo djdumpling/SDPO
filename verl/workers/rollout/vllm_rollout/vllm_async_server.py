@@ -503,6 +503,11 @@ class vLLMHttpServer:
             multi_modal_data["video"] = video_data
 
         prompt = TokensPrompt(prompt_token_ids=prompt_ids, multi_modal_data=multi_modal_data)
+        # vLLM 0.20+ input_processor branches on "type" key; without it, the
+        # prompt is treated as a raw text and the deprecated path mis-tokenizes,
+        # causing TypeError at validation. Tag explicitly.
+        if "type" not in prompt:
+            prompt["type"] = "multimodal" if multi_modal_data else "token"
 
         # Add lora request
         lora_request = None

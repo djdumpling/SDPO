@@ -302,6 +302,14 @@ class AgentLoopBase(ABC):
                     **self.apply_chat_template_kwargs,
                 ),
             )
+            # transformers 5.x defaults apply_chat_template(tokenize=True) to
+            # return_dict=True, yielding a BatchEncoding instead of list[int].
+            # Downstream (vLLM TokensPrompt) requires a flat list of int token
+            # ids, so unwrap it here.
+            if hasattr(prompt_ids, "input_ids"):
+                prompt_ids = prompt_ids["input_ids"]
+            elif isinstance(prompt_ids, dict) and "input_ids" in prompt_ids:
+                prompt_ids = prompt_ids["input_ids"]
 
         if remove_system_prompt:
             prompt_ids = prompt_ids[len(self.system_prompt) :]
