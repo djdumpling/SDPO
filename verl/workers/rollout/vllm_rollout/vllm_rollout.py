@@ -238,7 +238,12 @@ class vLLMAsyncRollout(BaseRollout):
         elif method == "load_model":
             return self._load_model(*args, **kwargs)
         else:
-            return self.inference_engine.execute_method(method, *args, **kwargs)
+            # vLLM 0.20+ removed Worker.execute_method (it was a getattr
+            # dispatcher). WorkerWrapperBase.__getattr__ falls through to the
+            # underlying Worker, so direct attribute lookup is equivalent.
+            if hasattr(self.inference_engine, "execute_method"):
+                return self.inference_engine.execute_method(method, *args, **kwargs)
+            return getattr(self.inference_engine, method)(*args, **kwargs)
 
     async def resume(self, tags: list[str]):
         """Resume rollout weights or kv cache in GPU memory.

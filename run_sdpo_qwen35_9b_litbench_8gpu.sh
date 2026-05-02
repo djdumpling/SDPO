@@ -22,11 +22,11 @@ CONFIG_NAME="sdpo_rupo"
 DATASET_NAME="${DATASET_NAME:-sumuks/litbench-ha-with-baseline}"
 TRAIN_DATA="${TRAIN_DATA:-datasets/dpo_to_rupo_litbench_ha_with_baseline_margin}"
 EVAL_DATA="${EVAL_DATA:-datasets/dpo_to_rupo_litbench_ha_with_baseline_absolute}"
-MODEL_PATH="${MODEL_PATH:-Qwen/Qwen3.5-9B}"
+MODEL_PATH="${MODEL_PATH:-Qwen/Qwen3-8B}"
 
 # Conservative defaults for 9B dense with 6 training H200s. With ROLLOUT_N=4,
-# batch 18 produces 72 rollout samples, which divides cleanly across 6 GPUs.
-TRAIN_BATCH_SIZE=${TRAIN_BATCH_SIZE:-18}
+# batch 12 produces 48 rollout samples, divisible by 6 GPUs and 3 rollout DP.
+TRAIN_BATCH_SIZE=${TRAIN_BATCH_SIZE:-12}
 ROLLOUT_N=${ROLLOUT_N:-4}
 LR=${LR:-5e-6}
 ALPHA=${ALPHA:-0.5}
@@ -99,6 +99,7 @@ actor_rollout_ref.rollout.n=$ROLLOUT_N \
 actor_rollout_ref.rollout.tensor_model_parallel_size=$TP_SIZE \
 actor_rollout_ref.rollout.gpu_memory_utilization=0.7 \
 actor_rollout_ref.model.path=$MODEL_PATH \
++actor_rollout_ref.model.override_config.attn_implementation=sdpa \
 actor_rollout_ref.model.lora_rank=$LORA_RANK \
 actor_rollout_ref.model.lora_alpha=$LORA_ALPHA \
 actor_rollout_ref.model.target_modules=all-linear \

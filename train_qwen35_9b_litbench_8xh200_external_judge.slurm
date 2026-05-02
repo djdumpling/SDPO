@@ -14,7 +14,7 @@ set -eo pipefail
 
 REPO_ROOT="${REPO_ROOT:-/root/rubric-policy-optimization}"
 VENV_PATH="${VENV_PATH:-$REPO_ROOT/SDPO/.venv}"
-POLICY_MODEL_HF="${POLICY_MODEL_HF:-Qwen/Qwen3.5-9B}"
+POLICY_MODEL_HF="${POLICY_MODEL_HF:-Qwen/Qwen3-8B}"
 DATASET_NAME="${DATASET_NAME:-sumuks/litbench-ha-with-baseline}"
 TRAIN_DATA="${TRAIN_DATA:-datasets/dpo_to_rupo_litbench_ha_with_baseline_margin}"
 EVAL_DATA="${EVAL_DATA:-datasets/dpo_to_rupo_litbench_ha_with_baseline_absolute}"
@@ -92,7 +92,7 @@ CUDA_VISIBLE_DEVICES=0,1 python -m vllm.entrypoints.openai.api_server \
   --host 127.0.0.1 \
   --port "$JUDGE_PORT" \
   --tensor-parallel-size 2 \
-  --gpu-memory-utilization 0.9 \
+  --gpu-memory-utilization 0.6 \
   --max-model-len 16384 \
   > "logs/judge-${SLURM_JOB_ID:-manual}.log" 2>&1 &
 JUDGE_PID=$!
@@ -127,7 +127,7 @@ export OPENAI_API_KEY
 export JUDGE_MODEL="$JUDGE_MODEL_HF"
 export CUDA_VISIBLE_DEVICES=2,3,4,5,6,7
 export N_GPUS_PER_NODE=6
-export TP_SIZE="${TP_SIZE:-2}"
+export TP_SIZE="${TP_SIZE:-1}"
 export MODEL_PATH="$POLICY_MODEL_HF"
 export DATASET_NAME
 export TRAIN_DATA

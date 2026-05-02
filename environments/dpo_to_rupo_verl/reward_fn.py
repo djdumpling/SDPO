@@ -18,7 +18,16 @@ from typing import Any
 
 from openai import AsyncOpenAI
 
-from .rubric_parser import extract_rubric_text, extract_score
+try:
+    from .rubric_parser import extract_rubric_text, extract_score
+except ImportError:
+    # verl loads this file by raw file path (no package context), so relative
+    # imports fail. Fall back to path-injected absolute import.
+    import sys
+    _here = os.path.dirname(os.path.abspath(__file__))
+    if _here not in sys.path:
+        sys.path.insert(0, _here)
+    from rubric_parser import extract_rubric_text, extract_score
 
 
 # ---------------------------------------------------------------------------
