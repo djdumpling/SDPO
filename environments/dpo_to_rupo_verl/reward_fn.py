@@ -543,11 +543,6 @@ def _build_feedback(chosen_score: float, rejected_score: float, reward: float, j
 # Public batch scoring function — called by verl's BatchRewardManager
 # ---------------------------------------------------------------------------
 
-# Lazily initialized globals shared across calls within the same process.
-_CLIENT: AsyncOpenAI | None = None
-_SEMAPHORE: asyncio.Semaphore | None = None
-
-
 def compute_score(
     data_sources: list[str],
     solution_strs: list[str],
@@ -561,23 +556,27 @@ def compute_score(
     responses and metadata.  Returns a list of dicts, one per sample, each
     containing at minimum ``{"score": float, "feedback": str}``.
     """
-    global _CLIENT, _SEMAPHORE
-
-    if _CLIENT is None:
-        _CLIENT = _get_judge_client()
     max_concurrent = int(os.environ.get("JUDGE_MAX_CONCURRENT", "64"))
-    if _SEMAPHORE is None:
-        _SEMAPHORE = asyncio.Semaphore(max_concurrent)
-
     model = _get_judge_model()
     max_tokens = _get_judge_max_tokens()
 
     async def _score_batch() -> list[dict[str, Any]]:
-        tasks = [
-            _score_one_sample(_CLIENT, _SEMAPHORE, model, max_tokens, sol, gt, ei)
-            for sol, gt, ei in zip(solution_strs, ground_truths, extra_infos, strict=True)
-        ]
-        results = await asyncio.gather(*tasks, return_exceptions=True)
+        # Build the client and semaphore inside the batch coroutine so they
+        # bind to the *current* event loop. verl invokes compute_score once
+        # per training step, and asyncio.run() creates a fresh loop each call.
+        # If we cached these as module-level globals (the previous design),
+        # the second step would fail with "Semaphore is bound to a different
+        # event loop" because the loop from step 1 was already closed.
+        client = _get_judge_client()
+        semaphore = asyncio.Semaphore(max_concurrent)
+        try:
+            tasks = [
+                _score_one_sample(client, semaphore, model, max_tokens, sol, gt, ei)
+                for sol, gt, ei in zip(solution_strs, ground_truths, extra_infos, strict=True)
+            ]
+            results = await asyncio.gather(*tasks, return_exceptions=True)
+        finally:
+            await client.close()
 
         scored: list[dict[str, Any]] = []
         for i, result in enumerate(results):

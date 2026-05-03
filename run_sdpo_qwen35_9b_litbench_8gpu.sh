@@ -28,7 +28,7 @@ MODEL_PATH="${MODEL_PATH:-Qwen/Qwen3-8B}"
 # the effective rollout count at 48 samples per step on six train GPUs.
 TRAIN_BATCH_SIZE=${TRAIN_BATCH_SIZE:-12}
 ROLLOUT_N=${ROLLOUT_N:-4}
-LR=${LR:-5e-6}
+LR=${LR:-2e-6}
 ALPHA=${ALPHA:-0.5}
 
 # Disable Qwen thinking mode for the policy path. The model should produce the
@@ -57,13 +57,34 @@ ROLLOUT_LOAD_FORMAT=${ROLLOUT_LOAD_FORMAT:-safetensors}
 SAVE_FREQ=${SAVE_FREQ:-50}
 TEST_FREQ=${TEST_FREQ:-50}
 VAL_BATCH_SIZE=${VAL_BATCH_SIZE:-12}
+# Rollouts per validation prompt. The val set has 819 prompts which already
+# averages out per-prompt noise; extra samples just slow validation. n=1 keeps
+# each validation run ~10 min instead of ~60 min for n=8.
+VAL_KWARGS_N=${VAL_KWARGS_N:-1}
+# Cap total optimizer steps. ppo_trainer.yaml defaults total_epochs=30 which
+# would push the step count to 30 * (14924 / TRAIN_BATCH_SIZE). The first run
+# (step-100 val=0.681) showed the policy saturating by step ~50 against the
+# Qwen3-8B self-judge ceiling, so 200 steps is plenty for this configuration.
+TOTAL_TRAINING_STEPS=${TOTAL_TRAINING_STEPS:-200}
+# Bound checkpoint disk usage. Each Qwen3-8B full-param checkpoint is ~80 GB
+# (actor weights + Adam state). With save_freq=50 over 3k steps that would be
+# ~4.8 TB. Keep only the most recent N to cap at ~5 * 80 GB = 400 GB.
+MAX_ACTOR_CKPT_TO_KEEP=${MAX_ACTOR_CKPT_TO_KEEP:-5}
+# verl's default checkpoint path is checkpoints/${project_name}/${experiment_name}.
+# ppo_trainer.yaml defaults are "verl_examples/gsm8k", which is misleading for
+# LitBench runs. Override both so checkpoints land in a recognizable folder.
+PROJECT_NAME=${PROJECT_NAME:-SDPO-RUPO-litbench}
 PPO_MAX_TOKEN_LEN_PER_GPU=${PPO_MAX_TOKEN_LEN_PER_GPU:-32768}
 LOG_PROB_MAX_TOKEN_LEN_PER_GPU=${LOG_PROB_MAX_TOKEN_LEN_PER_GPU:-32768}
 ROLLOUT_DATA_DIR=${ROLLOUT_DATA_DIR:-null}
 
-# LoRA keeps the split-node run memory-predictable while the Slurm wrapper uses
-# two GPUs for judging and six GPUs for rollout and actor work.
-LORA_RANK=${LORA_RANK:-32}
+# LORA_RANK=0 disables PEFT entirely and trains all 8B parameters via FSDP
+# sharding. This is the default because vLLM 0.20.0 + --enable_lora produced
+# corrupted forward passes (gibberish rollouts, log_ppl pinned at ln(vocab)).
+# Full-parameter training fits in the 6x H200 budget and is what produced the
+# step-100 val/reward/mean=0.681 baseline. Set LORA_RANK=32 to opt back into
+# LoRA only after confirming the vLLM LoRA path is fixed.
+LORA_RANK=${LORA_RANK:-0}
 LORA_ALPHA=${LORA_ALPHA:-32}
 
 # Keep tensor parallelism off by default for the 8B/9B dense model on H200s so
@@ -79,7 +100,7 @@ export OPENAI_API_KEY="${OPENAI_API_KEY:-EMPTY}"
 export JUDGE_MODEL="${JUDGE_MODEL:-$MODEL_PATH}"
 export JUDGE_ENABLE_THINKING="${JUDGE_ENABLE_THINKING:-false}"
 export JUDGE_MAX_CONCURRENT="${JUDGE_MAX_CONCURRENT:-32}"
-export JUDGE_MAX_TOKENS="${JUDGE_MAX_TOKENS:-1024}"
+export JUDGE_MAX_TOKENS="${JUDGE_MAX_TOKENS:-4096}"
 export JUDGE_TIMEOUT="${JUDGE_TIMEOUT:-900}"
 export RUBRIC_FORMAT_REWARD_MAX="${RUBRIC_FORMAT_REWARD_MAX:-0.0}"
 
@@ -133,6 +154,10 @@ trainer.nnodes=$NNODES \
 trainer.rollout_data_dir=$ROLLOUT_DATA_DIR \
 trainer.save_freq=$SAVE_FREQ \
 trainer.test_freq=$TEST_FREQ \
+trainer.total_training_steps=$TOTAL_TRAINING_STEPS \
+trainer.project_name=$PROJECT_NAME \
+trainer.experiment_name=$EXP_NAME \
+trainer.max_actor_ckpt_to_keep=$MAX_ACTOR_CKPT_TO_KEEP \
 data.val_batch_size=$VAL_BATCH_SIZE \
 actor_rollout_ref.rollout.n=$ROLLOUT_N \
 actor_rollout_ref.rollout.tensor_model_parallel_size=$TP_SIZE \
@@ -153,7 +178,7 @@ actor_rollout_ref.actor.self_distillation.distillation_topk=100 \
 actor_rollout_ref.actor.self_distillation.dont_reprompt_on_self_success=True \
 actor_rollout_ref.actor.self_distillation.max_reprompt_len=$MAX_REPROMPT_LEN \
 actor_rollout_ref.actor.optim.lr_warmup_steps=10 \
-actor_rollout_ref.rollout.val_kwargs.n=8 \
+actor_rollout_ref.rollout.val_kwargs.n=$VAL_KWARGS_N \
 +ray_kwargs.ray_init.include_dashboard=False"
 
 echo "----------------------------------------------------------------"
@@ -170,7 +195,9 @@ echo "Judge endpoint: $OPENAI_BASE_URL"
 echo "Judge model: $JUDGE_MODEL  judge thinking: $JUDGE_ENABLE_THINKING"
 echo "Format reward max: $RUBRIC_FORMAT_REWARD_MAX  rollout dump: $ROLLOUT_DATA_DIR"
 echo "Rollout load format: $ROLLOUT_LOAD_FORMAT"
-echo "Save freq: $SAVE_FREQ  test freq: $TEST_FREQ  val batch size: $VAL_BATCH_SIZE"
+echo "Save freq: $SAVE_FREQ  test freq: $TEST_FREQ  val batch size: $VAL_BATCH_SIZE  val n: $VAL_KWARGS_N"
+echo "Total training steps: $TOTAL_TRAINING_STEPS"
+echo "Checkpoint dir: $PROJECT_ROOT/checkpoints/$PROJECT_NAME/$EXP_NAME (keeping last $MAX_ACTOR_CKPT_TO_KEEP)"
 echo "----------------------------------------------------------------"
 
 bash "$PROJECT_ROOT/training/verl_training.sh" "$EXP_NAME" "$CONFIG_NAME" "$TRAIN_DATA" $ARGS

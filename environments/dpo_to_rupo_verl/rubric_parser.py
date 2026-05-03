@@ -10,7 +10,12 @@ import re
 
 
 # Match the innermost <tag>...</tag> block.  re.DOTALL lets '.' span newlines.
-_RUBRIC_RE = re.compile(r"<rubric>(.*?)</rubric>", re.DOTALL)
+# Qwen3-8B's tokenizer biases `<rub` toward `<r`+`ubic` (giving `<rubic>`)
+# rather than `<`+`rub`+`ric` (giving `<rubric>`). 95% of base-model rollouts
+# misspell the open tag while still closing with `</rubric>`. Accept any
+# `<rub[a-z]{0,3}>...</rub[a-z]{0,3}>` so the rubric extracts even when open
+# and close tags don't agree.
+_RUBRIC_RE = re.compile(r"<rub[a-z]{0,3}>(.*?)</rub[a-z]{0,3}>", re.DOTALL)
 _ANALYSIS_RE = re.compile(r"<analysis>(.*?)</analysis>", re.DOTALL)
 _SCORE_RE = re.compile(r"<score>(.*?)</score>", re.DOTALL)
 _THINK_RE = re.compile(r"<think>.*?</think>\s*", re.DOTALL)
