@@ -20,8 +20,17 @@
 # reused after changing judge models or LitBench variants.
 CONFIG_NAME="sdpo_rupo"
 DATASET_NAME="${DATASET_NAME:-sumuks/litbench-ha-with-baseline}"
-TRAIN_DATA="${TRAIN_DATA:-datasets/dpo_to_rupo_litbench_ha_with_baseline_margin}"
-EVAL_DATA="${EVAL_DATA:-datasets/dpo_to_rupo_litbench_ha_with_baseline_absolute}"
+
+# Reward type controls the gradient signal shape AND the parquet folder we read
+# from. Train and val should match — the previous train=margin / val=absolute
+# setup caused specification gaming (rubric-strictness inflation). criteria_margin
+# is the recommended default: per-criterion gradient signal, forces structured
+# <criterion> rubric format, less hackable than the whole-rubric margin reward.
+# Run prepare_litbench_ha_with_baseline.sh with matching env vars before training.
+JUDGE_REWARD_TYPE_TRAIN="${JUDGE_REWARD_TYPE_TRAIN:-criteria_margin}"
+JUDGE_REWARD_TYPE_VAL="${JUDGE_REWARD_TYPE_VAL:-criteria_margin}"
+TRAIN_DATA="${TRAIN_DATA:-datasets/dpo_to_rupo_litbench_ha_with_baseline_${JUDGE_REWARD_TYPE_TRAIN}}"
+EVAL_DATA="${EVAL_DATA:-datasets/dpo_to_rupo_litbench_ha_with_baseline_${JUDGE_REWARD_TYPE_VAL}}"
 MODEL_PATH="${MODEL_PATH:-Qwen/Qwen3-8B}"
 
 # Non-thinking rubric generation should emit final XML directly. Batch 12 keeps
@@ -50,11 +59,15 @@ ROLLOUT_GPU_MEMORY_UTILIZATION=${ROLLOUT_GPU_MEMORY_UTILIZATION:-0.55}
 # on-disk format.
 ROLLOUT_LOAD_FORMAT=${ROLLOUT_LOAD_FORMAT:-safetensors}
 
-# Checkpoint and validation cadence. ppo_trainer.yaml defaults save_freq to -1
-# (never save) and sdpo_rupo.yaml hard-codes test_freq=5 (every 5 steps -> very
-# expensive). Override both. data.val_batch_size chunks the val set; null would
-# evaluate the entire set in one giant batch.
-SAVE_FREQ=${SAVE_FREQ:-50}
+# Checkpoint cadence. Each Qwen3-8B FSDP checkpoint is ~92 GB on disk (model
+# shards + Adam optimizer state). With save_freq=50 over 200 steps that would
+# write 4 * 92 GB = 368 GB and quickly exhaust the shared cluster filesystem.
+# Default is now -1 (verl's "never save"). Override with e.g. SAVE_FREQ=200 to
+# save only the final checkpoint, or SAVE_FREQ=50 to restore the old cadence.
+# verl's checkpoint format always bundles model + optimizer; if you want a
+# deployable model only, set MAX_ACTOR_CKPT_TO_KEEP=1 and strip optim shards
+# afterward (~62 GB savings per kept checkpoint).
+SAVE_FREQ=${SAVE_FREQ:--1}
 TEST_FREQ=${TEST_FREQ:-50}
 VAL_BATCH_SIZE=${VAL_BATCH_SIZE:-12}
 # Rollouts per validation prompt. The val set has 819 prompts which already
@@ -185,8 +198,8 @@ echo "----------------------------------------------------------------"
 echo "Starting SDPO Rubric Training (Qwen dense + LoRA)"
 echo "Experiment: $EXP_NAME"
 echo "Dataset: $DATASET_NAME"
-echo "Train data: $TRAIN_DATA (margin reward)"
-echo "Eval data:  $EVAL_DATA (absolute reward)"
+echo "Train data: $TRAIN_DATA (reward type: $JUDGE_REWARD_TYPE_TRAIN)"
+echo "Eval data:  $EVAL_DATA (reward type: $JUDGE_REWARD_TYPE_VAL)"
 echo "Model: $MODEL_PATH"
 echo "GPUs/node: $N_GPUS_PER_NODE  TP: $TP_SIZE  LoRA rank: $LORA_RANK"
 echo "Thinking: $ENABLE_THINKING  response length: $MAX_RESPONSE_LENGTH  rollout max model len: $ROLLOUT_MAX_MODEL_LEN"
@@ -197,7 +210,11 @@ echo "Format reward max: $RUBRIC_FORMAT_REWARD_MAX  rollout dump: $ROLLOUT_DATA_
 echo "Rollout load format: $ROLLOUT_LOAD_FORMAT"
 echo "Save freq: $SAVE_FREQ  test freq: $TEST_FREQ  val batch size: $VAL_BATCH_SIZE  val n: $VAL_KWARGS_N"
 echo "Total training steps: $TOTAL_TRAINING_STEPS"
-echo "Checkpoint dir: $PROJECT_ROOT/checkpoints/$PROJECT_NAME/$EXP_NAME (keeping last $MAX_ACTOR_CKPT_TO_KEEP)"
+if [[ "$SAVE_FREQ" -le 0 ]]; then
+  echo "Checkpoints: DISABLED (set SAVE_FREQ>0 to enable; each save is ~92 GB)"
+else
+  echo "Checkpoint dir: $PROJECT_ROOT/checkpoints/$PROJECT_NAME/$EXP_NAME (keeping last $MAX_ACTOR_CKPT_TO_KEEP)"
+fi
 echo "----------------------------------------------------------------"
 
 bash "$PROJECT_ROOT/training/verl_training.sh" "$EXP_NAME" "$CONFIG_NAME" "$TRAIN_DATA" $ARGS

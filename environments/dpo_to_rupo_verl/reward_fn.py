@@ -124,10 +124,22 @@ Return only those XML tags.
 _SIGMOID_MARGIN_SLOPE = math.log(0.95 / 0.05) / 10.0
 _CLIPPED_MARGIN_DEADZONE = 5.0
 _CLIPPED_MARGIN_CAP = 35.0
+# Tighter cap for the bounded variant. The wider cap=35 lets the policy keep
+# extracting reward by inflating per-criterion gaps (which incentivizes ever
+# stricter rubrics that tank absolute scores). cap=20 saturates reward at a
+# 20-point gap, removing the marginal incentive for harsher rubrics beyond
+# that threshold.
+_CLIPPED_MARGIN_BOUNDED_CAP = 20.0
 _CRITERIA_ABSOLUTE_DEADZONE = 5.0
 
 _SCALAR_REWARD_TYPES = {"margin", "absolute", "sigmoid"}
-_CRITERIA_REWARD_TYPES = {"criteria_margin", "criteria_absolute", "criteria_absolute_deadzone", "criteria_total_absolute"}
+_CRITERIA_REWARD_TYPES = {
+    "criteria_margin",
+    "criteria_margin_bounded",
+    "criteria_absolute",
+    "criteria_absolute_deadzone",
+    "criteria_total_absolute",
+}
 
 
 def _sigmoid(value: float) -> float:
@@ -140,6 +152,18 @@ def _clipped_margin_reward(score_gap: float) -> float:
         return 0.5
     clipped_gap = min(absolute_gap, _CLIPPED_MARGIN_CAP) - _CLIPPED_MARGIN_DEADZONE
     usable_range = _CLIPPED_MARGIN_CAP - _CLIPPED_MARGIN_DEADZONE
+    signed_reward_offset = clipped_gap / (2.0 * usable_range)
+    return 0.5 + signed_reward_offset if score_gap > 0.0 else 0.5 - signed_reward_offset
+
+
+def _clipped_margin_reward_bounded(score_gap: float) -> float:
+    """Same shape as `_clipped_margin_reward` but with a tighter cap to remove
+    the incentive to inflate per-criterion gaps via overly strict rubrics."""
+    absolute_gap = abs(score_gap)
+    if absolute_gap <= _CLIPPED_MARGIN_DEADZONE:
+        return 0.5
+    clipped_gap = min(absolute_gap, _CLIPPED_MARGIN_BOUNDED_CAP) - _CLIPPED_MARGIN_DEADZONE
+    usable_range = _CLIPPED_MARGIN_BOUNDED_CAP - _CLIPPED_MARGIN_DEADZONE
     signed_reward_offset = clipped_gap / (2.0 * usable_range)
     return 0.5 + signed_reward_offset if score_gap > 0.0 else 0.5 - signed_reward_offset
 
@@ -180,6 +204,8 @@ def _reward_from_criterion_scores(
         gap = c - r
         if reward_type == "criteria_margin":
             cr = _clipped_margin_reward(gap)
+        elif reward_type == "criteria_margin_bounded":
+            cr = _clipped_margin_reward_bounded(gap)
         elif reward_type == "criteria_absolute":
             cr = _absolute_reward(gap)
         elif reward_type == "criteria_absolute_deadzone":
