@@ -16,8 +16,13 @@ REPO_ROOT="${REPO_ROOT:-/root/rubric-policy-optimization}"
 VENV_PATH="${VENV_PATH:-$REPO_ROOT/SDPO/.venv}"
 POLICY_MODEL_HF="${POLICY_MODEL_HF:-Qwen/Qwen3-8B}"
 DATASET_NAME="${DATASET_NAME:-sumuks/litbench-ha-with-baseline}"
-TRAIN_DATA="${TRAIN_DATA:-datasets/dpo_to_rupo_litbench_ha_with_baseline_margin}"
-EVAL_DATA="${EVAL_DATA:-datasets/dpo_to_rupo_litbench_ha_with_baseline_absolute}"
+# Reward type defaults match run_sdpo_qwen35_9b_litbench_8gpu.sh. Train and val
+# should agree to avoid the specification gaming pattern (margin/absolute mix
+# trained the policy to inflate rubric strictness for free margin reward).
+JUDGE_REWARD_TYPE_TRAIN="${JUDGE_REWARD_TYPE_TRAIN:-criteria_margin}"
+JUDGE_REWARD_TYPE_VAL="${JUDGE_REWARD_TYPE_VAL:-criteria_margin}"
+TRAIN_DATA="${TRAIN_DATA:-datasets/dpo_to_rupo_litbench_ha_with_baseline_${JUDGE_REWARD_TYPE_TRAIN}}"
+EVAL_DATA="${EVAL_DATA:-datasets/dpo_to_rupo_litbench_ha_with_baseline_${JUDGE_REWARD_TYPE_VAL}}"
 JUDGE_MODEL_HF="${JUDGE_MODEL_HF:-$POLICY_MODEL_HF}"
 JUDGE_PORT="${JUDGE_PORT:-8000}"
 OPENAI_API_KEY="${OPENAI_API_KEY:-EMPTY}"
@@ -152,5 +157,7 @@ export MODEL_PATH="$POLICY_MODEL_HF"
 export DATASET_NAME
 export TRAIN_DATA
 export EVAL_DATA
+export JUDGE_REWARD_TYPE_TRAIN
+export JUDGE_REWARD_TYPE_VAL
 
 bash ./run_sdpo_qwen35_9b_litbench_8gpu.sh "${SLURM_JOB_ID:-manual}"

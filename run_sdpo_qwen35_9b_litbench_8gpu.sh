@@ -39,6 +39,13 @@ TRAIN_BATCH_SIZE=${TRAIN_BATCH_SIZE:-12}
 ROLLOUT_N=${ROLLOUT_N:-4}
 LR=${LR:-2e-6}
 ALPHA=${ALPHA:-0.5}
+# LR schedule: warmup linear for lr_warmup_steps, then decay according to
+# LR_SCHEDULER_TYPE. "cosine" decays smoothly from peak to LR_MIN_RATIO * peak
+# over the remaining steps, which mitigates the late-run drift we saw at
+# constant LR (chosen_score collapsed in the final 25/200 steps).
+# "constant" reverts to the previous behavior (no decay after warmup).
+LR_SCHEDULER_TYPE=${LR_SCHEDULER_TYPE:-cosine}
+LR_MIN_RATIO=${LR_MIN_RATIO:-0.0}
 
 # Disable Qwen thinking mode for the policy path. The model should produce the
 # public <analysis> block and <rubric> block without hidden thinking tokens.
@@ -89,7 +96,19 @@ MAX_ACTOR_CKPT_TO_KEEP=${MAX_ACTOR_CKPT_TO_KEEP:-5}
 PROJECT_NAME=${PROJECT_NAME:-SDPO-RUPO-litbench}
 PPO_MAX_TOKEN_LEN_PER_GPU=${PPO_MAX_TOKEN_LEN_PER_GPU:-32768}
 LOG_PROB_MAX_TOKEN_LEN_PER_GPU=${LOG_PROB_MAX_TOKEN_LEN_PER_GPU:-32768}
+# Where to dump per-step training rollouts (one .jsonl per step, 48 rows each).
+# If user passes a base path like /logs/rollout_dump, auto-namespace it by run
+# timestamp + reward type so successive runs don't clobber each other's dumps.
+# Pass ROLLOUT_DATA_DIR=null to disable dumping entirely.
 ROLLOUT_DATA_DIR=${ROLLOUT_DATA_DIR:-null}
+ROLLOUT_DUMP_TIMESTAMP="${ROLLOUT_DUMP_TIMESTAMP:-$(date +%Y%m%d-%H%M%S)}"
+if [[ "$ROLLOUT_DATA_DIR" != "null" && "$ROLLOUT_DATA_DIR" != /*/run-* ]]; then
+    ROLLOUT_DATA_DIR="$ROLLOUT_DATA_DIR/run-${ROLLOUT_DUMP_TIMESTAMP}-${JUDGE_REWARD_TYPE_TRAIN}"
+fi
+# Number of validation (prompt, response, score) tuples to log to wandb at each
+# validation step. 0 disables (default). Useful for inspecting how the policy's
+# rubric format/quality evolves across training without re-running validations.
+VAL_GENERATIONS_TO_LOG=${VAL_GENERATIONS_TO_LOG:-20}
 
 # LORA_RANK=0 disables PEFT entirely and trains all 8B parameters via FSDP
 # sharding. This is the default because vLLM 0.20.0 + --enable_lora produced
@@ -168,6 +187,7 @@ trainer.rollout_data_dir=$ROLLOUT_DATA_DIR \
 trainer.save_freq=$SAVE_FREQ \
 trainer.test_freq=$TEST_FREQ \
 trainer.total_training_steps=$TOTAL_TRAINING_STEPS \
+trainer.log_val_generations=$VAL_GENERATIONS_TO_LOG \
 trainer.project_name=$PROJECT_NAME \
 trainer.experiment_name=$EXP_NAME \
 trainer.max_actor_ckpt_to_keep=$MAX_ACTOR_CKPT_TO_KEEP \
@@ -186,6 +206,8 @@ actor_rollout_ref.model.lora_alpha=$LORA_ALPHA \
 actor_rollout_ref.actor.ppo_mini_batch_size=$TRAIN_BATCH_SIZE \
 actor_rollout_ref.actor.ppo_max_token_len_per_gpu=$PPO_MAX_TOKEN_LEN_PER_GPU \
 actor_rollout_ref.actor.optim.lr=$LR \
+actor_rollout_ref.actor.optim.lr_scheduler_type=$LR_SCHEDULER_TYPE \
+actor_rollout_ref.actor.optim.min_lr_ratio=$LR_MIN_RATIO \
 actor_rollout_ref.actor.self_distillation.alpha=$ALPHA \
 actor_rollout_ref.actor.self_distillation.distillation_topk=100 \
 actor_rollout_ref.actor.self_distillation.dont_reprompt_on_self_success=True \
@@ -206,10 +228,13 @@ echo "Thinking: $ENABLE_THINKING  response length: $MAX_RESPONSE_LENGTH  rollout
 echo "Rollout KV: gpu util $ROLLOUT_GPU_MEMORY_UTILIZATION  max batched tokens $ROLLOUT_MAX_NUM_BATCHED_TOKENS  max seqs $ROLLOUT_MAX_NUM_SEQS"
 echo "Judge endpoint: $OPENAI_BASE_URL"
 echo "Judge model: $JUDGE_MODEL  judge thinking: $JUDGE_ENABLE_THINKING"
-echo "Format reward max: $RUBRIC_FORMAT_REWARD_MAX  rollout dump: $ROLLOUT_DATA_DIR"
+echo "Format reward max: $RUBRIC_FORMAT_REWARD_MAX"
+echo "Rollout dump:      $ROLLOUT_DATA_DIR"
+echo "Wandb val generations logged per validation: $VAL_GENERATIONS_TO_LOG"
 echo "Rollout load format: $ROLLOUT_LOAD_FORMAT"
 echo "Save freq: $SAVE_FREQ  test freq: $TEST_FREQ  val batch size: $VAL_BATCH_SIZE  val n: $VAL_KWARGS_N"
 echo "Total training steps: $TOTAL_TRAINING_STEPS"
+echo "LR schedule:       lr=$LR, type=$LR_SCHEDULER_TYPE, min_ratio=$LR_MIN_RATIO, warmup=10 steps"
 if [[ "$SAVE_FREQ" -le 0 ]]; then
   echo "Checkpoints: DISABLED (set SAVE_FREQ>0 to enable; each save is ~92 GB)"
 else
