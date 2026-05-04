@@ -48,6 +48,11 @@ ALPHA=${ALPHA:-0.5}
 # step 200; constant LR is being tested as the suspected late-training degrader.
 LR_SCHEDULER_TYPE=${LR_SCHEDULER_TYPE:-constant}
 LR_MIN_RATIO=${LR_MIN_RATIO:-0.0}
+# Data-loader seed. verl's actor.data_loader_seed defaults to 1, which is what
+# every SDPO RuPO run so far used; set SEED to a different integer for a
+# multi-seed ablation. Only the dataloader RNG is varied because the model is
+# initialized from a pretrained checkpoint, so FSDP init seed has no effect.
+SEED=${SEED:-1}
 
 # Disable Qwen thinking mode for the policy path. The model should produce the
 # public <analysis> block and <rubric> block without hidden thinking tokens.
@@ -105,6 +110,12 @@ ROLLOUT_DUMP_TIMESTAMP="${ROLLOUT_DUMP_TIMESTAMP:-$(date +%Y%m%d-%H%M%S)}"
 if [[ "$ROLLOUT_DATA_DIR" != "null" && "$ROLLOUT_DATA_DIR" != /*/run-* ]]; then
     ROLLOUT_DATA_DIR="$ROLLOUT_DATA_DIR/run-${ROLLOUT_DUMP_TIMESTAMP}-${JUDGE_REWARD_TYPE_TRAIN}"
 fi
+# Where to dump per-validation-step outputs (one .jsonl per val step, all 819
+# val prompts each). Set this when you want to re-judge the trained policy
+# offline with a different judge model — the JSONLs include input/output/gts
+# (chosen+rejected) and the original reward, which is the exact input the
+# cross-judge eval script expects. Default null disables dumping.
+VALIDATION_DATA_DIR=${VALIDATION_DATA_DIR:-null}
 # Number of validation (prompt, response, score) tuples to log to wandb at each
 # validation step. 0 disables (default). Useful for inspecting how the policy's
 # rubric format/quality evolves across training without re-running validations.
@@ -184,6 +195,7 @@ trainer.group_name=SDPO-rupo \
 trainer.n_gpus_per_node=$N_GPUS_PER_NODE \
 trainer.nnodes=$NNODES \
 trainer.rollout_data_dir=$ROLLOUT_DATA_DIR \
+trainer.validation_data_dir=$VALIDATION_DATA_DIR \
 trainer.save_freq=$SAVE_FREQ \
 trainer.test_freq=$TEST_FREQ \
 trainer.total_training_steps=$TOTAL_TRAINING_STEPS \
@@ -208,6 +220,7 @@ actor_rollout_ref.actor.ppo_max_token_len_per_gpu=$PPO_MAX_TOKEN_LEN_PER_GPU \
 actor_rollout_ref.actor.optim.lr=$LR \
 actor_rollout_ref.actor.optim.lr_scheduler_type=$LR_SCHEDULER_TYPE \
 actor_rollout_ref.actor.optim.min_lr_ratio=$LR_MIN_RATIO \
+actor_rollout_ref.actor.data_loader_seed=$SEED \
 actor_rollout_ref.actor.self_distillation.alpha=$ALPHA \
 actor_rollout_ref.actor.self_distillation.distillation_topk=100 \
 actor_rollout_ref.actor.self_distillation.dont_reprompt_on_self_success=True \
@@ -233,6 +246,8 @@ echo "Judge endpoint: $OPENAI_BASE_URL"
 echo "Judge model: $JUDGE_MODEL  judge thinking: $JUDGE_ENABLE_THINKING"
 echo "Format reward max: $RUBRIC_FORMAT_REWARD_MAX"
 echo "Rollout dump:      $ROLLOUT_DATA_DIR"
+echo "Validation dump:   $VALIDATION_DATA_DIR"
+echo "Data-loader seed:  $SEED"
 echo "Wandb val generations logged per validation: $VAL_GENERATIONS_TO_LOG"
 echo "Rollout load format: $ROLLOUT_LOAD_FORMAT"
 echo "Save freq: $SAVE_FREQ  test freq: $TEST_FREQ  val batch size: $VAL_BATCH_SIZE  val n: $VAL_KWARGS_N"

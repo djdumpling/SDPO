@@ -95,6 +95,9 @@ echo "JUDGE_ENABLE_THINKING=$JUDGE_ENABLE_THINKING"
 echo "DATASET_NAME=$DATASET_NAME"
 echo "TRAIN_DATA=$TRAIN_DATA"
 echo "EVAL_DATA=$EVAL_DATA"
+echo "EXP_SUFFIX=${EXP_SUFFIX:-<SLURM_JOB_ID-or-manual>}"
+echo "SEED=${SEED:-<launcher-default>}"
+echo "VALIDATION_DATA_DIR=${VALIDATION_DATA_DIR:-<unset>}"
 if [[ -n "${WANDB_API_KEY:-}" ]]; then echo "WANDB_API_KEY=SET"; else echo "WANDB_API_KEY=UNSET"; fi
 echo "WANDB_ENTITY=${WANDB_ENTITY:-<default>}"
 echo "WANDB_MODE=${WANDB_MODE:-online}"
@@ -127,7 +130,7 @@ CUDA_VISIBLE_DEVICES=0,1 python -m vllm.entrypoints.openai.api_server \
   --max-model-len "$JUDGE_MAX_MODEL_LEN" \
   --max-num-seqs 32 \
   --generation-config vllm \
-  > "logs/judge-${SLURM_JOB_ID:-manual}.log" 2>&1 &
+  > "logs/judge-${EXP_SUFFIX:-${SLURM_JOB_ID:-manual}}.log" 2>&1 &
 JUDGE_PID=$!
 
 cleanup() {
@@ -144,7 +147,7 @@ for i in $(seq 1 120); do
     break
   fi
   if ! kill -0 "$JUDGE_PID" 2>/dev/null; then
-    echo "Judge process died before becoming ready. See logs/judge-${SLURM_JOB_ID:-manual}.log"
+    echo "Judge process died before becoming ready. See logs/judge-${EXP_SUFFIX:-${SLURM_JOB_ID:-manual}}.log"
     exit 1
   fi
   sleep 5
@@ -169,4 +172,4 @@ export EVAL_DATA
 export JUDGE_REWARD_TYPE_TRAIN
 export JUDGE_REWARD_TYPE_VAL
 
-bash ./run_sdpo_qwen35_9b_litbench_8gpu.sh "${SLURM_JOB_ID:-manual}"
+bash ./run_sdpo_qwen35_9b_litbench_8gpu.sh "${EXP_SUFFIX:-${SLURM_JOB_ID:-manual}}"
