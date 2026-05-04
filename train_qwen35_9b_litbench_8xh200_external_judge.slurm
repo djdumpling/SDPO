@@ -19,8 +19,11 @@ DATASET_NAME="${DATASET_NAME:-sumuks/litbench-ha-with-baseline}"
 # Reward type defaults match run_sdpo_qwen35_9b_litbench_8gpu.sh. Train and val
 # should agree to avoid the specification gaming pattern (margin/absolute mix
 # trained the policy to inflate rubric strictness for free margin reward).
-JUDGE_REWARD_TYPE_TRAIN="${JUDGE_REWARD_TYPE_TRAIN:-criteria_margin}"
-JUDGE_REWARD_TYPE_VAL="${JUDGE_REWARD_TYPE_VAL:-criteria_margin}"
+# criteria_total_absolute had the highest peak val reward (0.70 @ step 50) of
+# the four criteria-based shapes tested; constant LR is the next variable to
+# isolate as the late-training degrader.
+JUDGE_REWARD_TYPE_TRAIN="${JUDGE_REWARD_TYPE_TRAIN:-criteria_total_absolute}"
+JUDGE_REWARD_TYPE_VAL="${JUDGE_REWARD_TYPE_VAL:-criteria_total_absolute}"
 TRAIN_DATA="${TRAIN_DATA:-datasets/dpo_to_rupo_litbench_ha_with_baseline_${JUDGE_REWARD_TYPE_TRAIN}}"
 EVAL_DATA="${EVAL_DATA:-datasets/dpo_to_rupo_litbench_ha_with_baseline_${JUDGE_REWARD_TYPE_VAL}}"
 JUDGE_MODEL_HF="${JUDGE_MODEL_HF:-$POLICY_MODEL_HF}"
@@ -62,6 +65,12 @@ if [[ -z "${WANDB_API_KEY:-}" ]]; then
   echo "WARNING: WANDB_API_KEY not set; using WANDB_MODE=offline."
   export WANDB_MODE=offline
 fi
+
+# Run wandb in-thread instead of as a subprocess service. The default service
+# architecture races with Ray's TaskRunner teardown and surfaces a noisy
+# BrokenPipeError in the atexit hook (data is already saved by then; it's
+# cosmetic). Thread mode avoids the cross-process socket entirely.
+export WANDB_START_METHOD="${WANDB_START_METHOD:-thread}"
 
 cd "$REPO_ROOT/SDPO"
 mkdir -p logs

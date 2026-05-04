@@ -130,6 +130,12 @@ _CLIPPED_MARGIN_CAP = 35.0
 # 20-point gap, removing the marginal incentive for harsher rubrics beyond
 # that threshold.
 _CLIPPED_MARGIN_BOUNDED_CAP = 20.0
+# Tighter deadzone for the bounded variant. With deadzone=5, natural rubric
+# gaps of 2-5 points fell entirely in the deadzone (reward=0.5, no gradient),
+# causing the policy to drift toward non-discriminating rubrics. deadzone=2
+# preserves a no-signal band around true ties while letting small but real
+# gaps drive learning.
+_CLIPPED_MARGIN_BOUNDED_DEADZONE = 2.0
 _CRITERIA_ABSOLUTE_DEADZONE = 5.0
 
 _SCALAR_REWARD_TYPES = {"margin", "absolute", "sigmoid"}
@@ -158,12 +164,13 @@ def _clipped_margin_reward(score_gap: float) -> float:
 
 def _clipped_margin_reward_bounded(score_gap: float) -> float:
     """Same shape as `_clipped_margin_reward` but with a tighter cap to remove
-    the incentive to inflate per-criterion gaps via overly strict rubrics."""
+    the incentive to inflate per-criterion gaps via overly strict rubrics, and
+    a tighter deadzone so small natural gaps still drive learning."""
     absolute_gap = abs(score_gap)
-    if absolute_gap <= _CLIPPED_MARGIN_DEADZONE:
+    if absolute_gap <= _CLIPPED_MARGIN_BOUNDED_DEADZONE:
         return 0.5
-    clipped_gap = min(absolute_gap, _CLIPPED_MARGIN_BOUNDED_CAP) - _CLIPPED_MARGIN_DEADZONE
-    usable_range = _CLIPPED_MARGIN_BOUNDED_CAP - _CLIPPED_MARGIN_DEADZONE
+    clipped_gap = min(absolute_gap, _CLIPPED_MARGIN_BOUNDED_CAP) - _CLIPPED_MARGIN_BOUNDED_DEADZONE
+    usable_range = _CLIPPED_MARGIN_BOUNDED_CAP - _CLIPPED_MARGIN_BOUNDED_DEADZONE
     signed_reward_offset = clipped_gap / (2.0 * usable_range)
     return 0.5 + signed_reward_offset if score_gap > 0.0 else 0.5 - signed_reward_offset
 

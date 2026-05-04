@@ -23,12 +23,14 @@ DATASET_NAME="${DATASET_NAME:-sumuks/litbench-ha-with-baseline}"
 
 # Reward type controls the gradient signal shape AND the parquet folder we read
 # from. Train and val should match — the previous train=margin / val=absolute
-# setup caused specification gaming (rubric-strictness inflation). criteria_margin
-# is the recommended default: per-criterion gradient signal, forces structured
-# <criterion> rubric format, less hackable than the whole-rubric margin reward.
-# Run prepare_litbench_ha_with_baseline.sh with matching env vars before training.
-JUDGE_REWARD_TYPE_TRAIN="${JUDGE_REWARD_TYPE_TRAIN:-criteria_margin}"
-JUDGE_REWARD_TYPE_VAL="${JUDGE_REWARD_TYPE_VAL:-criteria_margin}"
+# setup caused specification gaming (rubric-strictness inflation). Across the
+# four criteria-based shapes tested (criteria_margin, criteria_margin_bounded
+# at dz=5 and dz=2, criteria_total_absolute) the binary-aggregate
+# criteria_total_absolute had the strongest signal (val/reward 0.70 @ step 50
+# vs 0.60-0.62 for the others). Run prepare_litbench_ha_with_baseline.sh with
+# matching env vars before training.
+JUDGE_REWARD_TYPE_TRAIN="${JUDGE_REWARD_TYPE_TRAIN:-criteria_total_absolute}"
+JUDGE_REWARD_TYPE_VAL="${JUDGE_REWARD_TYPE_VAL:-criteria_total_absolute}"
 TRAIN_DATA="${TRAIN_DATA:-datasets/dpo_to_rupo_litbench_ha_with_baseline_${JUDGE_REWARD_TYPE_TRAIN}}"
 EVAL_DATA="${EVAL_DATA:-datasets/dpo_to_rupo_litbench_ha_with_baseline_${JUDGE_REWARD_TYPE_VAL}}"
 MODEL_PATH="${MODEL_PATH:-Qwen/Qwen3-8B}"
@@ -41,10 +43,10 @@ LR=${LR:-2e-6}
 ALPHA=${ALPHA:-0.5}
 # LR schedule: warmup linear for lr_warmup_steps, then decay according to
 # LR_SCHEDULER_TYPE. "cosine" decays smoothly from peak to LR_MIN_RATIO * peak
-# over the remaining steps, which mitigates the late-run drift we saw at
-# constant LR (chosen_score collapsed in the final 25/200 steps).
-# "constant" reverts to the previous behavior (no decay after warmup).
-LR_SCHEDULER_TYPE=${LR_SCHEDULER_TYPE:-cosine}
+# over the remaining steps. "constant" holds peak LR after warmup. The four
+# 200-step cosine runs all peaked at step 50 then declined monotonically through
+# step 200; constant LR is being tested as the suspected late-training degrader.
+LR_SCHEDULER_TYPE=${LR_SCHEDULER_TYPE:-constant}
 LR_MIN_RATIO=${LR_MIN_RATIO:-0.0}
 
 # Disable Qwen thinking mode for the policy path. The model should produce the
@@ -67,29 +69,27 @@ ROLLOUT_GPU_MEMORY_UTILIZATION=${ROLLOUT_GPU_MEMORY_UTILIZATION:-0.55}
 ROLLOUT_LOAD_FORMAT=${ROLLOUT_LOAD_FORMAT:-safetensors}
 
 # Checkpoint cadence. Each Qwen3-8B FSDP checkpoint is ~92 GB on disk (model
-# shards + Adam optimizer state). With save_freq=50 over 200 steps that would
-# write 4 * 92 GB = 368 GB and quickly exhaust the shared cluster filesystem.
-# Default is now -1 (verl's "never save"). Override with e.g. SAVE_FREQ=200 to
-# save only the final checkpoint, or SAVE_FREQ=50 to restore the old cadence.
-# verl's checkpoint format always bundles model + optimizer; if you want a
-# deployable model only, set MAX_ACTOR_CKPT_TO_KEEP=1 and strip optim shards
-# afterward (~62 GB savings per kept checkpoint).
+# shards + Adam optimizer state). Default is -1 ("never save"); flip to e.g.
+# SAVE_FREQ=25 only when a deployable checkpoint is wanted. Disk budget for
+# rolling 3-checkpoint window (max_actor_ckpt_to_keep=3) is ~276 GB.
 SAVE_FREQ=${SAVE_FREQ:--1}
-TEST_FREQ=${TEST_FREQ:-50}
+TEST_FREQ=${TEST_FREQ:-25}
 VAL_BATCH_SIZE=${VAL_BATCH_SIZE:-12}
 # Rollouts per validation prompt. The val set has 819 prompts which already
 # averages out per-prompt noise; extra samples just slow validation. n=1 keeps
 # each validation run ~10 min instead of ~60 min for n=8.
 VAL_KWARGS_N=${VAL_KWARGS_N:-1}
 # Cap total optimizer steps. ppo_trainer.yaml defaults total_epochs=30 which
-# would push the step count to 30 * (14924 / TRAIN_BATCH_SIZE). The first run
-# (step-100 val=0.681) showed the policy saturating by step ~50 against the
-# Qwen3-8B self-judge ceiling, so 200 steps is plenty for this configuration.
-TOTAL_TRAINING_STEPS=${TOTAL_TRAINING_STEPS:-200}
-# Bound checkpoint disk usage. Each Qwen3-8B full-param checkpoint is ~80 GB
-# (actor weights + Adam state). With save_freq=50 over 3k steps that would be
-# ~4.8 TB. Keep only the most recent N to cap at ~5 * 80 GB = 400 GB.
-MAX_ACTOR_CKPT_TO_KEEP=${MAX_ACTOR_CKPT_TO_KEEP:-5}
+# would push the step count to 30 * (14924 / TRAIN_BATCH_SIZE). All four
+# 200-step cosine runs peaked at step 50 and declined through step 200. For
+# the constant-LR follow-up, 100 steps is enough to see whether removing the
+# decay lets the policy hold or improve past the prior peak.
+TOTAL_TRAINING_STEPS=${TOTAL_TRAINING_STEPS:-100}
+# Bound checkpoint disk usage. Each Qwen3-8B full-param checkpoint is ~92 GB.
+# With save_freq=25 over 100 steps that's 4 saves; keep the last 3 (~276 GB)
+# so the rolling window covers steps 50/75/100 — the post-warmup window
+# where the prior cosine runs peaked.
+MAX_ACTOR_CKPT_TO_KEEP=${MAX_ACTOR_CKPT_TO_KEEP:-3}
 # verl's default checkpoint path is checkpoints/${project_name}/${experiment_name}.
 # ppo_trainer.yaml defaults are "verl_examples/gsm8k", which is misleading for
 # LitBench runs. Override both so checkpoints land in a recognizable folder.
@@ -214,7 +214,10 @@ actor_rollout_ref.actor.self_distillation.dont_reprompt_on_self_success=True \
 actor_rollout_ref.actor.self_distillation.max_reprompt_len=$MAX_REPROMPT_LEN \
 actor_rollout_ref.actor.optim.lr_warmup_steps=10 \
 actor_rollout_ref.rollout.val_kwargs.n=$VAL_KWARGS_N \
-+ray_kwargs.ray_init.include_dashboard=False"
++ray_kwargs.ray_init.include_dashboard=False \
++ray_kwargs.ray_init.runtime_env.env_vars.WANDB_START_METHOD=thread \
++ray_kwargs.ray_init.runtime_env.env_vars.RAYON_NUM_THREADS=\"4\" \
++ray_kwargs.ray_init.runtime_env.env_vars.TOKENIZERS_PARALLELISM=\"false\""
 
 echo "----------------------------------------------------------------"
 echo "Starting SDPO Rubric Training (Qwen dense + LoRA)"
