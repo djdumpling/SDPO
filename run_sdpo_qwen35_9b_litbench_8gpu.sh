@@ -90,6 +90,10 @@ VAL_KWARGS_N=${VAL_KWARGS_N:-1}
 # the constant-LR follow-up, 100 steps is enough to see whether removing the
 # decay lets the policy hold or improve past the prior peak.
 TOTAL_TRAINING_STEPS=${TOTAL_TRAINING_STEPS:-100}
+# When True, verl runs one validation cycle BEFORE training step 1 and writes
+# val_generations/0.jsonl. This is the cheapest way to capture an "untrained
+# policy" baseline against the same val set + judge setup the run uses.
+VAL_BEFORE_TRAIN=${VAL_BEFORE_TRAIN:-False}
 # Bound checkpoint disk usage. Each Qwen3-8B full-param checkpoint is ~92 GB.
 # With save_freq=25 over 100 steps that's 4 saves; keep the last 3 (~276 GB)
 # so the rolling window covers steps 50/75/100 — the post-warmup window
@@ -199,6 +203,7 @@ trainer.validation_data_dir=$VALIDATION_DATA_DIR \
 trainer.save_freq=$SAVE_FREQ \
 trainer.test_freq=$TEST_FREQ \
 trainer.total_training_steps=$TOTAL_TRAINING_STEPS \
+trainer.val_before_train=$VAL_BEFORE_TRAIN \
 trainer.log_val_generations=$VAL_GENERATIONS_TO_LOG \
 trainer.project_name=$PROJECT_NAME \
 trainer.experiment_name=$EXP_NAME \
