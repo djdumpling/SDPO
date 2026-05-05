@@ -1,0 +1,2417 @@
+{
+  "headline": {
+    "n_triples": 100,
+    "k_resamples": 5,
+    "judge_temperature": 0.7,
+    "test_retest_chosen_sigma_mean": 5.520608338196239,
+    "test_retest_rejected_sigma_mean": 6.431919346969088,
+    "test_retest_margin_sigma_mean": 9.53110937914565,
+    "between_triple_chosen_sigma": 24.44201783814094,
+    "between_triple_margin_sigma": 29.48462948724301,
+    "between_triple_margin_mean": 4.9319999999999995,
+    "verdict": "H1 CONFIRMED \u2014 judge per-call \u03c3 on margin = 9.5pt, between-triple mean margin = 4.9pt \u2192 SNR = 0.52. Judge noise dominates the rubric signal. k=4 ensembling should reduce \u03c3 to ~4.8pt and restore signal.",
+    "snr_margin_mean_over_test_retest_sigma": 0.5174633721853368
+  },
+  "rows": [
+    {
+      "ti": 0,
+      "criterion": "Emotional Engagement with the Alien",
+      "chosen_scores": [
+        85.0,
+        90.0,
+        95.0,
+        90.0,
+        85.0
+      ],
+      "rejected_scores": [
+        85.0,
+        90.0,
+        75.0,
+        85.0,
+        90.0
+      ],
+      "chosen_mean": 89.0,
+      "chosen_std": 3.7416573867739413,
+      "rejected_mean": 85.0,
+      "rejected_std": 5.477225575051661,
+      "margin_mean": 4.0,
+      "margin_std": 8.602325267042627
+    },
+    {
+      "ti": 1,
+      "criterion": "Emotional Core",
+      "chosen_scores": [
+        95.0,
+        85.0,
+        95.0,
+        90.0,
+        90.0
+      ],
+      "rejected_scores": [
+        60.0,
+        50.0,
+        60.0,
+        60.0,
+        50.0
+      ],
+      "chosen_mean": 91.0,
+      "chosen_std": 3.7416573867739413,
+      "rejected_mean": 56.0,
+      "rejected_std": 4.898979485566356,
+      "margin_mean": 35.0,
+      "margin_std": 3.1622776601683795
+    },
+    {
+      "ti": 2,
+      "criterion": "Shock Value and Emotional Impact",
+      "chosen_scores": [
+        90.0,
+        90.0,
+        95.0,
+        95.0,
+        95.0
+      ],
+      "rejected_scores": [
+        35.0,
+        40.0,
+        50.0,
+        70.0,
+        55.0
+      ],
+      "chosen_mean": 93.0,
+      "chosen_std": 2.449489742783178,
+      "rejected_mean": 50.0,
+      "rejected_std": 12.24744871391589,
+      "margin_mean": 43.0,
+      "margin_std": 10.295630140987
+    },
+    {
+      "ti": 3,
+      "criterion": "Survival Strategy Integration",
+      "chosen_scores": [
+        95.0,
+        75.0,
+        90.0,
+        85.0,
+        90.0
+      ],
+      "rejected_scores": [
+        85.0,
+        85.0,
+        90.0,
+        90.0,
+        65.0
+      ],
+      "chosen_mean": 87.0,
+      "chosen_std": 6.782329983125268,
+      "rejected_mean": 83.0,
+      "rejected_std": 9.273618495495704,
+      "margin_mean": 4.0,
+      "margin_std": 12.409673645990857
+    },
+    {
+      "ti": 4,
+      "criterion": "Emotional Stakes",
+      "chosen_scores": [
+        90.0,
+        85.0,
+        90.0,
+        90.0,
+        90.0
+      ],
+      "rejected_scores": [
+        65.0,
+        60.0,
+        70.0,
+        70.0,
+        50.0
+      ],
+      "chosen_mean": 89.0,
+      "chosen_std": 2.0,
+      "rejected_mean": 63.0,
+      "rejected_std": 7.483314773547883,
+      "margin_mean": 26.0,
+      "margin_std": 7.3484692283495345
+    },
+    {
+      "ti": 5,
+      "criterion": "Emotional Transformation",
+      "chosen_scores": [
+        70.0,
+        40.0,
+        60.0,
+        70.0,
+        60.0
+      ],
+      "rejected_scores": [
+        90.0,
+        90.0,
+        85.0,
+        90.0,
+        85.0
+      ],
+      "chosen_mean": 60.0,
+      "chosen_std": 10.954451150103322,
+      "rejected_mean": 88.0,
+      "rejected_std": 2.449489742783178,
+      "margin_mean": -28.0,
+      "margin_std": 11.224972160321824
+    },
+    {
+      "ti": 6,
+      "criterion": "Emotional Transformation",
+      "chosen_scores": [
+        95.0,
+        90.0,
+        90.0,
+        90.0,
+        90.0
+      ],
+      "rejected_scores": [
+        60.0,
+        75.0,
+        85.0,
+        80.0,
+        75.0
+      ],
+      "chosen_mean": 91.0,
+      "chosen_std": 2.0,
+      "rejected_mean": 75.0,
+      "rejected_std": 8.366600265340756,
+      "margin_mean": 16.0,
+      "margin_std": 10.198039027185569
+    },
+    {
+      "ti": 7,
+      "criterion": "Emotional Arc and Transformation",
+      "chosen_scores": [
+        90.0,
+        90.0,
+        95.0,
+        85.0,
+        95.0
+      ],
+      "rejected_scores": [
+        60.0,
+        60.0,
+        65.0,
+        50.0,
+        60.0
+      ],
+      "chosen_mean": 91.0,
+      "chosen_std": 3.7416573867739413,
+      "rejected_mean": 59.0,
+      "rejected_std": 4.898979485566356,
+      "margin_mean": 32.0,
+      "margin_std": 2.449489742783178
+    },
+    {
+      "ti": 8,
+      "criterion": "Community Transformation",
+      "chosen_scores": [
+        95.0,
+        95.0,
+        95.0,
+        95.0,
+        95.0
+      ],
+      "rejected_scores": [
+        45.0,
+        55.0,
+        50.0,
+        50.0,
+        20.0
+      ],
+      "chosen_mean": 95.0,
+      "chosen_std": 0.0,
+      "rejected_mean": 44.0,
+      "rejected_std": 12.409673645990857,
+      "margin_mean": 51.0,
+      "margin_std": 12.409673645990857
+    },
+    {
+      "ti": 9,
+      "criterion": "Emotional Clarity",
+      "chosen_scores": [
+        70.0,
+        90.0,
+        70.0,
+        65.0,
+        60.0
+      ],
+      "rejected_scores": [
+        92.0,
+        95.0,
+        95.0,
+        92.0,
+        90.0
+      ],
+      "chosen_mean": 71.0,
+      "chosen_std": 10.198039027185569,
+      "rejected_mean": 92.8,
+      "rejected_std": 1.9390719429665315,
+      "margin_mean": -21.8,
+      "margin_std": 8.795453370918409
+    },
+    {
+      "ti": 10,
+      "criterion": "Emotional Transformation",
+      "chosen_scores": [
+        50.0,
+        40.0,
+        65.0,
+        40.0,
+        40.0
+      ],
+      "rejected_scores": [
+        10.0,
+        20.0,
+        20.0,
+        15.0,
+        20.0
+      ],
+      "chosen_mean": 47.0,
+      "chosen_std": 9.797958971132712,
+      "rejected_mean": 17.0,
+      "rejected_std": 4.0,
+      "margin_mean": 30.0,
+      "margin_std": 10.488088481701515
+    },
+    {
+      "ti": 11,
+      "criterion": "Emotional Impact of the Mistake",
+      "chosen_scores": [
+        70.0,
+        85.0,
+        90.0,
+        85.0,
+        90.0
+      ],
+      "rejected_scores": [
+        85.0,
+        85.0,
+        75.0,
+        80.0,
+        85.0
+      ],
+      "chosen_mean": 84.0,
+      "chosen_std": 7.3484692283495345,
+      "rejected_mean": 82.0,
+      "rejected_std": 4.0,
+      "margin_mean": 2.0,
+      "margin_std": 9.797958971132712
+    },
+    {
+      "ti": 12,
+      "criterion": "Emotional Stakes",
+      "chosen_scores": [
+        90.0,
+        95.0,
+        95.0,
+        95.0,
+        95.0
+      ],
+      "rejected_scores": [
+        85.0,
+        85.0,
+        92.0,
+        90.0,
+        85.0
+      ],
+      "chosen_mean": 94.0,
+      "chosen_std": 2.0,
+      "rejected_mean": 87.4,
+      "rejected_std": 3.006659275674582,
+      "margin_mean": 6.6,
+      "margin_std": 2.870540018881465
+    },
+    {
+      "ti": 13,
+      "criterion": "Emotional Engagement with the Wishes",
+      "chosen_scores": [
+        75.0,
+        80.0,
+        82.0,
+        70.0,
+        75.0
+      ],
+      "rejected_scores": [
+        60.0,
+        70.0,
+        40.0,
+        50.0,
+        50.0
+      ],
+      "chosen_mean": 76.4,
+      "chosen_std": 4.223742416388575,
+      "rejected_mean": 54.0,
+      "rejected_std": 10.198039027185569,
+      "margin_mean": 22.4,
+      "margin_std": 11.001818031580054
+    },
+    {
+      "ti": 14,
+      "criterion": "Emotional and Psychological Authenticity",
+      "chosen_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rejected_scores": [
+        70.0,
+        20.0,
+        50.0,
+        65.0,
+        20.0
+      ],
+      "chosen_mean": 0.0,
+      "chosen_std": 0.0,
+      "rejected_mean": 45.0,
+      "rejected_std": 21.447610589527216,
+      "margin_mean": -45.0,
+      "margin_std": 21.447610589527216
+    },
+    {
+      "ti": 15,
+      "criterion": "Emotional Impact of the Moment",
+      "chosen_scores": [
+        95.0,
+        95.0,
+        95.0,
+        95.0,
+        95.0
+      ],
+      "rejected_scores": [
+        95.0,
+        95.0,
+        95.0,
+        95.0,
+        95.0
+      ],
+      "chosen_mean": 95.0,
+      "chosen_std": 0.0,
+      "rejected_mean": 95.0,
+      "rejected_std": 0.0,
+      "margin_mean": 0.0,
+      "margin_std": 0.0
+    },
+    {
+      "ti": 16,
+      "criterion": "Emotional Core",
+      "chosen_scores": [
+        70.0,
+        80.0,
+        60.0,
+        85.0,
+        75.0
+      ],
+      "rejected_scores": [
+        65.0,
+        65.0,
+        55.0,
+        50.0,
+        50.0
+      ],
+      "chosen_mean": 74.0,
+      "chosen_std": 8.602325267042627,
+      "rejected_mean": 57.0,
+      "rejected_std": 6.782329983125268,
+      "margin_mean": 17.0,
+      "margin_std": 11.661903789690601
+    },
+    {
+      "ti": 17,
+      "criterion": "Emotional and Psychological Impact",
+      "chosen_scores": [
+        90.0,
+        88.0,
+        88.0,
+        90.0,
+        88.0
+      ],
+      "rejected_scores": [
+        75.0,
+        75.0,
+        75.0,
+        75.0,
+        65.0
+      ],
+      "chosen_mean": 88.8,
+      "chosen_std": 0.9797958971132712,
+      "rejected_mean": 73.0,
+      "rejected_std": 4.0,
+      "margin_mean": 15.8,
+      "margin_std": 3.7094473981982814
+    },
+    {
+      "ti": 18,
+      "criterion": "Emotional Resonance of the Human Experience",
+      "chosen_scores": [
+        95.0,
+        95.0,
+        95.0,
+        95.0,
+        95.0
+      ],
+      "rejected_scores": [
+        95.0,
+        95.0,
+        95.0,
+        85.0,
+        95.0
+      ],
+      "chosen_mean": 95.0,
+      "chosen_std": 0.0,
+      "rejected_mean": 93.0,
+      "rejected_std": 4.0,
+      "margin_mean": 2.0,
+      "margin_std": 4.0
+    },
+    {
+      "ti": 19,
+      "criterion": "Shock Value and Clarity",
+      "chosen_scores": [
+        95.0,
+        85.0,
+        95.0,
+        90.0,
+        95.0
+      ],
+      "rejected_scores": [
+        95.0,
+        95.0,
+        95.0,
+        95.0,
+        90.0
+      ],
+      "chosen_mean": 92.0,
+      "chosen_std": 4.0,
+      "rejected_mean": 94.0,
+      "rejected_std": 2.0,
+      "margin_mean": -2.0,
+      "margin_std": 5.0990195135927845
+    },
+    {
+      "ti": 20,
+      "criterion": "Tactical Contrast",
+      "chosen_scores": [
+        95.0,
+        95.0,
+        100.0,
+        95.0,
+        95.0
+      ],
+      "rejected_scores": [
+        60.0,
+        65.0,
+        60.0,
+        65.0,
+        50.0
+      ],
+      "chosen_mean": 96.0,
+      "chosen_std": 2.0,
+      "rejected_mean": 60.0,
+      "rejected_std": 5.477225575051661,
+      "margin_mean": 36.0,
+      "margin_std": 5.830951894845301
+    },
+    {
+      "ti": 21,
+      "criterion": "Emotional Impact of the Decision",
+      "chosen_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rejected_scores": [
+        75.0,
+        65.0,
+        65.0,
+        60.0,
+        70.0
+      ],
+      "chosen_mean": 0.0,
+      "chosen_std": 0.0,
+      "rejected_mean": 67.0,
+      "rejected_std": 5.0990195135927845,
+      "margin_mean": -67.0,
+      "margin_std": 5.0990195135927845
+    },
+    {
+      "ti": 22,
+      "criterion": "Symbolic Representation",
+      "chosen_scores": [
+        100.0,
+        95.0,
+        100.0,
+        100.0,
+        95.0
+      ],
+      "rejected_scores": [
+        95.0,
+        95.0,
+        95.0,
+        100.0,
+        100.0
+      ],
+      "chosen_mean": 98.0,
+      "chosen_std": 2.449489742783178,
+      "rejected_mean": 97.0,
+      "rejected_std": 2.449489742783178,
+      "margin_mean": 1.0,
+      "margin_std": 3.7416573867739413
+    },
+    {
+      "ti": 23,
+      "criterion": "Symbolic Power of Silence",
+      "chosen_scores": [
+        95.0,
+        95.0,
+        90.0,
+        95.0,
+        90.0
+      ],
+      "rejected_scores": [
+        90.0,
+        95.0,
+        85.0,
+        90.0,
+        95.0
+      ],
+      "chosen_mean": 93.0,
+      "chosen_std": 2.449489742783178,
+      "rejected_mean": 91.0,
+      "rejected_std": 3.7416573867739413,
+      "margin_mean": 2.0,
+      "margin_std": 4.0
+    },
+    {
+      "ti": 24,
+      "criterion": "Psychological Engagement",
+      "chosen_scores": [
+        95.0,
+        75.0,
+        65.0,
+        65.0,
+        80.0
+      ],
+      "rejected_scores": [
+        70.0,
+        50.0,
+        75.0,
+        60.0,
+        65.0
+      ],
+      "chosen_mean": 76.0,
+      "chosen_std": 11.135528725660043,
+      "rejected_mean": 64.0,
+      "rejected_std": 8.602325267042627,
+      "margin_mean": 12.0,
+      "margin_std": 13.2664991614216
+    },
+    {
+      "ti": 25,
+      "criterion": "Thematic Engagement",
+      "chosen_scores": [
+        60.0,
+        60.0,
+        60.0,
+        30.0,
+        60.0
+      ],
+      "rejected_scores": [
+        30.0,
+        10.0,
+        15.0,
+        35.0,
+        0.0
+      ],
+      "chosen_mean": 54.0,
+      "chosen_std": 12.0,
+      "rejected_mean": 18.0,
+      "rejected_std": 12.884098726725126,
+      "margin_mean": 36.0,
+      "margin_std": 22.67156809750927
+    },
+    {
+      "ti": 26,
+      "criterion": "Emotional Engagement",
+      "chosen_scores": [
+        90.0,
+        90.0,
+        90.0,
+        85.0,
+        90.0
+      ],
+      "rejected_scores": [
+        60.0,
+        65.0,
+        85.0,
+        70.0,
+        60.0
+      ],
+      "chosen_mean": 89.0,
+      "chosen_std": 2.0,
+      "rejected_mean": 68.0,
+      "rejected_std": 9.273618495495704,
+      "margin_mean": 21.0,
+      "margin_std": 9.695359714832659
+    },
+    {
+      "ti": 27,
+      "criterion": "Emotional Engagement",
+      "chosen_scores": [
+        60.0,
+        75.0,
+        70.0,
+        70.0,
+        65.0
+      ],
+      "rejected_scores": [
+        70.0,
+        95.0,
+        75.0,
+        85.0,
+        70.0
+      ],
+      "chosen_mean": 68.0,
+      "chosen_std": 5.0990195135927845,
+      "rejected_mean": 79.0,
+      "rejected_std": 9.695359714832659,
+      "margin_mean": -11.0,
+      "margin_std": 5.830951894845301
+    },
+    {
+      "ti": 28,
+      "criterion": "Emotional and Symbolic Depth",
+      "chosen_scores": [
+        90.0,
+        70.0,
+        85.0,
+        90.0,
+        85.0
+      ],
+      "rejected_scores": [
+        55.0,
+        50.0,
+        40.0,
+        45.0,
+        50.0
+      ],
+      "chosen_mean": 84.0,
+      "chosen_std": 7.3484692283495345,
+      "rejected_mean": 48.0,
+      "rejected_std": 5.0990195135927845,
+      "margin_mean": 36.0,
+      "margin_std": 9.16515138991168
+    },
+    {
+      "ti": 29,
+      "criterion": "Emotional Resonance",
+      "chosen_scores": [
+        50.0,
+        75.0,
+        60.0,
+        60.0,
+        65.0
+      ],
+      "rejected_scores": [
+        90.0,
+        90.0,
+        90.0,
+        90.0,
+        85.0
+      ],
+      "chosen_mean": 62.0,
+      "chosen_std": 8.12403840463596,
+      "rejected_mean": 89.0,
+      "rejected_std": 2.0,
+      "margin_mean": -27.0,
+      "margin_std": 8.717797887081348
+    },
+    {
+      "ti": 30,
+      "criterion": "Emotional and Psychological Impact",
+      "chosen_scores": [
+        85.0,
+        85.0,
+        85.0,
+        80.0,
+        80.0
+      ],
+      "rejected_scores": [
+        75.0,
+        70.0,
+        65.0,
+        75.0,
+        45.0
+      ],
+      "chosen_mean": 83.0,
+      "chosen_std": 2.449489742783178,
+      "rejected_mean": 66.0,
+      "rejected_std": 11.135528725660043,
+      "margin_mean": 17.0,
+      "margin_std": 10.295630140987
+    },
+    {
+      "ti": 31,
+      "criterion": "Emotional Resonance",
+      "chosen_scores": [
+        30.0,
+        20.0,
+        20.0,
+        0.0,
+        0.0
+      ],
+      "rejected_scores": [
+        25.0,
+        90.0,
+        90.0,
+        30.0,
+        85.0
+      ],
+      "chosen_mean": 14.0,
+      "chosen_std": 12.0,
+      "rejected_mean": 64.0,
+      "rejected_std": 29.899832775452108,
+      "margin_mean": -50.0,
+      "margin_std": 33.015148038438355
+    },
+    {
+      "ti": 32,
+      "criterion": "Emotional Engagement",
+      "chosen_scores": [
+        85.0,
+        60.0,
+        40.0,
+        50.0,
+        50.0
+      ],
+      "rejected_scores": [
+        0.0,
+        0.0,
+        0.0,
+        20.0,
+        0.0
+      ],
+      "chosen_mean": 57.0,
+      "chosen_std": 15.362291495737216,
+      "rejected_mean": 4.0,
+      "rejected_std": 8.0,
+      "margin_mean": 53.0,
+      "margin_std": 18.867962264113206
+    },
+    {
+      "ti": 33,
+      "criterion": "Thematic Engagement",
+      "chosen_scores": [
+        65.0,
+        65.0,
+        65.0,
+        65.0,
+        75.0
+      ],
+      "rejected_scores": [
+        100.0,
+        95.0,
+        95.0,
+        95.0,
+        95.0
+      ],
+      "chosen_mean": 67.0,
+      "chosen_std": 4.0,
+      "rejected_mean": 96.0,
+      "rejected_std": 2.0,
+      "margin_mean": -29.0,
+      "margin_std": 4.898979485566356
+    },
+    {
+      "ti": 34,
+      "criterion": "Emotional Impact",
+      "chosen_scores": [
+        35.0,
+        30.0,
+        40.0,
+        60.0,
+        60.0
+      ],
+      "rejected_scores": [
+        30.0,
+        85.0,
+        20.0,
+        20.0,
+        0.0
+      ],
+      "chosen_mean": 45.0,
+      "chosen_std": 12.649110640673518,
+      "rejected_mean": 31.0,
+      "rejected_std": 28.705400188814647,
+      "margin_mean": 14.0,
+      "margin_std": 39.16631205513228
+    },
+    {
+      "ti": 35,
+      "criterion": "Language as Magical Force",
+      "chosen_scores": [
+        95.0,
+        100.0,
+        90.0,
+        90.0,
+        90.0
+      ],
+      "rejected_scores": [
+        85.0,
+        90.0,
+        95.0,
+        95.0,
+        100.0
+      ],
+      "chosen_mean": 93.0,
+      "chosen_std": 4.0,
+      "rejected_mean": 93.0,
+      "rejected_std": 5.0990195135927845,
+      "margin_mean": 0.0,
+      "margin_std": 8.366600265340756
+    },
+    {
+      "ti": 36,
+      "criterion": "Transformational Impact",
+      "chosen_scores": [
+        85.0,
+        95.0,
+        95.0,
+        100.0,
+        95.0
+      ],
+      "rejected_scores": [
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "chosen_mean": 94.0,
+      "chosen_std": 4.898979485566356,
+      "rejected_mean": 20.0,
+      "rejected_std": 0.0,
+      "margin_mean": 74.0,
+      "margin_std": 4.898979485566356
+    },
+    {
+      "ti": 37,
+      "criterion": "Emotional Transformation",
+      "chosen_scores": [
+        0.0,
+        20.0,
+        20.0,
+        65.0,
+        30.0
+      ],
+      "rejected_scores": [
+        30.0,
+        30.0,
+        35.0,
+        15.0,
+        30.0
+      ],
+      "chosen_mean": 27.0,
+      "chosen_std": 21.354156504062622,
+      "rejected_mean": 28.0,
+      "rejected_std": 6.782329983125268,
+      "margin_mean": -1.0,
+      "margin_std": 27.27636339397171
+    },
+    {
+      "ti": 38,
+      "criterion": "Thematic Engagement",
+      "chosen_scores": [
+        90.0,
+        85.0,
+        85.0,
+        85.0,
+        75.0
+      ],
+      "rejected_scores": [
+        95.0,
+        100.0,
+        95.0,
+        95.0,
+        95.0
+      ],
+      "chosen_mean": 84.0,
+      "chosen_std": 4.898979485566356,
+      "rejected_mean": 96.0,
+      "rejected_std": 2.0,
+      "margin_mean": -12.0,
+      "margin_std": 5.0990195135927845
+    },
+    {
+      "ti": 39,
+      "criterion": "Thematic Depth",
+      "chosen_scores": [
+        75.0,
+        85.0,
+        75.0,
+        85.0,
+        80.0
+      ],
+      "rejected_scores": [
+        90.0,
+        90.0,
+        90.0,
+        90.0,
+        85.0
+      ],
+      "chosen_mean": 80.0,
+      "chosen_std": 4.47213595499958,
+      "rejected_mean": 89.0,
+      "rejected_std": 2.0,
+      "margin_mean": -9.0,
+      "margin_std": 4.898979485566356
+    },
+    {
+      "ti": 40,
+      "criterion": "Symbolic Role of the Handkerchief",
+      "chosen_scores": [
+        95.0,
+        95.0,
+        95.0,
+        95.0,
+        95.0
+      ],
+      "rejected_scores": [
+        95.0,
+        95.0,
+        95.0,
+        95.0,
+        95.0
+      ],
+      "chosen_mean": 95.0,
+      "chosen_std": 0.0,
+      "rejected_mean": 95.0,
+      "rejected_std": 0.0,
+      "margin_mean": 0.0,
+      "margin_std": 0.0
+    },
+    {
+      "ti": 41,
+      "criterion": "Thematic Engagement",
+      "chosen_scores": [
+        60.0,
+        30.0,
+        70.0,
+        30.0,
+        20.0
+      ],
+      "rejected_scores": [
+        95.0,
+        80.0,
+        85.0,
+        85.0,
+        60.0
+      ],
+      "chosen_mean": 42.0,
+      "chosen_std": 19.390719429665317,
+      "rejected_mean": 81.0,
+      "rejected_std": 11.575836902790225,
+      "margin_mean": -39.0,
+      "margin_std": 13.92838827718412
+    },
+    {
+      "ti": 42,
+      "criterion": "Event Clarity",
+      "chosen_scores": [
+        100.0,
+        95.0,
+        100.0,
+        100.0,
+        100.0
+      ],
+      "rejected_scores": [
+        50.0,
+        60.0,
+        50.0,
+        50.0,
+        50.0
+      ],
+      "chosen_mean": 99.0,
+      "chosen_std": 2.0,
+      "rejected_mean": 52.0,
+      "rejected_std": 4.0,
+      "margin_mean": 47.0,
+      "margin_std": 6.0
+    },
+    {
+      "ti": 43,
+      "criterion": "Emotional Resonance of Student's Skill",
+      "chosen_scores": [
+        95.0,
+        95.0,
+        100.0,
+        95.0,
+        100.0
+      ],
+      "rejected_scores": [
+        75.0,
+        95.0,
+        70.0,
+        70.0,
+        90.0
+      ],
+      "chosen_mean": 97.0,
+      "chosen_std": 2.449489742783178,
+      "rejected_mean": 80.0,
+      "rejected_std": 10.488088481701515,
+      "margin_mean": 17.0,
+      "margin_std": 10.770329614269007
+    },
+    {
+      "ti": 44,
+      "criterion": "Emotional Engagement with Identity",
+      "chosen_scores": [
+        85.0,
+        90.0,
+        85.0,
+        85.0,
+        95.0
+      ],
+      "rejected_scores": [
+        50.0,
+        55.0,
+        60.0,
+        60.0,
+        60.0
+      ],
+      "chosen_mean": 88.0,
+      "chosen_std": 4.0,
+      "rejected_mean": 57.0,
+      "rejected_std": 4.0,
+      "margin_mean": 31.0,
+      "margin_std": 4.898979485566356
+    },
+    {
+      "ti": 45,
+      "criterion": "Emotional Core",
+      "chosen_scores": [
+        20.0,
+        0.0,
+        0.0,
+        20.0,
+        30.0
+      ],
+      "rejected_scores": [
+        90.0,
+        85.0,
+        90.0,
+        85.0,
+        90.0
+      ],
+      "chosen_mean": 14.0,
+      "chosen_std": 12.0,
+      "rejected_mean": 88.0,
+      "rejected_std": 2.449489742783178,
+      "margin_mean": -74.0,
+      "margin_std": 11.575836902790225
+    },
+    {
+      "ti": 46,
+      "criterion": "Emotional Depth of Transformation",
+      "chosen_scores": [
+        40.0,
+        70.0,
+        55.0,
+        50.0,
+        60.0
+      ],
+      "rejected_scores": [
+        90.0,
+        80.0,
+        90.0,
+        85.0,
+        85.0
+      ],
+      "chosen_mean": 55.0,
+      "chosen_std": 10.0,
+      "rejected_mean": 86.0,
+      "rejected_std": 3.7416573867739413,
+      "margin_mean": -31.0,
+      "margin_std": 13.19090595827292
+    },
+    {
+      "ti": 47,
+      "criterion": "Emotional Depth of Transformation",
+      "chosen_scores": [
+        95.0,
+        95.0,
+        95.0,
+        95.0,
+        90.0
+      ],
+      "rejected_scores": [
+        60.0,
+        50.0,
+        50.0,
+        55.0,
+        50.0
+      ],
+      "chosen_mean": 94.0,
+      "chosen_std": 2.0,
+      "rejected_mean": 53.0,
+      "rejected_std": 4.0,
+      "margin_mean": 41.0,
+      "margin_std": 3.7416573867739413
+    },
+    {
+      "ti": 48,
+      "criterion": "Emotional Core Focus",
+      "chosen_scores": [
+        90.0,
+        100.0,
+        95.0,
+        95.0,
+        95.0
+      ],
+      "rejected_scores": [
+        100.0,
+        95.0,
+        95.0,
+        95.0,
+        95.0
+      ],
+      "chosen_mean": 95.0,
+      "chosen_std": 3.1622776601683795,
+      "rejected_mean": 96.0,
+      "rejected_std": 2.0,
+      "margin_mean": -1.0,
+      "margin_std": 4.898979485566356
+    },
+    {
+      "ti": 49,
+      "criterion": "Emotional Focus",
+      "chosen_scores": [
+        75.0,
+        60.0,
+        75.0,
+        65.0,
+        80.0
+      ],
+      "rejected_scores": [
+        100.0,
+        90.0,
+        85.0,
+        95.0,
+        75.0
+      ],
+      "chosen_mean": 71.0,
+      "chosen_std": 7.3484692283495345,
+      "rejected_mean": 89.0,
+      "rejected_std": 8.602325267042627,
+      "margin_mean": -18.0,
+      "margin_std": 13.638181696985855
+    },
+    {
+      "ti": 50,
+      "criterion": "Emotional Core",
+      "chosen_scores": [
+        90.0,
+        95.0,
+        85.0,
+        90.0,
+        95.0
+      ],
+      "rejected_scores": [
+        70.0,
+        85.0,
+        70.0,
+        50.0,
+        50.0
+      ],
+      "chosen_mean": 91.0,
+      "chosen_std": 3.7416573867739413,
+      "rejected_mean": 65.0,
+      "rejected_std": 13.416407864998739,
+      "margin_mean": 26.0,
+      "margin_std": 13.92838827718412
+    },
+    {
+      "ti": 51,
+      "criterion": "Integration of Migratory Life",
+      "chosen_scores": [
+        85.0,
+        95.0,
+        90.0,
+        95.0,
+        95.0
+      ],
+      "rejected_scores": [
+        85.0,
+        85.0,
+        75.0,
+        95.0,
+        90.0
+      ],
+      "chosen_mean": 92.0,
+      "chosen_std": 4.0,
+      "rejected_mean": 86.0,
+      "rejected_std": 6.6332495807108,
+      "margin_mean": 6.0,
+      "margin_std": 5.830951894845301
+    },
+    {
+      "ti": 52,
+      "criterion": "Emotional Depth",
+      "chosen_scores": [
+        60.0,
+        85.0,
+        85.0,
+        60.0,
+        85.0
+      ],
+      "rejected_scores": [
+        95.0,
+        95.0,
+        95.0,
+        95.0,
+        95.0
+      ],
+      "chosen_mean": 75.0,
+      "chosen_std": 12.24744871391589,
+      "rejected_mean": 95.0,
+      "rejected_std": 0.0,
+      "margin_mean": -20.0,
+      "margin_std": 12.24744871391589
+    },
+    {
+      "ti": 53,
+      "criterion": "Emotional Core",
+      "chosen_scores": [
+        75.0,
+        85.0,
+        90.0,
+        90.0,
+        85.0
+      ],
+      "rejected_scores": [
+        90.0,
+        90.0,
+        90.0,
+        90.0,
+        95.0
+      ],
+      "chosen_mean": 85.0,
+      "chosen_std": 5.477225575051661,
+      "rejected_mean": 91.0,
+      "rejected_std": 2.0,
+      "margin_mean": -6.0,
+      "margin_std": 5.830951894845301
+    },
+    {
+      "ti": 54,
+      "criterion": "Emotional Depth",
+      "chosen_scores": [
+        60.0,
+        60.0,
+        60.0,
+        85.0,
+        60.0
+      ],
+      "rejected_scores": [
+        90.0,
+        90.0,
+        90.0,
+        95.0,
+        95.0
+      ],
+      "chosen_mean": 65.0,
+      "chosen_std": 10.0,
+      "rejected_mean": 92.0,
+      "rejected_std": 2.449489742783178,
+      "margin_mean": -27.0,
+      "margin_std": 8.717797887081348
+    },
+    {
+      "ti": 55,
+      "criterion": "Clear Explanation of Design Choice",
+      "chosen_scores": [
+        95.0,
+        95.0,
+        95.0,
+        100.0,
+        100.0
+      ],
+      "rejected_scores": [
+        85.0,
+        75.0,
+        85.0,
+        70.0,
+        90.0
+      ],
+      "chosen_mean": 97.0,
+      "chosen_std": 2.449489742783178,
+      "rejected_mean": 81.0,
+      "rejected_std": 7.3484692283495345,
+      "margin_mean": 16.0,
+      "margin_std": 8.0
+    },
+    {
+      "ti": 56,
+      "criterion": "Moral Focus",
+      "chosen_scores": [
+        95.0,
+        95.0,
+        95.0,
+        95.0,
+        95.0
+      ],
+      "rejected_scores": [
+        65.0,
+        65.0,
+        65.0,
+        60.0,
+        90.0
+      ],
+      "chosen_mean": 95.0,
+      "chosen_std": 0.0,
+      "rejected_mean": 69.0,
+      "rejected_std": 10.677078252031311,
+      "margin_mean": 26.0,
+      "margin_std": 10.677078252031311
+    },
+    {
+      "ti": 57,
+      "criterion": "Elven Perspective",
+      "chosen_scores": [
+        95.0,
+        90.0,
+        95.0,
+        95.0,
+        95.0
+      ],
+      "rejected_scores": [
+        60.0,
+        85.0,
+        85.0,
+        90.0,
+        70.0
+      ],
+      "chosen_mean": 94.0,
+      "chosen_std": 2.0,
+      "rejected_mean": 78.0,
+      "rejected_std": 11.224972160321824,
+      "margin_mean": 16.0,
+      "margin_std": 12.0
+    },
+    {
+      "ti": 58,
+      "criterion": "Emotional Impact",
+      "chosen_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rejected_scores": [
+        85.0,
+        75.0,
+        85.0,
+        85.0,
+        85.0
+      ],
+      "chosen_mean": 0.0,
+      "chosen_std": 0.0,
+      "rejected_mean": 83.0,
+      "rejected_std": 4.0,
+      "margin_mean": -83.0,
+      "margin_std": 4.0
+    },
+    {
+      "ti": 59,
+      "criterion": "Central Question Engagement",
+      "chosen_scores": [
+        100.0,
+        100.0,
+        95.0,
+        100.0,
+        100.0
+      ],
+      "rejected_scores": [
+        90.0,
+        85.0,
+        90.0,
+        85.0,
+        70.0
+      ],
+      "chosen_mean": 99.0,
+      "chosen_std": 2.0,
+      "rejected_mean": 84.0,
+      "rejected_std": 7.3484692283495345,
+      "margin_mean": 15.0,
+      "margin_std": 8.366600265340756
+    },
+    {
+      "ti": 60,
+      "criterion": "Core Ethical Dilemma Engagement",
+      "chosen_scores": [
+        90.0,
+        60.0,
+        85.0,
+        85.0,
+        80.0
+      ],
+      "rejected_scores": [
+        80.0,
+        85.0,
+        75.0,
+        45.0,
+        90.0
+      ],
+      "chosen_mean": 80.0,
+      "chosen_std": 10.488088481701515,
+      "rejected_mean": 75.0,
+      "rejected_std": 15.811388300841896,
+      "margin_mean": 5.0,
+      "margin_std": 21.908902300206645
+    },
+    {
+      "ti": 61,
+      "criterion": "Teacher\u2019s Explanation Clarity",
+      "chosen_scores": [
+        95.0,
+        95.0,
+        95.0,
+        95.0,
+        90.0
+      ],
+      "rejected_scores": [
+        70.0,
+        85.0,
+        85.0,
+        70.0,
+        70.0
+      ],
+      "chosen_mean": 94.0,
+      "chosen_std": 2.0,
+      "rejected_mean": 76.0,
+      "rejected_std": 7.3484692283495345,
+      "margin_mean": 18.0,
+      "margin_std": 6.782329983125268
+    },
+    {
+      "ti": 62,
+      "criterion": "Emotional Intensity",
+      "chosen_scores": [
+        55.0,
+        65.0,
+        50.0,
+        50.0,
+        70.0
+      ],
+      "rejected_scores": [
+        95.0,
+        90.0,
+        95.0,
+        95.0,
+        95.0
+      ],
+      "chosen_mean": 58.0,
+      "chosen_std": 8.12403840463596,
+      "rejected_mean": 94.0,
+      "rejected_std": 2.0,
+      "margin_mean": -36.0,
+      "margin_std": 9.16515138991168
+    },
+    {
+      "ti": 63,
+      "criterion": "Emotional Weight of the Task",
+      "chosen_scores": [
+        95.0,
+        95.0,
+        95.0,
+        95.0,
+        95.0
+      ],
+      "rejected_scores": [
+        95.0,
+        90.0,
+        90.0,
+        95.0,
+        95.0
+      ],
+      "chosen_mean": 95.0,
+      "chosen_std": 0.0,
+      "rejected_mean": 93.0,
+      "rejected_std": 2.449489742783178,
+      "margin_mean": 2.0,
+      "margin_std": 2.449489742783178
+    },
+    {
+      "ti": 64,
+      "criterion": "Immersion in the Game World",
+      "chosen_scores": [
+        85.0,
+        85.0,
+        90.0,
+        90.0,
+        85.0
+      ],
+      "rejected_scores": [
+        70.0,
+        65.0,
+        75.0,
+        65.0,
+        60.0
+      ],
+      "chosen_mean": 87.0,
+      "chosen_std": 2.449489742783178,
+      "rejected_mean": 67.0,
+      "rejected_std": 5.0990195135927845,
+      "margin_mean": 20.0,
+      "margin_std": 4.47213595499958
+    },
+    {
+      "ti": 65,
+      "criterion": "Emotional and Ethical Weight",
+      "chosen_scores": [
+        45.0,
+        40.0,
+        40.0,
+        40.0,
+        50.0
+      ],
+      "rejected_scores": [
+        90.0,
+        90.0,
+        85.0,
+        95.0,
+        95.0
+      ],
+      "chosen_mean": 43.0,
+      "chosen_std": 4.0,
+      "rejected_mean": 91.0,
+      "rejected_std": 3.7416573867739413,
+      "margin_mean": -48.0,
+      "margin_std": 4.0
+    },
+    {
+      "ti": 66,
+      "criterion": "Prompt Engagement",
+      "chosen_scores": [
+        100.0,
+        100.0,
+        95.0,
+        100.0,
+        100.0
+      ],
+      "rejected_scores": [
+        60.0,
+        75.0,
+        85.0,
+        50.0,
+        65.0
+      ],
+      "chosen_mean": 99.0,
+      "chosen_std": 2.0,
+      "rejected_mean": 67.0,
+      "rejected_std": 12.083045973594572,
+      "margin_mean": 32.0,
+      "margin_std": 13.638181696985855
+    },
+    {
+      "ti": 67,
+      "criterion": "Emotional Engagement",
+      "chosen_scores": [
+        85.0,
+        80.0,
+        85.0,
+        90.0,
+        85.0
+      ],
+      "rejected_scores": [
+        40.0,
+        65.0,
+        75.0,
+        70.0,
+        60.0
+      ],
+      "chosen_mean": 85.0,
+      "chosen_std": 3.1622776601683795,
+      "rejected_mean": 62.0,
+      "rejected_std": 12.083045973594572,
+      "margin_mean": 23.0,
+      "margin_std": 12.083045973594572
+    },
+    {
+      "ti": 68,
+      "criterion": "Dragon's Symbolic Significance",
+      "chosen_scores": [
+        50.0,
+        40.0,
+        50.0,
+        50.0,
+        15.0
+      ],
+      "rejected_scores": [
+        50.0,
+        30.0,
+        30.0,
+        50.0,
+        40.0
+      ],
+      "chosen_mean": 41.0,
+      "chosen_std": 13.564659966250536,
+      "rejected_mean": 40.0,
+      "rejected_std": 8.94427190999916,
+      "margin_mean": 1.0,
+      "margin_std": 14.966629547095765
+    },
+    {
+      "ti": 69,
+      "criterion": "Emotional Integration",
+      "chosen_scores": [
+        95.0,
+        95.0,
+        95.0,
+        100.0,
+        100.0
+      ],
+      "rejected_scores": [
+        75.0,
+        90.0,
+        85.0,
+        85.0,
+        90.0
+      ],
+      "chosen_mean": 97.0,
+      "chosen_std": 2.449489742783178,
+      "rejected_mean": 85.0,
+      "rejected_std": 5.477225575051661,
+      "margin_mean": 12.0,
+      "margin_std": 5.0990195135927845
+    },
+    {
+      "ti": 70,
+      "criterion": "Emotional Engagement with the Prophecy",
+      "chosen_scores": [
+        65.0,
+        75.0,
+        40.0,
+        30.0,
+        0.0
+      ],
+      "rejected_scores": [
+        75.0,
+        65.0,
+        50.0,
+        60.0,
+        55.0
+      ],
+      "chosen_mean": 42.0,
+      "chosen_std": 26.570660511172846,
+      "rejected_mean": 61.0,
+      "rejected_std": 8.602325267042627,
+      "margin_mean": -19.0,
+      "margin_std": 22.0
+    },
+    {
+      "ti": 71,
+      "criterion": "Emotional and Cultural Impact",
+      "chosen_scores": [
+        100.0,
+        95.0,
+        95.0,
+        95.0,
+        95.0
+      ],
+      "rejected_scores": [
+        80.0,
+        65.0,
+        60.0,
+        70.0,
+        85.0
+      ],
+      "chosen_mean": 96.0,
+      "chosen_std": 2.0,
+      "rejected_mean": 72.0,
+      "rejected_std": 9.273618495495704,
+      "margin_mean": 24.0,
+      "margin_std": 8.602325267042627
+    },
+    {
+      "ti": 72,
+      "criterion": "Emotional Engagement",
+      "chosen_scores": [
+        95.0,
+        95.0,
+        95.0,
+        95.0,
+        100.0
+      ],
+      "rejected_scores": [
+        70.0,
+        75.0,
+        75.0,
+        85.0,
+        85.0
+      ],
+      "chosen_mean": 96.0,
+      "chosen_std": 2.0,
+      "rejected_mean": 78.0,
+      "rejected_std": 6.0,
+      "margin_mean": 18.0,
+      "margin_std": 5.0990195135927845
+    },
+    {
+      "ti": 73,
+      "criterion": "Emotional and Psychological Impact",
+      "chosen_scores": [
+        30.0,
+        65.0,
+        65.0,
+        30.0,
+        50.0
+      ],
+      "rejected_scores": [
+        60.0,
+        65.0,
+        65.0,
+        72.0,
+        65.0
+      ],
+      "chosen_mean": 48.0,
+      "chosen_std": 15.684387141358123,
+      "rejected_mean": 65.4,
+      "rejected_std": 3.826225293941798,
+      "margin_mean": -17.4,
+      "margin_std": 16.584329953302305
+    },
+    {
+      "ti": 74,
+      "criterion": "Emotional Impact",
+      "chosen_scores": [
+        95.0,
+        95.0,
+        95.0,
+        90.0,
+        90.0
+      ],
+      "rejected_scores": [
+        80.0,
+        95.0,
+        85.0,
+        80.0,
+        95.0
+      ],
+      "chosen_mean": 93.0,
+      "chosen_std": 2.449489742783178,
+      "rejected_mean": 87.0,
+      "rejected_std": 6.782329983125268,
+      "margin_mean": 6.0,
+      "margin_std": 7.3484692283495345
+    },
+    {
+      "ti": 75,
+      "criterion": "Emotional Engagement",
+      "chosen_scores": [
+        90.0,
+        90.0,
+        90.0,
+        90.0,
+        95.0
+      ],
+      "rejected_scores": [
+        30.0,
+        30.0,
+        20.0,
+        20.0,
+        30.0
+      ],
+      "chosen_mean": 91.0,
+      "chosen_std": 2.0,
+      "rejected_mean": 26.0,
+      "rejected_std": 4.898979485566356,
+      "margin_mean": 65.0,
+      "margin_std": 4.47213595499958
+    },
+    {
+      "ti": 76,
+      "criterion": "Emotional Core",
+      "chosen_scores": [
+        90.0,
+        90.0,
+        95.0,
+        95.0,
+        85.0
+      ],
+      "rejected_scores": [
+        95.0,
+        90.0,
+        95.0,
+        95.0,
+        90.0
+      ],
+      "chosen_mean": 91.0,
+      "chosen_std": 3.7416573867739413,
+      "rejected_mean": 93.0,
+      "rejected_std": 2.449489742783178,
+      "margin_mean": -2.0,
+      "margin_std": 2.449489742783178
+    },
+    {
+      "ti": 77,
+      "criterion": "Emotional Core",
+      "chosen_scores": [
+        95.0,
+        85.0,
+        95.0,
+        90.0,
+        90.0
+      ],
+      "rejected_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "chosen_mean": 91.0,
+      "chosen_std": 3.7416573867739413,
+      "rejected_mean": 0.0,
+      "rejected_std": 0.0,
+      "margin_mean": 91.0,
+      "margin_std": 3.7416573867739413
+    },
+    {
+      "ti": 78,
+      "criterion": "Internal Conflict Engagement",
+      "chosen_scores": [
+        30.0,
+        40.0,
+        30.0,
+        30.0,
+        30.0
+      ],
+      "rejected_scores": [
+        20.0,
+        30.0,
+        30.0,
+        20.0,
+        30.0
+      ],
+      "chosen_mean": 32.0,
+      "chosen_std": 4.0,
+      "rejected_mean": 26.0,
+      "rejected_std": 4.898979485566356,
+      "margin_mean": 6.0,
+      "margin_std": 4.898979485566356
+    },
+    {
+      "ti": 79,
+      "criterion": "Core Premise Engagement",
+      "chosen_scores": [
+        95.0,
+        100.0,
+        85.0,
+        95.0,
+        95.0
+      ],
+      "rejected_scores": [
+        100.0,
+        95.0,
+        95.0,
+        95.0,
+        95.0
+      ],
+      "chosen_mean": 94.0,
+      "chosen_std": 4.898979485566356,
+      "rejected_mean": 96.0,
+      "rejected_std": 2.0,
+      "margin_mean": -2.0,
+      "margin_std": 5.0990195135927845
+    },
+    {
+      "ti": 80,
+      "criterion": "Emotional Impact",
+      "chosen_scores": [
+        92.0,
+        85.0,
+        85.0,
+        90.0,
+        90.0
+      ],
+      "rejected_scores": [
+        95.0,
+        90.0,
+        95.0,
+        90.0,
+        90.0
+      ],
+      "chosen_mean": 88.4,
+      "chosen_std": 2.870540018881465,
+      "rejected_mean": 92.0,
+      "rejected_std": 2.449489742783178,
+      "margin_mean": -3.6,
+      "margin_std": 3.7202150475476548
+    },
+    {
+      "ti": 81,
+      "criterion": "Emotional Engagement with the Child",
+      "chosen_scores": [
+        95.0,
+        85.0,
+        95.0,
+        95.0,
+        100.0
+      ],
+      "rejected_scores": [
+        85.0,
+        85.0,
+        85.0,
+        85.0,
+        85.0
+      ],
+      "chosen_mean": 94.0,
+      "chosen_std": 4.898979485566356,
+      "rejected_mean": 85.0,
+      "rejected_std": 0.0,
+      "margin_mean": 9.0,
+      "margin_std": 4.898979485566356
+    },
+    {
+      "ti": 82,
+      "criterion": "Internal Transformation",
+      "chosen_scores": [
+        65.0,
+        90.0,
+        90.0,
+        85.0,
+        95.0
+      ],
+      "rejected_scores": [
+        95.0,
+        90.0,
+        85.0,
+        90.0,
+        90.0
+      ],
+      "chosen_mean": 85.0,
+      "chosen_std": 10.488088481701515,
+      "rejected_mean": 90.0,
+      "rejected_std": 3.1622776601683795,
+      "margin_mean": -5.0,
+      "margin_std": 13.038404810405298
+    },
+    {
+      "ti": 83,
+      "criterion": "Emotional Core",
+      "chosen_scores": [
+        70.0,
+        60.0,
+        95.0,
+        85.0,
+        95.0
+      ],
+      "rejected_scores": [
+        95.0,
+        85.0,
+        60.0,
+        90.0,
+        90.0
+      ],
+      "chosen_mean": 81.0,
+      "chosen_std": 13.92838827718412,
+      "rejected_mean": 84.0,
+      "rejected_std": 12.409673645990857,
+      "margin_mean": -3.0,
+      "margin_std": 22.271057451320086
+    },
+    {
+      "ti": 84,
+      "criterion": "Power's Emotional Impact",
+      "chosen_scores": [
+        95.0,
+        95.0,
+        95.0,
+        95.0,
+        90.0
+      ],
+      "rejected_scores": [
+        75.0,
+        95.0,
+        95.0,
+        95.0,
+        75.0
+      ],
+      "chosen_mean": 94.0,
+      "chosen_std": 2.0,
+      "rejected_mean": 87.0,
+      "rejected_std": 9.797958971132712,
+      "margin_mean": 7.0,
+      "margin_std": 8.717797887081348
+    },
+    {
+      "ti": 85,
+      "criterion": "Emotional Truth",
+      "chosen_scores": [
+        65.0,
+        75.0,
+        75.0,
+        60.0,
+        75.0
+      ],
+      "rejected_scores": [
+        85.0,
+        80.0,
+        80.0,
+        85.0,
+        85.0
+      ],
+      "chosen_mean": 70.0,
+      "chosen_std": 6.324555320336759,
+      "rejected_mean": 83.0,
+      "rejected_std": 2.449489742783178,
+      "margin_mean": -13.0,
+      "margin_std": 8.12403840463596
+    },
+    {
+      "ti": 86,
+      "criterion": "Emotional Stakes of the Conflict",
+      "chosen_scores": [
+        95.0,
+        90.0,
+        90.0,
+        90.0,
+        95.0
+      ],
+      "rejected_scores": [
+        80.0,
+        80.0,
+        75.0,
+        80.0,
+        65.0
+      ],
+      "chosen_mean": 92.0,
+      "chosen_std": 2.449489742783178,
+      "rejected_mean": 76.0,
+      "rejected_std": 5.830951894845301,
+      "margin_mean": 16.0,
+      "margin_std": 7.3484692283495345
+    },
+    {
+      "ti": 87,
+      "criterion": "Emotional Engagement",
+      "chosen_scores": [
+        60.0,
+        30.0,
+        50.0,
+        30.0,
+        40.0
+      ],
+      "rejected_scores": [
+        50.0,
+        70.0,
+        75.0,
+        80.0,
+        85.0
+      ],
+      "chosen_mean": 42.0,
+      "chosen_std": 11.661903789690601,
+      "rejected_mean": 72.0,
+      "rejected_std": 12.083045973594572,
+      "margin_mean": -30.0,
+      "margin_std": 21.6794833886788
+    },
+    {
+      "ti": 88,
+      "criterion": "Emotional Intensity",
+      "chosen_scores": [
+        85.0,
+        92.0,
+        95.0,
+        90.0,
+        95.0
+      ],
+      "rejected_scores": [
+        85.0,
+        90.0,
+        85.0,
+        85.0,
+        85.0
+      ],
+      "chosen_mean": 91.4,
+      "chosen_std": 3.7202150475476548,
+      "rejected_mean": 86.0,
+      "rejected_std": 2.0,
+      "margin_mean": 5.4,
+      "margin_std": 4.079215610874228
+    },
+    {
+      "ti": 89,
+      "criterion": "Emotional Core",
+      "chosen_scores": [
+        90.0,
+        90.0,
+        85.0,
+        90.0,
+        90.0
+      ],
+      "rejected_scores": [
+        95.0,
+        85.0,
+        95.0,
+        95.0,
+        95.0
+      ],
+      "chosen_mean": 89.0,
+      "chosen_std": 2.0,
+      "rejected_mean": 93.0,
+      "rejected_std": 4.0,
+      "margin_mean": -4.0,
+      "margin_std": 4.898979485566356
+    },
+    {
+      "ti": 90,
+      "criterion": "Emotional Core",
+      "chosen_scores": [
+        90.0,
+        65.0,
+        85.0,
+        60.0,
+        70.0
+      ],
+      "rejected_scores": [
+        40.0,
+        70.0,
+        30.0,
+        40.0,
+        40.0
+      ],
+      "chosen_mean": 74.0,
+      "chosen_std": 11.575836902790225,
+      "rejected_mean": 44.0,
+      "rejected_std": 13.564659966250536,
+      "margin_mean": 30.0,
+      "margin_std": 21.6794833886788
+    },
+    {
+      "ti": 91,
+      "criterion": "Emotional Focus",
+      "chosen_scores": [
+        95.0,
+        95.0,
+        90.0,
+        95.0,
+        90.0
+      ],
+      "rejected_scores": [
+        90.0,
+        45.0,
+        55.0,
+        50.0,
+        85.0
+      ],
+      "chosen_mean": 93.0,
+      "chosen_std": 2.449489742783178,
+      "rejected_mean": 65.0,
+      "rejected_std": 18.708286933869708,
+      "margin_mean": 28.0,
+      "margin_std": 19.390719429665317
+    },
+    {
+      "ti": 92,
+      "criterion": "Hero's Moral Stance",
+      "chosen_scores": [
+        85.0,
+        75.0,
+        85.0,
+        85.0,
+        90.0
+      ],
+      "rejected_scores": [
+        95.0,
+        95.0,
+        95.0,
+        95.0,
+        95.0
+      ],
+      "chosen_mean": 84.0,
+      "chosen_std": 4.898979485566356,
+      "rejected_mean": 95.0,
+      "rejected_std": 0.0,
+      "margin_mean": -11.0,
+      "margin_std": 4.898979485566356
+    },
+    {
+      "ti": 93,
+      "criterion": "Emotional Impact of the Blade's Plea",
+      "chosen_scores": [
+        95.0,
+        95.0,
+        95.0,
+        95.0,
+        95.0
+      ],
+      "rejected_scores": [
+        95.0,
+        95.0,
+        90.0,
+        90.0,
+        95.0
+      ],
+      "chosen_mean": 95.0,
+      "chosen_std": 0.0,
+      "rejected_mean": 93.0,
+      "rejected_std": 2.449489742783178,
+      "margin_mean": 2.0,
+      "margin_std": 2.449489742783178
+    },
+    {
+      "ti": 94,
+      "criterion": "Emotional Engagement",
+      "chosen_scores": [
+        95.0,
+        95.0,
+        95.0,
+        100.0,
+        95.0
+      ],
+      "rejected_scores": [
+        88.0,
+        90.0,
+        90.0,
+        95.0,
+        85.0
+      ],
+      "chosen_mean": 96.0,
+      "chosen_std": 2.0,
+      "rejected_mean": 89.6,
+      "rejected_std": 3.2619012860600183,
+      "margin_mean": 6.4,
+      "margin_std": 1.9595917942265424
+    },
+    {
+      "ti": 95,
+      "criterion": "Emotional Engagement with Divine Beasts",
+      "chosen_scores": [
+        75.0,
+        78.0,
+        85.0,
+        88.0,
+        70.0
+      ],
+      "rejected_scores": [
+        30.0,
+        30.0,
+        30.0,
+        30.0,
+        30.0
+      ],
+      "chosen_mean": 79.2,
+      "chosen_std": 6.554387843269576,
+      "rejected_mean": 30.0,
+      "rejected_std": 0.0,
+      "margin_mean": 49.2,
+      "margin_std": 6.554387843269576
+    },
+    {
+      "ti": 96,
+      "criterion": "Emotional Engagement",
+      "chosen_scores": [
+        85.0,
+        95.0,
+        95.0,
+        95.0,
+        90.0
+      ],
+      "rejected_scores": [
+        85.0,
+        90.0,
+        90.0,
+        95.0,
+        85.0
+      ],
+      "chosen_mean": 92.0,
+      "chosen_std": 4.0,
+      "rejected_mean": 89.0,
+      "rejected_std": 3.7416573867739413,
+      "margin_mean": 3.0,
+      "margin_std": 2.449489742783178
+    },
+    {
+      "ti": 97,
+      "criterion": "Emotional Core",
+      "chosen_scores": [
+        20.0,
+        15.0,
+        15.0,
+        30.0,
+        55.0
+      ],
+      "rejected_scores": [
+        92.0,
+        90.0,
+        95.0,
+        95.0,
+        90.0
+      ],
+      "chosen_mean": 27.0,
+      "chosen_std": 15.033296378372908,
+      "rejected_mean": 92.4,
+      "rejected_std": 2.244994432064365,
+      "margin_mean": -65.4,
+      "margin_std": 15.957443404254956
+    },
+    {
+      "ti": 98,
+      "criterion": "Emotional Weight of the Spell",
+      "chosen_scores": [
+        95.0,
+        90.0,
+        90.0,
+        90.0,
+        85.0
+      ],
+      "rejected_scores": [
+        60.0,
+        60.0,
+        85.0,
+        70.0,
+        90.0
+      ],
+      "chosen_mean": 90.0,
+      "chosen_std": 3.1622776601683795,
+      "rejected_mean": 73.0,
+      "rejected_std": 12.489995996796797,
+      "margin_mean": 17.0,
+      "margin_std": 15.033296378372908
+    },
+    {
+      "ti": 99,
+      "criterion": "Emotional Engagement",
+      "chosen_scores": [
+        95.0,
+        95.0,
+        95.0,
+        95.0,
+        98.0
+      ],
+      "rejected_scores": [
+        90.0,
+        90.0,
+        85.0,
+        90.0,
+        80.0
+      ],
+      "chosen_mean": 95.6,
+      "chosen_std": 1.2,
+      "rejected_mean": 87.0,
+      "rejected_std": 4.0,
+      "margin_mean": 8.6,
+      "margin_std": 5.083306010855534
+    }
+  ]
+}

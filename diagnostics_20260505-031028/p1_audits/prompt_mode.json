@@ -1,0 +1,84 @@
+{
+  "findings": {
+    "launcher": {
+      "policy_prompt_mode": [],
+      "DATASET_NAME": [
+        "DATASET_NAME=\"${DATASET_NAME:-sumuks/litbench-ha-with-baseline}\"",
+        "echo \"Dataset: $DATASET_NAME\""
+      ],
+      "TRAIN_DATA": [
+        "TRAIN_DATA=\"${TRAIN_DATA:-datasets/dpo_to_rupo_litbench_ha_with_baseline_${JUDGE_REWARD_TYPE_TRAIN}}\"",
+        "if [[ ! -f \"$PROJECT_ROOT/$TRAIN_DATA/train.parquet\" || ! -f \"$PROJECT_ROOT/$EVAL_DATA/test.parquet\" ]]; then",
+        "data.train_files=[$TRAIN_DATA/train.parquet] \\",
+        "echo \"Train data: $TRAIN_DATA (reward type: $JUDGE_REWARD_TYPE_TRAIN)\"",
+        "bash \"$PROJECT_ROOT/training/verl_training.sh\" \"$EXP_NAME\" \"$CONFIG_NAME\" \"$TRAIN_DATA\" $ARGS"
+      ],
+      "EVAL_DATA": [
+        "EVAL_DATA=\"${EVAL_DATA:-datasets/dpo_to_rupo_litbench_ha_with_baseline_${JUDGE_REWARD_TYPE_VAL}}\"",
+        "if [[ ! -f \"$PROJECT_ROOT/$TRAIN_DATA/train.parquet\" || ! -f \"$PROJECT_ROOT/$EVAL_DATA/test.parquet\" ]]; then",
+        "data.val_files=[$EVAL_DATA/test.parquet] \\",
+        "echo \"Eval data:  $EVAL_DATA (reward type: $JUDGE_REWARD_TYPE_VAL)\""
+      ],
+      "trainer\\.val_before_train": [
+        "trainer.val_before_train=$VAL_BEFORE_TRAIN \\"
+      ],
+      "VAL_KWARGS_N": [
+        "VAL_KWARGS_N=${VAL_KWARGS_N:-1}",
+        "actor_rollout_ref.rollout.val_kwargs.n=$VAL_KWARGS_N \\",
+        "echo \"Save freq: $SAVE_FREQ  test freq: $TEST_FREQ  val batch size: $VAL_BATCH_SIZE  val n: $VAL_KWARGS_N\""
+      ],
+      "ROLLOUT_N": [
+        "ROLLOUT_N=${ROLLOUT_N:-4}",
+        "EXP_NAME=\"SDPO-RUPO-bs${TRAIN_BATCH_SIZE}-n${ROLLOUT_N}-alpha${ALPHA}-lr${LR}-lora${LORA_RANK}-${MODEL_NAME}-${SUFFIX}\"",
+        "actor_rollout_ref.rollout.n=$ROLLOUT_N \\"
+      ]
+    },
+    "preprocess": {
+      "policy_prompt_mode": [
+        "--policy_prompt_mode pair \\",
+        "policy_prompt_mode: str,",
+        "base = DEFAULT_PAIR_SYSTEM_PROMPT if policy_prompt_mode == \"pair\" else DEFAULT_PROMPT_ONLY_SYSTEM_PROMPT",
+        "policy_prompt_mode: str,",
+        "swap = policy_prompt_mode == \"pair\" and randomize_order and random.random() < 0.5",
+        "user_content = build_policy_prompt(prompt_text, candidate_a, candidate_b, policy_prompt_mode)",
+        "\"policy_prompt_mode\": policy_prompt_mode,",
+        "policy_prompt_mode: str = \"pair\",",
+        "system_prompt = _get_system_prompt(policy_prompt_mode, judge_reward_type, custom_system_prompt)",
+        "map_fn = make_map_fn(split, policy_prompt_mode, judge_reward_type, randomize_order, system_prompt)",
+        "parser.add_argument(\"--policy_prompt_mode\", type=str, default=\"pair\", choices=[\"pair\", \"prompt_only\"])",
+        "policy_prompt_mode=args.policy_prompt_mode,"
+      ],
+      "build_policy_prompt": [
+        "build_policy_prompt,",
+        "build_policy_prompt,",
+        "user_content = build_policy_prompt(prompt_text, candidate_a, candidate_b, policy_prompt_mode)"
+      ],
+      "is_eval": [],
+      "split": [
+        "split: str,",
+        "\"split\": split,",
+        "for split in (\"train\", \"test\"):",
+        "print(f\"Loading {dataset_name} split={split}...\")",
+        "ds = datasets.load_dataset(dataset_name, split=split)",
+        "map_fn = make_map_fn(split, policy_prompt_mode, judge_reward_type, randomize_order, system_prompt)",
+        "out_path = os.path.join(output_dir, f\"{split}.parquet\")"
+      ]
+    },
+    "baseline_prep": {
+      "policy_prompt_mode": [
+        "--policy_prompt_mode pair \\",
+        "--policy_prompt_mode pair \\"
+      ],
+      "DATASET_NAME": [
+        "DATASET_NAME=\"${DATASET_NAME:-sumuks/litbench-ha-with-baseline}\"",
+        "echo \"Dataset:                  $DATASET_NAME\"",
+        "--dataset_name \"$DATASET_NAME\" \\",
+        "--dataset_name \"$DATASET_NAME\" \\"
+      ]
+    }
+  },
+  "summary": {
+    "differs_train_vs_val": "POSSIBLE \u2014 preprocess routes by is_eval/split; manual inspection required",
+    "recommendation": "Open preprocess_dataset.py around the `policy_prompt_mode` line and confirm both train and val rows go through the same code path. The untrained baseline uses `policy_prompt_mode=prompt_only`; the trained policy uses `pair`. If val for the trained policy uses `pair` mode (sees both responses), and the untrained baseline uses `prompt_only`, the comparison is asymmetric."
+  }
+}

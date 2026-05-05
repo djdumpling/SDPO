@@ -142,14 +142,18 @@ async def run_one_judge_call(
     max_completion_tokens: int,
     system_prompt: str,
     timeout_seconds: float,
+    temperature: float | None = None,
 ) -> tuple[str | None, float | None, str | None]:
     """Return (raw_reply, parsed_score, error_kind)."""
     messages = [{"role": "system", "content": system_prompt}, {"role": "user", "content": judge_prompt}]
+    extra: dict[str, Any] = {}
+    if temperature is not None: extra["temperature"] = temperature
     async with semaphore:
         try:
             async with asyncio.timeout(timeout_seconds):
                 response = await client.chat.completions.create(
                     model=model, messages=messages, max_completion_tokens=max_completion_tokens,
+                    **extra,
                 )
         except (asyncio.TimeoutError, APITimeoutError):
             return None, None, "timeout"
@@ -182,6 +186,7 @@ async def cross_judge_one_example(
     chosen_text: str,
     rejected_text: str,
     criteria: list[Any],
+    temperature: float | None = None,
 ) -> dict[str, Any]:
     """Score one (prompt, chosen, rejected, rubric) tuple. Returns scores + reward."""
     weights = [c.weight for c in criteria]
@@ -192,6 +197,7 @@ async def cross_judge_one_example(
                 client, semaphore,
                 build_single_criterion_judge_prompt(prompt_text, story_text, c.index, c.name, c.description),
                 judge_model, max_completion_tokens, system_prompt, timeout_seconds,
+                temperature=temperature,
             )
             for c in criteria
         ])
@@ -444,6 +450,7 @@ async def run_cross_judge(args: argparse.Namespace) -> dict[str, Any]:
             client, semaphore, args.judge_model, args.judge_max_tokens,
             DEFAULT_JUDGE_SYSTEM_PROMPT, args.judge_timeout,
             ex["prompt"], ex["chosen"], ex["rejected"], list(inspection.criteria),
+            temperature=args.temperature,
         )
         if result.get("judge_error"): counters["judge_error"] += 1
         return {"idx": idx, **ex, "rubric_parse_success": True, "valid_rubric": True, **result}
@@ -515,6 +522,9 @@ def parse_args() -> argparse.Namespace:
                    help="OpenAI-compatible base URL. Default points at Prime Intellect inference.")
     p.add_argument("--judge-api-key-env", default="PRIME_API_KEY",
                    help="Env var holding the judge API key.")
+    p.add_argument("--temperature", type=float, default=None,
+                   help="Sampling temperature for judge calls. Default: server default. "
+                        "Set to 0.7 for OpenRubrics-style stochastic judge ensembling.")
     p.add_argument("--judge-max-tokens", type=int, default=4096,
                    help="max_completion_tokens per judge call (covers reasoning tokens for GPT-5).")
     p.add_argument("--judge-timeout", type=float, default=300.0,
