@@ -1,0 +1,5452 @@
+{
+  "headline": {
+    "K": 4,
+    "n_rows_kept": 286,
+    "individual_run_accuracy": [
+      0.708041958041958,
+      0.6835664335664335,
+      0.7062937062937062,
+      0.6748251748251748
+    ],
+    "individual_avg_accuracy": 0.6931818181818181,
+    "ensemble_accuracy": 0.6958041958041958,
+    "ensembling_lift_pp": 0.2622377622377714,
+    "verdict": "H1 marginal \u2014 k=4 lift = 0.3pp. Ensembling helps a little; not the dominant fix."
+  },
+  "rows": [
+    {
+      "id": 0,
+      "chosen_totals_k": [
+        95.0,
+        96.75,
+        95.0,
+        95.0
+      ],
+      "rejected_totals_k": [
+        73.25,
+        80.25,
+        69.0,
+        81.5
+      ],
+      "chosen_total_ensemble": 95.4375,
+      "rejected_total_ensemble": 76.0,
+      "margin_ensemble": 19.4375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 1,
+      "chosen_totals_k": [
+        81.0,
+        76.5,
+        89.0,
+        84.5
+      ],
+      "rejected_totals_k": [
+        68.5,
+        70.75,
+        73.5,
+        63.25
+      ],
+      "chosen_total_ensemble": 82.75,
+      "rejected_total_ensemble": 69.0,
+      "margin_ensemble": 13.75,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 2,
+      "chosen_totals_k": [
+        79.0,
+        87.0,
+        93.5,
+        86.75
+      ],
+      "rejected_totals_k": [
+        36.75,
+        60.0,
+        64.75,
+        68.65
+      ],
+      "chosen_total_ensemble": 86.5625,
+      "rejected_total_ensemble": 57.5375,
+      "margin_ensemble": 29.025,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 3,
+      "chosen_totals_k": [
+        96.25,
+        96.75,
+        95.0,
+        95.25
+      ],
+      "rejected_totals_k": [
+        61.0,
+        57.75,
+        44.0,
+        51.75
+      ],
+      "chosen_total_ensemble": 95.8125,
+      "rejected_total_ensemble": 53.625,
+      "margin_ensemble": 42.1875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 4,
+      "chosen_totals_k": [
+        59.0,
+        63.75,
+        60.0,
+        61.5
+      ],
+      "rejected_totals_k": [
+        56.25,
+        55.0,
+        49.0,
+        59.0
+      ],
+      "chosen_total_ensemble": 61.0625,
+      "rejected_total_ensemble": 54.8125,
+      "margin_ensemble": 6.25,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 5,
+      "chosen_totals_k": [
+        87.75,
+        86.5,
+        87.75,
+        85.25
+      ],
+      "rejected_totals_k": [
+        34.5,
+        38.5,
+        35.5,
+        35.0
+      ],
+      "chosen_total_ensemble": 86.8125,
+      "rejected_total_ensemble": 35.875,
+      "margin_ensemble": 50.9375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 6,
+      "chosen_totals_k": [
+        95.0,
+        92.0,
+        93.0,
+        94.0
+      ],
+      "rejected_totals_k": [
+        56.0,
+        61.25,
+        57.75,
+        54.5
+      ],
+      "chosen_total_ensemble": 93.5,
+      "rejected_total_ensemble": 57.375,
+      "margin_ensemble": 36.125,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 7,
+      "chosen_totals_k": [
+        41.5,
+        64.25,
+        47.5,
+        49.5
+      ],
+      "rejected_totals_k": [
+        26.0,
+        18.5,
+        26.5,
+        32.5
+      ],
+      "chosen_total_ensemble": 50.6875,
+      "rejected_total_ensemble": 25.875,
+      "margin_ensemble": 24.8125,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 8,
+      "chosen_totals_k": [
+        86.25,
+        86.75,
+        84.25,
+        85.0
+      ],
+      "rejected_totals_k": [
+        58.75,
+        56.75,
+        50.5,
+        63.0
+      ],
+      "chosen_total_ensemble": 85.5625,
+      "rejected_total_ensemble": 57.25,
+      "margin_ensemble": 28.3125,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 9,
+      "chosen_totals_k": [
+        91.25,
+        89.0,
+        89.25,
+        85.0
+      ],
+      "rejected_totals_k": [
+        60.5,
+        55.25,
+        62.25,
+        63.75
+      ],
+      "chosen_total_ensemble": 88.625,
+      "rejected_total_ensemble": 60.4375,
+      "margin_ensemble": 28.1875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 11,
+      "chosen_totals_k": [
+        90.5,
+        93.25,
+        90.0,
+        85.5
+      ],
+      "rejected_totals_k": [
+        85.75,
+        83.75,
+        93.25,
+        90.75
+      ],
+      "chosen_total_ensemble": 89.8125,
+      "rejected_total_ensemble": 88.375,
+      "margin_ensemble": 1.4375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 12,
+      "chosen_totals_k": [
+        81.45,
+        85.75,
+        85.5,
+        86.0
+      ],
+      "rejected_totals_k": [
+        47.0,
+        51.25,
+        62.0,
+        53.0
+      ],
+      "chosen_total_ensemble": 84.675,
+      "rejected_total_ensemble": 53.3125,
+      "margin_ensemble": 31.362499999999997,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 13,
+      "chosen_totals_k": [
+        93.75,
+        90.64999999999999,
+        92.25,
+        92.0
+      ],
+      "rejected_totals_k": [
+        19.5,
+        19.25,
+        19.25,
+        18.0
+      ],
+      "chosen_total_ensemble": 92.1625,
+      "rejected_total_ensemble": 19.0,
+      "margin_ensemble": 73.1625,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 14,
+      "chosen_totals_k": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rejected_totals_k": [
+        7.8,
+        6.2,
+        7.8,
+        7.5
+      ],
+      "chosen_total_ensemble": 0.0,
+      "rejected_total_ensemble": 7.325,
+      "margin_ensemble": -7.325,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 15,
+      "chosen_totals_k": [
+        92.25,
+        95.5,
+        92.75,
+        93.5
+      ],
+      "rejected_totals_k": [
+        56.0,
+        58.5,
+        59.5,
+        57.5
+      ],
+      "chosen_total_ensemble": 93.5,
+      "rejected_total_ensemble": 57.875,
+      "margin_ensemble": 35.625,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 16,
+      "chosen_totals_k": [
+        84.75,
+        91.5,
+        86.75,
+        89.75
+      ],
+      "rejected_totals_k": [
+        95.5,
+        92.25,
+        92.0,
+        93.0
+      ],
+      "chosen_total_ensemble": 88.1875,
+      "rejected_total_ensemble": 93.1875,
+      "margin_ensemble": -5.0,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 17,
+      "chosen_totals_k": [
+        66.5,
+        72.25,
+        67.0,
+        73.75
+      ],
+      "rejected_totals_k": [
+        84.5,
+        86.0,
+        88.45,
+        89.5
+      ],
+      "chosen_total_ensemble": 69.875,
+      "rejected_total_ensemble": 87.1125,
+      "margin_ensemble": -17.237499999999997,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 18,
+      "chosen_totals_k": [
+        66.0,
+        72.5,
+        69.0,
+        67.75
+      ],
+      "rejected_totals_k": [
+        94.0,
+        94.5,
+        94.0,
+        95.0
+      ],
+      "chosen_total_ensemble": 68.8125,
+      "rejected_total_ensemble": 94.375,
+      "margin_ensemble": -25.5625,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 19,
+      "chosen_totals_k": [
+        68.5,
+        67.0,
+        72.5,
+        73.75
+      ],
+      "rejected_totals_k": [
+        86.0,
+        92.0,
+        92.5,
+        88.75
+      ],
+      "chosen_total_ensemble": 70.4375,
+      "rejected_total_ensemble": 89.8125,
+      "margin_ensemble": -19.375,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 20,
+      "chosen_totals_k": [
+        83.75,
+        80.25,
+        78.75,
+        87.75
+      ],
+      "rejected_totals_k": [
+        83.25,
+        78.0,
+        78.5,
+        83.25
+      ],
+      "chosen_total_ensemble": 82.625,
+      "rejected_total_ensemble": 80.75,
+      "margin_ensemble": 1.875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 21,
+      "chosen_totals_k": [
+        79.75,
+        81.75,
+        81.0,
+        77.0
+      ],
+      "rejected_totals_k": [
+        49.25,
+        48.5,
+        52.25,
+        43.25
+      ],
+      "chosen_total_ensemble": 79.875,
+      "rejected_total_ensemble": 48.3125,
+      "margin_ensemble": 31.5625,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 22,
+      "chosen_totals_k": [
+        88.5,
+        83.5,
+        83.5,
+        80.5
+      ],
+      "rejected_totals_k": [
+        44.25,
+        47.75,
+        51.5,
+        40.5
+      ],
+      "chosen_total_ensemble": 84.0,
+      "rejected_total_ensemble": 46.0,
+      "margin_ensemble": 38.0,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 23,
+      "chosen_totals_k": [
+        90.75,
+        92.5,
+        91.65,
+        87.45
+      ],
+      "rejected_totals_k": [
+        65.0,
+        61.5,
+        48.5,
+        62.0
+      ],
+      "chosen_total_ensemble": 90.5875,
+      "rejected_total_ensemble": 59.25,
+      "margin_ensemble": 31.337500000000006,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 24,
+      "chosen_totals_k": [
+        89.75,
+        90.69999999999999,
+        78.5,
+        90.0
+      ],
+      "rejected_totals_k": [
+        54.5,
+        57.5,
+        46.5,
+        40.75
+      ],
+      "chosen_total_ensemble": 87.2375,
+      "rejected_total_ensemble": 49.8125,
+      "margin_ensemble": 37.425,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 25,
+      "chosen_totals_k": [
+        90.75,
+        90.25,
+        90.2,
+        91.0
+      ],
+      "rejected_totals_k": [
+        65.5,
+        59.5,
+        52.0,
+        50.0
+      ],
+      "chosen_total_ensemble": 90.55,
+      "rejected_total_ensemble": 56.75,
+      "margin_ensemble": 33.8,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 26,
+      "chosen_totals_k": [
+        93.75,
+        93.25,
+        90.5,
+        90.5
+      ],
+      "rejected_totals_k": [
+        65.75,
+        42.75,
+        51.5,
+        60.75
+      ],
+      "chosen_total_ensemble": 92.0,
+      "rejected_total_ensemble": 55.1875,
+      "margin_ensemble": 36.8125,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 27,
+      "chosen_totals_k": [
+        86.5,
+        86.25,
+        86.0,
+        88.25
+      ],
+      "rejected_totals_k": [
+        48.75,
+        48.75,
+        45.0,
+        45.0
+      ],
+      "chosen_total_ensemble": 86.75,
+      "rejected_total_ensemble": 46.875,
+      "margin_ensemble": 39.875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 28,
+      "chosen_totals_k": [
+        89.75,
+        93.25,
+        93.5,
+        82.5
+      ],
+      "rejected_totals_k": [
+        59.25,
+        47.5,
+        55.5,
+        55.5
+      ],
+      "chosen_total_ensemble": 89.75,
+      "rejected_total_ensemble": 54.4375,
+      "margin_ensemble": 35.3125,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 29,
+      "chosen_totals_k": [
+        88.75,
+        88.0,
+        89.4,
+        89.25
+      ],
+      "rejected_totals_k": [
+        66.5,
+        62.75,
+        58.5,
+        54.5
+      ],
+      "chosen_total_ensemble": 88.85,
+      "rejected_total_ensemble": 60.5625,
+      "margin_ensemble": 28.287499999999994,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 30,
+      "chosen_totals_k": [
+        69.5,
+        71.0,
+        65.75,
+        61.0
+      ],
+      "rejected_totals_k": [
+        92.75,
+        92.5,
+        91.35,
+        91.35
+      ],
+      "chosen_total_ensemble": 66.8125,
+      "rejected_total_ensemble": 91.9875,
+      "margin_ensemble": -25.174999999999997,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 31,
+      "chosen_totals_k": [
+        81.5,
+        77.5,
+        80.75,
+        74.25
+      ],
+      "rejected_totals_k": [
+        83.75,
+        84.75,
+        81.75,
+        86.0
+      ],
+      "chosen_total_ensemble": 78.5,
+      "rejected_total_ensemble": 84.0625,
+      "margin_ensemble": -5.5625,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 32,
+      "chosen_totals_k": [
+        71.0,
+        66.25,
+        64.0,
+        69.75
+      ],
+      "rejected_totals_k": [
+        49.75,
+        42.25,
+        41.5,
+        50.0
+      ],
+      "chosen_total_ensemble": 67.75,
+      "rejected_total_ensemble": 45.875,
+      "margin_ensemble": 21.875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 33,
+      "chosen_totals_k": [
+        75.25,
+        76.5,
+        78.75,
+        78.25
+      ],
+      "rejected_totals_k": [
+        91.5,
+        90.25,
+        85.7,
+        90.75
+      ],
+      "chosen_total_ensemble": 77.1875,
+      "rejected_total_ensemble": 89.55,
+      "margin_ensemble": -12.362499999999997,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 34,
+      "chosen_totals_k": [
+        94.0,
+        87.75,
+        89.0,
+        90.25
+      ],
+      "rejected_totals_k": [
+        51.25,
+        58.0,
+        49.5,
+        70.0
+      ],
+      "chosen_total_ensemble": 90.25,
+      "rejected_total_ensemble": 57.1875,
+      "margin_ensemble": 33.0625,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 35,
+      "chosen_totals_k": [
+        81.25,
+        85.75,
+        84.25,
+        84.25
+      ],
+      "rejected_totals_k": [
+        66.25,
+        59.75,
+        64.25,
+        57.5
+      ],
+      "chosen_total_ensemble": 83.875,
+      "rejected_total_ensemble": 61.9375,
+      "margin_ensemble": 21.9375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 36,
+      "chosen_totals_k": [
+        94.25,
+        94.5,
+        94.5,
+        95.0
+      ],
+      "rejected_totals_k": [
+        88.0,
+        88.5,
+        88.75,
+        87.7
+      ],
+      "chosen_total_ensemble": 94.5625,
+      "rejected_total_ensemble": 88.2375,
+      "margin_ensemble": 6.325000000000003,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 37,
+      "chosen_totals_k": [
+        89.75,
+        88.75,
+        79.25,
+        83.5
+      ],
+      "rejected_totals_k": [
+        54.25,
+        66.5,
+        61.0,
+        60.0
+      ],
+      "chosen_total_ensemble": 85.3125,
+      "rejected_total_ensemble": 60.4375,
+      "margin_ensemble": 24.875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 38,
+      "chosen_totals_k": [
+        93.5,
+        92.5,
+        93.0,
+        93.0
+      ],
+      "rejected_totals_k": [
+        56.75,
+        46.5,
+        42.75,
+        46.0
+      ],
+      "chosen_total_ensemble": 93.0,
+      "rejected_total_ensemble": 48.0,
+      "margin_ensemble": 45.0,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 39,
+      "chosen_totals_k": [
+        8.0,
+        0.0,
+        2.0,
+        0.0
+      ],
+      "rejected_totals_k": [
+        14.0,
+        17.5,
+        12.0,
+        16.0
+      ],
+      "chosen_total_ensemble": 2.5,
+      "rejected_total_ensemble": 14.875,
+      "margin_ensemble": -12.375,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 40,
+      "chosen_totals_k": [
+        47.5,
+        57.25,
+        47.0,
+        41.5
+      ],
+      "rejected_totals_k": [
+        81.5,
+        82.0,
+        83.0,
+        85.0
+      ],
+      "chosen_total_ensemble": 48.3125,
+      "rejected_total_ensemble": 82.875,
+      "margin_ensemble": -34.5625,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 41,
+      "chosen_totals_k": [
+        90.5,
+        85.5,
+        84.0,
+        87.25
+      ],
+      "rejected_totals_k": [
+        71.5,
+        66.5,
+        67.25,
+        69.25
+      ],
+      "chosen_total_ensemble": 86.8125,
+      "rejected_total_ensemble": 68.625,
+      "margin_ensemble": 18.1875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 42,
+      "chosen_totals_k": [
+        56.5,
+        59.5,
+        55.0,
+        55.0
+      ],
+      "rejected_totals_k": [
+        74.25,
+        74.75,
+        75.5,
+        73.0
+      ],
+      "chosen_total_ensemble": 56.5,
+      "rejected_total_ensemble": 74.375,
+      "margin_ensemble": -17.875,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 43,
+      "chosen_totals_k": [
+        77.5,
+        80.75,
+        67.5,
+        70.0
+      ],
+      "rejected_totals_k": [
+        96.75,
+        94.5,
+        95.5,
+        95.75
+      ],
+      "chosen_total_ensemble": 73.9375,
+      "rejected_total_ensemble": 95.625,
+      "margin_ensemble": -21.6875,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 44,
+      "chosen_totals_k": [
+        57.75,
+        54.5,
+        57.0,
+        51.75
+      ],
+      "rejected_totals_k": [
+        49.5,
+        56.5,
+        53.0,
+        52.5
+      ],
+      "chosen_total_ensemble": 55.25,
+      "rejected_total_ensemble": 52.875,
+      "margin_ensemble": 2.375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 45,
+      "chosen_totals_k": [
+        91.75,
+        94.0,
+        92.25,
+        94.0
+      ],
+      "rejected_totals_k": [
+        51.0,
+        42.5,
+        44.5,
+        46.5
+      ],
+      "chosen_total_ensemble": 93.0,
+      "rejected_total_ensemble": 46.125,
+      "margin_ensemble": 46.875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 46,
+      "chosen_totals_k": [
+        86.75,
+        88.0,
+        87.75,
+        84.75
+      ],
+      "rejected_totals_k": [
+        56.0,
+        59.25,
+        62.0,
+        60.25
+      ],
+      "chosen_total_ensemble": 86.8125,
+      "rejected_total_ensemble": 59.375,
+      "margin_ensemble": 27.4375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 47,
+      "chosen_totals_k": [
+        94.5,
+        96.2,
+        95.75,
+        94.5
+      ],
+      "rejected_totals_k": [
+        74.75,
+        81.5,
+        79.0,
+        82.75
+      ],
+      "chosen_total_ensemble": 95.2375,
+      "rejected_total_ensemble": 79.5,
+      "margin_ensemble": 15.737499999999997,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 48,
+      "chosen_totals_k": [
+        91.19999999999999,
+        91.25,
+        89.25,
+        89.25
+      ],
+      "rejected_totals_k": [
+        69.8,
+        61.75,
+        64.0,
+        66.25
+      ],
+      "chosen_total_ensemble": 90.2375,
+      "rejected_total_ensemble": 65.45,
+      "margin_ensemble": 24.787499999999994,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 49,
+      "chosen_totals_k": [
+        63.85,
+        57.0,
+        77.25,
+        62.0
+      ],
+      "rejected_totals_k": [
+        74.5,
+        74.0,
+        78.25,
+        82.25
+      ],
+      "chosen_total_ensemble": 65.025,
+      "rejected_total_ensemble": 77.25,
+      "margin_ensemble": -12.224999999999994,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 50,
+      "chosen_totals_k": [
+        96.75,
+        99.0,
+        99.0,
+        95.0
+      ],
+      "rejected_totals_k": [
+        81.0,
+        85.5,
+        83.5,
+        85.75
+      ],
+      "chosen_total_ensemble": 97.4375,
+      "rejected_total_ensemble": 83.9375,
+      "margin_ensemble": 13.5,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 52,
+      "chosen_totals_k": [
+        93.75,
+        93.5,
+        94.25,
+        92.5
+      ],
+      "rejected_totals_k": [
+        70.5,
+        63.75,
+        71.25,
+        71.0
+      ],
+      "chosen_total_ensemble": 93.5,
+      "rejected_total_ensemble": 69.125,
+      "margin_ensemble": 24.375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 53,
+      "chosen_totals_k": [
+        86.0,
+        92.25,
+        89.75,
+        88.05
+      ],
+      "rejected_totals_k": [
+        53.0,
+        53.5,
+        47.5,
+        49.5
+      ],
+      "chosen_total_ensemble": 89.0125,
+      "rejected_total_ensemble": 50.875,
+      "margin_ensemble": 38.1375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 54,
+      "chosen_totals_k": [
+        95.25,
+        94.25,
+        92.75,
+        93.25
+      ],
+      "rejected_totals_k": [
+        47.5,
+        47.0,
+        49.5,
+        44.75
+      ],
+      "chosen_total_ensemble": 93.875,
+      "rejected_total_ensemble": 47.1875,
+      "margin_ensemble": 46.6875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 55,
+      "chosen_totals_k": [
+        88.0,
+        80.0,
+        87.5,
+        89.5
+      ],
+      "rejected_totals_k": [
+        86.25,
+        84.75,
+        88.0,
+        89.25
+      ],
+      "chosen_total_ensemble": 86.25,
+      "rejected_total_ensemble": 87.0625,
+      "margin_ensemble": -0.8125,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 56,
+      "chosen_totals_k": [
+        87.25,
+        91.5,
+        88.0,
+        94.5
+      ],
+      "rejected_totals_k": [
+        51.75,
+        49.25,
+        53.25,
+        53.5
+      ],
+      "chosen_total_ensemble": 90.3125,
+      "rejected_total_ensemble": 51.9375,
+      "margin_ensemble": 38.375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 57,
+      "chosen_totals_k": [
+        91.0,
+        91.75,
+        85.5,
+        90.0
+      ],
+      "rejected_totals_k": [
+        66.5,
+        66.5,
+        65.0,
+        68.75
+      ],
+      "chosen_total_ensemble": 89.5625,
+      "rejected_total_ensemble": 66.6875,
+      "margin_ensemble": 22.875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 58,
+      "chosen_totals_k": [
+        86.5,
+        85.8,
+        90.25,
+        86.5
+      ],
+      "rejected_totals_k": [
+        60.5,
+        55.55,
+        60.0,
+        67.5
+      ],
+      "chosen_total_ensemble": 87.2625,
+      "rejected_total_ensemble": 60.8875,
+      "margin_ensemble": 26.375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 59,
+      "chosen_totals_k": [
+        79.0,
+        79.5,
+        87.75,
+        87.25
+      ],
+      "rejected_totals_k": [
+        53.75,
+        51.75,
+        53.25,
+        51.5
+      ],
+      "chosen_total_ensemble": 83.375,
+      "rejected_total_ensemble": 52.5625,
+      "margin_ensemble": 30.8125,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 60,
+      "chosen_totals_k": [
+        96.75,
+        98.0,
+        95.5,
+        97.25
+      ],
+      "rejected_totals_k": [
+        93.0,
+        94.5,
+        94.5,
+        93.94999999999999
+      ],
+      "chosen_total_ensemble": 96.875,
+      "rejected_total_ensemble": 93.9875,
+      "margin_ensemble": 2.887500000000003,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 61,
+      "chosen_totals_k": [
+        66.75,
+        80.5,
+        85.5,
+        84.5
+      ],
+      "rejected_totals_k": [
+        64.5,
+        62.25,
+        59.5,
+        61.75
+      ],
+      "chosen_total_ensemble": 79.3125,
+      "rejected_total_ensemble": 62.0,
+      "margin_ensemble": 17.3125,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 62,
+      "chosen_totals_k": [
+        76.25,
+        72.5,
+        75.0,
+        77.5
+      ],
+      "rejected_totals_k": [
+        94.75,
+        94.0,
+        95.0,
+        91.75
+      ],
+      "chosen_total_ensemble": 75.3125,
+      "rejected_total_ensemble": 93.875,
+      "margin_ensemble": -18.5625,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 63,
+      "chosen_totals_k": [
+        79.5,
+        76.0,
+        74.0,
+        71.25
+      ],
+      "rejected_totals_k": [
+        60.0,
+        60.75,
+        72.0,
+        62.25
+      ],
+      "chosen_total_ensemble": 75.1875,
+      "rejected_total_ensemble": 63.75,
+      "margin_ensemble": 11.4375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 64,
+      "chosen_totals_k": [
+        66.5,
+        71.25,
+        61.25,
+        75.0
+      ],
+      "rejected_totals_k": [
+        80.5,
+        80.25,
+        81.25,
+        77.5
+      ],
+      "chosen_total_ensemble": 68.5,
+      "rejected_total_ensemble": 79.875,
+      "margin_ensemble": -11.375,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 65,
+      "chosen_totals_k": [
+        90.4,
+        93.25,
+        85.0,
+        82.25
+      ],
+      "rejected_totals_k": [
+        81.5,
+        81.35,
+        80.75,
+        87.5
+      ],
+      "chosen_total_ensemble": 87.725,
+      "rejected_total_ensemble": 82.775,
+      "margin_ensemble": 4.949999999999989,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 66,
+      "chosen_totals_k": [
+        94.75,
+        96.0,
+        94.75,
+        96.0
+      ],
+      "rejected_totals_k": [
+        66.75,
+        69.25,
+        77.25,
+        71.75
+      ],
+      "chosen_total_ensemble": 95.375,
+      "rejected_total_ensemble": 71.25,
+      "margin_ensemble": 24.125,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 67,
+      "chosen_totals_k": [
+        85.25,
+        87.5,
+        87.0,
+        87.75
+      ],
+      "rejected_totals_k": [
+        26.5,
+        29.25,
+        21.0,
+        25.0
+      ],
+      "chosen_total_ensemble": 86.875,
+      "rejected_total_ensemble": 25.4375,
+      "margin_ensemble": 61.4375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 68,
+      "chosen_totals_k": [
+        50.0,
+        54.45,
+        44.75,
+        48.0
+      ],
+      "rejected_totals_k": [
+        87.25,
+        82.5,
+        81.25,
+        85.25
+      ],
+      "chosen_total_ensemble": 49.3,
+      "rejected_total_ensemble": 84.0625,
+      "margin_ensemble": -34.7625,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 69,
+      "chosen_totals_k": [
+        58.5,
+        63.75,
+        70.25,
+        58.0
+      ],
+      "rejected_totals_k": [
+        81.0,
+        83.45,
+        79.65,
+        79.05
+      ],
+      "chosen_total_ensemble": 62.625,
+      "rejected_total_ensemble": 80.7875,
+      "margin_ensemble": -18.162499999999994,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 70,
+      "chosen_totals_k": [
+        96.0,
+        91.5,
+        91.75,
+        91.0
+      ],
+      "rejected_totals_k": [
+        78.0,
+        76.75,
+        76.0,
+        72.5
+      ],
+      "chosen_total_ensemble": 92.5625,
+      "rejected_total_ensemble": 75.8125,
+      "margin_ensemble": 16.75,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 71,
+      "chosen_totals_k": [
+        90.75,
+        91.0,
+        94.5,
+        91.25
+      ],
+      "rejected_totals_k": [
+        89.5,
+        91.7,
+        90.25,
+        86.05000000000001
+      ],
+      "chosen_total_ensemble": 91.875,
+      "rejected_total_ensemble": 89.375,
+      "margin_ensemble": 2.5,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 72,
+      "chosen_totals_k": [
+        96.0,
+        90.75,
+        94.25,
+        91.25
+      ],
+      "rejected_totals_k": [
+        62.0,
+        56.75,
+        62.75,
+        59.5
+      ],
+      "chosen_total_ensemble": 93.0625,
+      "rejected_total_ensemble": 60.25,
+      "margin_ensemble": 32.8125,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 73,
+      "chosen_totals_k": [
+        64.5,
+        75.75,
+        76.75,
+        83.25
+      ],
+      "rejected_totals_k": [
+        60.5,
+        56.25,
+        64.75,
+        63.5
+      ],
+      "chosen_total_ensemble": 75.0625,
+      "rejected_total_ensemble": 61.25,
+      "margin_ensemble": 13.8125,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 74,
+      "chosen_totals_k": [
+        90.5,
+        80.75,
+        90.5,
+        90.25
+      ],
+      "rejected_totals_k": [
+        66.75,
+        38.0,
+        45.5,
+        57.5
+      ],
+      "chosen_total_ensemble": 88.0,
+      "rejected_total_ensemble": 51.9375,
+      "margin_ensemble": 36.0625,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 75,
+      "chosen_totals_k": [
+        88.75,
+        88.75,
+        90.75,
+        90.1
+      ],
+      "rejected_totals_k": [
+        82.75,
+        83.25,
+        80.25,
+        86.0
+      ],
+      "chosen_total_ensemble": 89.5875,
+      "rejected_total_ensemble": 83.0625,
+      "margin_ensemble": 6.525000000000006,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 76,
+      "chosen_totals_k": [
+        88.5,
+        91.2,
+        89.5,
+        93.25
+      ],
+      "rejected_totals_k": [
+        76.25,
+        79.0,
+        72.25,
+        77.0
+      ],
+      "chosen_total_ensemble": 90.6125,
+      "rejected_total_ensemble": 76.125,
+      "margin_ensemble": 14.487499999999997,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 77,
+      "chosen_totals_k": [
+        71.75,
+        70.5,
+        66.2,
+        69.5
+      ],
+      "rejected_totals_k": [
+        56.0,
+        55.5,
+        59.0,
+        58.8
+      ],
+      "chosen_total_ensemble": 69.4875,
+      "rejected_total_ensemble": 57.325,
+      "margin_ensemble": 12.162499999999994,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 78,
+      "chosen_totals_k": [
+        96.75,
+        97.25,
+        95.0,
+        96.25
+      ],
+      "rejected_totals_k": [
+        76.0,
+        71.25,
+        62.5,
+        67.75
+      ],
+      "chosen_total_ensemble": 96.3125,
+      "rejected_total_ensemble": 69.375,
+      "margin_ensemble": 26.9375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 79,
+      "chosen_totals_k": [
+        70.75,
+        66.75,
+        67.45,
+        66.0
+      ],
+      "rejected_totals_k": [
+        63.75,
+        68.95,
+        72.5,
+        71.5
+      ],
+      "chosen_total_ensemble": 67.7375,
+      "rejected_total_ensemble": 69.175,
+      "margin_ensemble": -1.4375,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 80,
+      "chosen_totals_k": [
+        94.0,
+        92.75,
+        91.5,
+        92.0
+      ],
+      "rejected_totals_k": [
+        66.0,
+        67.5,
+        60.25,
+        68.25
+      ],
+      "chosen_total_ensemble": 92.5625,
+      "rejected_total_ensemble": 65.5,
+      "margin_ensemble": 27.0625,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 81,
+      "chosen_totals_k": [
+        68.0,
+        76.0,
+        74.25,
+        78.5
+      ],
+      "rejected_totals_k": [
+        60.75,
+        69.0,
+        66.75,
+        68.25
+      ],
+      "chosen_total_ensemble": 74.1875,
+      "rejected_total_ensemble": 66.1875,
+      "margin_ensemble": 8.0,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 82,
+      "chosen_totals_k": [
+        97.75,
+        98.75,
+        97.25,
+        97.5
+      ],
+      "rejected_totals_k": [
+        69.5,
+        67.25,
+        72.5,
+        71.75
+      ],
+      "chosen_total_ensemble": 97.8125,
+      "rejected_total_ensemble": 70.25,
+      "margin_ensemble": 27.5625,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 83,
+      "chosen_totals_k": [
+        97.0,
+        96.25,
+        95.0,
+        94.25
+      ],
+      "rejected_totals_k": [
+        37.5,
+        45.25,
+        38.75,
+        33.5
+      ],
+      "chosen_total_ensemble": 95.625,
+      "rejected_total_ensemble": 38.75,
+      "margin_ensemble": 56.875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 84,
+      "chosen_totals_k": [
+        90.25,
+        93.5,
+        92.0,
+        94.5
+      ],
+      "rejected_totals_k": [
+        89.5,
+        91.5,
+        91.75,
+        89.25
+      ],
+      "chosen_total_ensemble": 92.5625,
+      "rejected_total_ensemble": 90.5,
+      "margin_ensemble": 2.0625,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 85,
+      "chosen_totals_k": [
+        44.0,
+        43.0,
+        39.75,
+        34.5
+      ],
+      "rejected_totals_k": [
+        40.25,
+        47.0,
+        52.25,
+        47.5
+      ],
+      "chosen_total_ensemble": 40.3125,
+      "rejected_total_ensemble": 46.75,
+      "margin_ensemble": -6.4375,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 86,
+      "chosen_totals_k": [
+        95.0,
+        92.0,
+        95.0,
+        94.5
+      ],
+      "rejected_totals_k": [
+        59.25,
+        29.25,
+        57.0,
+        41.5
+      ],
+      "chosen_total_ensemble": 94.125,
+      "rejected_total_ensemble": 46.75,
+      "margin_ensemble": 47.375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 87,
+      "chosen_totals_k": [
+        33.0,
+        48.0,
+        42.75,
+        43.5
+      ],
+      "rejected_totals_k": [
+        66.0,
+        80.5,
+        74.5,
+        69.5
+      ],
+      "chosen_total_ensemble": 41.8125,
+      "rejected_total_ensemble": 72.625,
+      "margin_ensemble": -30.8125,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 88,
+      "chosen_totals_k": [
+        83.5,
+        90.75,
+        85.5,
+        91.5
+      ],
+      "rejected_totals_k": [
+        76.5,
+        68.0,
+        70.0,
+        47.5
+      ],
+      "chosen_total_ensemble": 87.8125,
+      "rejected_total_ensemble": 65.5,
+      "margin_ensemble": 22.3125,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 89,
+      "chosen_totals_k": [
+        66.5,
+        72.75,
+        73.0,
+        67.0
+      ],
+      "rejected_totals_k": [
+        82.0,
+        90.25,
+        84.0,
+        85.35
+      ],
+      "chosen_total_ensemble": 69.8125,
+      "rejected_total_ensemble": 85.4,
+      "margin_ensemble": -15.587500000000006,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 90,
+      "chosen_totals_k": [
+        89.25,
+        86.5,
+        86.75,
+        86.05
+      ],
+      "rejected_totals_k": [
+        85.5,
+        86.5,
+        84.5,
+        84.75
+      ],
+      "chosen_total_ensemble": 87.1375,
+      "rejected_total_ensemble": 85.3125,
+      "margin_ensemble": 1.8250000000000028,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 91,
+      "chosen_totals_k": [
+        69.25,
+        72.25,
+        75.75,
+        73.5
+      ],
+      "rejected_totals_k": [
+        57.0,
+        58.0,
+        50.0,
+        53.0
+      ],
+      "chosen_total_ensemble": 72.6875,
+      "rejected_total_ensemble": 54.5,
+      "margin_ensemble": 18.1875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 92,
+      "chosen_totals_k": [
+        85.75,
+        70.75,
+        85.9,
+        78.5
+      ],
+      "rejected_totals_k": [
+        44.75,
+        46.0,
+        42.75,
+        55.0
+      ],
+      "chosen_total_ensemble": 80.225,
+      "rejected_total_ensemble": 47.125,
+      "margin_ensemble": 33.099999999999994,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 94,
+      "chosen_totals_k": [
+        95.0,
+        94.0,
+        95.0,
+        95.0
+      ],
+      "rejected_totals_k": [
+        74.75,
+        64.5,
+        64.0,
+        80.0
+      ],
+      "chosen_total_ensemble": 94.75,
+      "rejected_total_ensemble": 70.8125,
+      "margin_ensemble": 23.9375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 95,
+      "chosen_totals_k": [
+        90.5,
+        91.75,
+        94.0,
+        92.0
+      ],
+      "rejected_totals_k": [
+        34.75,
+        35.0,
+        23.5,
+        32.0
+      ],
+      "chosen_total_ensemble": 92.0625,
+      "rejected_total_ensemble": 31.3125,
+      "margin_ensemble": 60.75,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 96,
+      "chosen_totals_k": [
+        80.5,
+        81.75,
+        82.25,
+        77.05
+      ],
+      "rejected_totals_k": [
+        48.0,
+        50.25,
+        54.75,
+        39.0
+      ],
+      "chosen_total_ensemble": 80.3875,
+      "rejected_total_ensemble": 48.0,
+      "margin_ensemble": 32.3875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 97,
+      "chosen_totals_k": [
+        73.75,
+        87.8,
+        88.5,
+        78.75
+      ],
+      "rejected_totals_k": [
+        93.5,
+        95.0,
+        91.5,
+        92.0
+      ],
+      "chosen_total_ensemble": 82.2,
+      "rejected_total_ensemble": 93.0,
+      "margin_ensemble": -10.799999999999997,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 98,
+      "chosen_totals_k": [
+        76.5,
+        84.0,
+        84.0,
+        86.25
+      ],
+      "rejected_totals_k": [
+        65.75,
+        63.25,
+        71.25,
+        69.5
+      ],
+      "chosen_total_ensemble": 82.6875,
+      "rejected_total_ensemble": 67.4375,
+      "margin_ensemble": 15.25,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 99,
+      "chosen_totals_k": [
+        93.7,
+        92.25,
+        93.5,
+        94.5
+      ],
+      "rejected_totals_k": [
+        96.0,
+        95.0,
+        95.0,
+        95.0
+      ],
+      "chosen_total_ensemble": 93.4875,
+      "rejected_total_ensemble": 95.25,
+      "margin_ensemble": -1.7625000000000028,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 100,
+      "chosen_totals_k": [
+        83.0,
+        84.25,
+        83.25,
+        88.5
+      ],
+      "rejected_totals_k": [
+        81.5,
+        80.75,
+        82.5,
+        82.75
+      ],
+      "chosen_total_ensemble": 84.75,
+      "rejected_total_ensemble": 81.875,
+      "margin_ensemble": 2.875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 101,
+      "chosen_totals_k": [
+        69.25,
+        71.0,
+        70.25,
+        73.75
+      ],
+      "rejected_totals_k": [
+        84.25,
+        79.5,
+        82.25,
+        80.0
+      ],
+      "chosen_total_ensemble": 71.0625,
+      "rejected_total_ensemble": 81.5,
+      "margin_ensemble": -10.4375,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 102,
+      "chosen_totals_k": [
+        91.0,
+        91.0,
+        85.0,
+        84.0
+      ],
+      "rejected_totals_k": [
+        57.0,
+        51.0,
+        53.5,
+        64.25
+      ],
+      "chosen_total_ensemble": 87.75,
+      "rejected_total_ensemble": 56.4375,
+      "margin_ensemble": 31.3125,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 103,
+      "chosen_totals_k": [
+        79.5,
+        72.0,
+        73.0,
+        80.25
+      ],
+      "rejected_totals_k": [
+        47.0,
+        33.5,
+        36.5,
+        30.25
+      ],
+      "chosen_total_ensemble": 76.1875,
+      "rejected_total_ensemble": 36.8125,
+      "margin_ensemble": 39.375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 104,
+      "chosen_totals_k": [
+        90.5,
+        88.0,
+        89.5,
+        91.0
+      ],
+      "rejected_totals_k": [
+        96.0,
+        96.3,
+        94.5,
+        93.5
+      ],
+      "chosen_total_ensemble": 89.75,
+      "rejected_total_ensemble": 95.075,
+      "margin_ensemble": -5.325000000000003,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 105,
+      "chosen_totals_k": [
+        78.25,
+        79.0,
+        73.0,
+        71.5
+      ],
+      "rejected_totals_k": [
+        90.75,
+        88.44999999999999,
+        92.5,
+        92.2
+      ],
+      "chosen_total_ensemble": 75.4375,
+      "rejected_total_ensemble": 90.975,
+      "margin_ensemble": -15.537499999999994,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 106,
+      "chosen_totals_k": [
+        56.5,
+        47.75,
+        58.5,
+        51.75
+      ],
+      "rejected_totals_k": [
+        88.55,
+        86.0,
+        89.5,
+        90.0
+      ],
+      "chosen_total_ensemble": 53.625,
+      "rejected_total_ensemble": 88.5125,
+      "margin_ensemble": -34.8875,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 107,
+      "chosen_totals_k": [
+        9.5,
+        4.5,
+        11.5,
+        4.5
+      ],
+      "rejected_totals_k": [
+        25.5,
+        26.0,
+        30.0,
+        24.0
+      ],
+      "chosen_total_ensemble": 7.5,
+      "rejected_total_ensemble": 26.375,
+      "margin_ensemble": -18.875,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 108,
+      "chosen_totals_k": [
+        92.5,
+        92.25,
+        92.75,
+        88.85
+      ],
+      "rejected_totals_k": [
+        73.5,
+        54.0,
+        62.25,
+        71.0
+      ],
+      "chosen_total_ensemble": 91.5875,
+      "rejected_total_ensemble": 65.1875,
+      "margin_ensemble": 26.400000000000006,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 109,
+      "chosen_totals_k": [
+        76.5,
+        78.25,
+        75.25,
+        78.25
+      ],
+      "rejected_totals_k": [
+        92.25,
+        91.75,
+        94.25,
+        94.5
+      ],
+      "chosen_total_ensemble": 77.0625,
+      "rejected_total_ensemble": 93.1875,
+      "margin_ensemble": -16.125,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 110,
+      "chosen_totals_k": [
+        31.25,
+        23.0,
+        32.25,
+        24.75
+      ],
+      "rejected_totals_k": [
+        34.5,
+        28.25,
+        49.0,
+        49.75
+      ],
+      "chosen_total_ensemble": 27.8125,
+      "rejected_total_ensemble": 40.375,
+      "margin_ensemble": -12.5625,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 111,
+      "chosen_totals_k": [
+        70.75,
+        69.0,
+        70.0,
+        66.5
+      ],
+      "rejected_totals_k": [
+        95.5,
+        95.0,
+        96.5,
+        96.1
+      ],
+      "chosen_total_ensemble": 69.0625,
+      "rejected_total_ensemble": 95.775,
+      "margin_ensemble": -26.712500000000006,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 113,
+      "chosen_totals_k": [
+        27.5,
+        15.75,
+        23.0,
+        33.5
+      ],
+      "rejected_totals_k": [
+        5.0,
+        13.0,
+        17.0,
+        4.0
+      ],
+      "chosen_total_ensemble": 24.9375,
+      "rejected_total_ensemble": 9.75,
+      "margin_ensemble": 15.1875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 114,
+      "chosen_totals_k": [
+        78.5,
+        83.0,
+        84.25,
+        87.25
+      ],
+      "rejected_totals_k": [
+        62.0,
+        59.5,
+        56.75,
+        60.75
+      ],
+      "chosen_total_ensemble": 83.25,
+      "rejected_total_ensemble": 59.75,
+      "margin_ensemble": 23.5,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 115,
+      "chosen_totals_k": [
+        76.25,
+        78.25,
+        70.75,
+        81.25
+      ],
+      "rejected_totals_k": [
+        66.75,
+        67.25,
+        76.75,
+        64.0
+      ],
+      "chosen_total_ensemble": 76.625,
+      "rejected_total_ensemble": 68.6875,
+      "margin_ensemble": 7.9375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 116,
+      "chosen_totals_k": [
+        89.25,
+        86.0,
+        90.25,
+        87.25
+      ],
+      "rejected_totals_k": [
+        71.75,
+        76.0,
+        67.0,
+        70.5
+      ],
+      "chosen_total_ensemble": 88.1875,
+      "rejected_total_ensemble": 71.3125,
+      "margin_ensemble": 16.875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 118,
+      "chosen_totals_k": [
+        80.0,
+        89.0,
+        82.3,
+        79.5
+      ],
+      "rejected_totals_k": [
+        74.25,
+        66.5,
+        65.75,
+        67.25
+      ],
+      "chosen_total_ensemble": 82.7,
+      "rejected_total_ensemble": 68.4375,
+      "margin_ensemble": 14.262500000000003,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 119,
+      "chosen_totals_k": [
+        88.5,
+        89.25,
+        92.5,
+        90.0
+      ],
+      "rejected_totals_k": [
+        66.0,
+        81.75,
+        73.75,
+        70.0
+      ],
+      "chosen_total_ensemble": 90.0625,
+      "rejected_total_ensemble": 72.875,
+      "margin_ensemble": 17.1875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 120,
+      "chosen_totals_k": [
+        83.5,
+        89.0,
+        85.75,
+        80.5
+      ],
+      "rejected_totals_k": [
+        20.0,
+        29.25,
+        33.5,
+        32.5
+      ],
+      "chosen_total_ensemble": 84.6875,
+      "rejected_total_ensemble": 28.8125,
+      "margin_ensemble": 55.875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 121,
+      "chosen_totals_k": [
+        94.5,
+        94.5,
+        94.0,
+        94.0
+      ],
+      "rejected_totals_k": [
+        87.0,
+        91.75,
+        92.75,
+        87.25
+      ],
+      "chosen_total_ensemble": 94.25,
+      "rejected_total_ensemble": 89.6875,
+      "margin_ensemble": 4.5625,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 122,
+      "chosen_totals_k": [
+        93.5,
+        90.5,
+        95.5,
+        95.0
+      ],
+      "rejected_totals_k": [
+        74.5,
+        75.5,
+        76.5,
+        72.5
+      ],
+      "chosen_total_ensemble": 93.625,
+      "rejected_total_ensemble": 74.75,
+      "margin_ensemble": 18.875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 123,
+      "chosen_totals_k": [
+        85.0,
+        93.55000000000001,
+        92.75,
+        83.95
+      ],
+      "rejected_totals_k": [
+        72.75,
+        65.5,
+        74.0,
+        72.25
+      ],
+      "chosen_total_ensemble": 88.8125,
+      "rejected_total_ensemble": 71.125,
+      "margin_ensemble": 17.6875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 124,
+      "chosen_totals_k": [
+        90.25,
+        89.25,
+        91.6,
+        88.0
+      ],
+      "rejected_totals_k": [
+        91.5,
+        92.65,
+        92.25,
+        93.75
+      ],
+      "chosen_total_ensemble": 89.775,
+      "rejected_total_ensemble": 92.5375,
+      "margin_ensemble": -2.7624999999999886,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 125,
+      "chosen_totals_k": [
+        86.75,
+        83.75,
+        84.25,
+        84.25
+      ],
+      "rejected_totals_k": [
+        52.0,
+        48.5,
+        39.5,
+        44.0
+      ],
+      "chosen_total_ensemble": 84.75,
+      "rejected_total_ensemble": 46.0,
+      "margin_ensemble": 38.75,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 126,
+      "chosen_totals_k": [
+        85.19999999999999,
+        78.25,
+        81.25,
+        87.25
+      ],
+      "rejected_totals_k": [
+        65.3,
+        64.75,
+        63.75,
+        62.0
+      ],
+      "chosen_total_ensemble": 82.9875,
+      "rejected_total_ensemble": 63.95,
+      "margin_ensemble": 19.037499999999994,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 127,
+      "chosen_totals_k": [
+        65.5,
+        64.0,
+        60.75,
+        69.75
+      ],
+      "rejected_totals_k": [
+        78.0,
+        84.0,
+        85.75,
+        90.75
+      ],
+      "chosen_total_ensemble": 65.0,
+      "rejected_total_ensemble": 84.625,
+      "margin_ensemble": -19.625,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 128,
+      "chosen_totals_k": [
+        88.25,
+        88.0,
+        85.75,
+        86.0
+      ],
+      "rejected_totals_k": [
+        36.0,
+        43.0,
+        33.25,
+        35.75
+      ],
+      "chosen_total_ensemble": 87.0,
+      "rejected_total_ensemble": 37.0,
+      "margin_ensemble": 50.0,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 129,
+      "chosen_totals_k": [
+        53.0,
+        56.25,
+        55.5,
+        56.5
+      ],
+      "rejected_totals_k": [
+        93.25,
+        93.25,
+        90.25,
+        94.0
+      ],
+      "chosen_total_ensemble": 55.3125,
+      "rejected_total_ensemble": 92.6875,
+      "margin_ensemble": -37.375,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 130,
+      "chosen_totals_k": [
+        95.25,
+        94.5,
+        94.25,
+        92.5
+      ],
+      "rejected_totals_k": [
+        38.5,
+        21.75,
+        24.75,
+        49.0
+      ],
+      "chosen_total_ensemble": 94.125,
+      "rejected_total_ensemble": 33.5,
+      "margin_ensemble": 60.625,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 131,
+      "chosen_totals_k": [
+        14.5,
+        13.0,
+        19.0,
+        8.5
+      ],
+      "rejected_totals_k": [
+        15.25,
+        28.0,
+        21.5,
+        22.0
+      ],
+      "chosen_total_ensemble": 13.75,
+      "rejected_total_ensemble": 21.6875,
+      "margin_ensemble": -7.9375,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 132,
+      "chosen_totals_k": [
+        75.25,
+        60.5,
+        77.75,
+        73.0
+      ],
+      "rejected_totals_k": [
+        87.25,
+        82.25,
+        82.75,
+        79.75
+      ],
+      "chosen_total_ensemble": 71.625,
+      "rejected_total_ensemble": 83.0,
+      "margin_ensemble": -11.375,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 133,
+      "chosen_totals_k": [
+        95.75,
+        98.25,
+        96.5,
+        94.5
+      ],
+      "rejected_totals_k": [
+        76.25,
+        78.25,
+        82.25,
+        73.75
+      ],
+      "chosen_total_ensemble": 96.25,
+      "rejected_total_ensemble": 77.625,
+      "margin_ensemble": 18.625,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 134,
+      "chosen_totals_k": [
+        89.75,
+        91.5,
+        90.5,
+        89.75
+      ],
+      "rejected_totals_k": [
+        88.0,
+        86.8,
+        77.5,
+        84.0
+      ],
+      "chosen_total_ensemble": 90.375,
+      "rejected_total_ensemble": 84.075,
+      "margin_ensemble": 6.299999999999997,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 135,
+      "chosen_totals_k": [
+        83.5,
+        88.25,
+        80.75,
+        90.9
+      ],
+      "rejected_totals_k": [
+        93.75,
+        93.1,
+        93.0,
+        94.25
+      ],
+      "chosen_total_ensemble": 85.85,
+      "rejected_total_ensemble": 93.525,
+      "margin_ensemble": -7.675000000000011,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 136,
+      "chosen_totals_k": [
+        71.5,
+        69.25,
+        78.5,
+        79.1
+      ],
+      "rejected_totals_k": [
+        94.0,
+        93.75,
+        91.0,
+        90.25
+      ],
+      "chosen_total_ensemble": 74.5875,
+      "rejected_total_ensemble": 92.25,
+      "margin_ensemble": -17.662499999999994,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 137,
+      "chosen_totals_k": [
+        66.75,
+        64.75,
+        67.0,
+        72.75
+      ],
+      "rejected_totals_k": [
+        49.0,
+        36.0,
+        30.0,
+        40.75
+      ],
+      "chosen_total_ensemble": 67.8125,
+      "rejected_total_ensemble": 38.9375,
+      "margin_ensemble": 28.875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 138,
+      "chosen_totals_k": [
+        91.75,
+        89.5,
+        88.8,
+        89.0
+      ],
+      "rejected_totals_k": [
+        89.0,
+        85.25,
+        87.5,
+        87.75
+      ],
+      "chosen_total_ensemble": 89.7625,
+      "rejected_total_ensemble": 87.375,
+      "margin_ensemble": 2.387500000000003,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 139,
+      "chosen_totals_k": [
+        40.5,
+        40.5,
+        38.5,
+        44.0
+      ],
+      "rejected_totals_k": [
+        45.5,
+        33.75,
+        28.0,
+        48.75
+      ],
+      "chosen_total_ensemble": 40.875,
+      "rejected_total_ensemble": 39.0,
+      "margin_ensemble": 1.875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 140,
+      "chosen_totals_k": [
+        91.0,
+        91.25,
+        90.5,
+        87.75
+      ],
+      "rejected_totals_k": [
+        84.75,
+        84.25,
+        70.0,
+        78.0
+      ],
+      "chosen_total_ensemble": 90.125,
+      "rejected_total_ensemble": 79.25,
+      "margin_ensemble": 10.875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 141,
+      "chosen_totals_k": [
+        84.5,
+        76.5,
+        78.0,
+        73.1
+      ],
+      "rejected_totals_k": [
+        41.5,
+        41.5,
+        35.5,
+        37.75
+      ],
+      "chosen_total_ensemble": 78.025,
+      "rejected_total_ensemble": 39.0625,
+      "margin_ensemble": 38.962500000000006,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 142,
+      "chosen_totals_k": [
+        90.69999999999999,
+        87.6,
+        91.5,
+        91.3
+      ],
+      "rejected_totals_k": [
+        40.0,
+        39.75,
+        38.5,
+        41.5
+      ],
+      "chosen_total_ensemble": 90.27499999999999,
+      "rejected_total_ensemble": 39.9375,
+      "margin_ensemble": 50.33749999999999,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 143,
+      "chosen_totals_k": [
+        93.0,
+        93.30000000000001,
+        94.5,
+        94.5
+      ],
+      "rejected_totals_k": [
+        57.0,
+        54.25,
+        65.0,
+        60.75
+      ],
+      "chosen_total_ensemble": 93.825,
+      "rejected_total_ensemble": 59.25,
+      "margin_ensemble": 34.575,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 144,
+      "chosen_totals_k": [
+        13.0,
+        10.3,
+        13.5,
+        11.15
+      ],
+      "rejected_totals_k": [
+        1.7,
+        0.0,
+        2.1,
+        0.8
+      ],
+      "chosen_total_ensemble": 11.9875,
+      "rejected_total_ensemble": 1.15,
+      "margin_ensemble": 10.8375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 145,
+      "chosen_totals_k": [
+        74.0,
+        84.25,
+        70.75,
+        72.75
+      ],
+      "rejected_totals_k": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "chosen_total_ensemble": 75.4375,
+      "rejected_total_ensemble": 0.0,
+      "margin_ensemble": 75.4375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 146,
+      "chosen_totals_k": [
+        91.0,
+        87.5,
+        88.25,
+        91.95
+      ],
+      "rejected_totals_k": [
+        83.4,
+        90.5,
+        90.5,
+        90.0
+      ],
+      "chosen_total_ensemble": 89.675,
+      "rejected_total_ensemble": 88.6,
+      "margin_ensemble": 1.0750000000000028,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 147,
+      "chosen_totals_k": [
+        63.5,
+        68.0,
+        60.25,
+        66.25
+      ],
+      "rejected_totals_k": [
+        44.5,
+        46.5,
+        33.5,
+        47.25
+      ],
+      "chosen_total_ensemble": 64.5,
+      "rejected_total_ensemble": 42.9375,
+      "margin_ensemble": 21.5625,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 148,
+      "chosen_totals_k": [
+        93.75,
+        89.5,
+        93.75,
+        95.5
+      ],
+      "rejected_totals_k": [
+        86.25,
+        87.75,
+        88.0,
+        84.5
+      ],
+      "chosen_total_ensemble": 93.125,
+      "rejected_total_ensemble": 86.625,
+      "margin_ensemble": 6.5,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 149,
+      "chosen_totals_k": [
+        87.0,
+        87.0,
+        86.5,
+        89.25
+      ],
+      "rejected_totals_k": [
+        91.25,
+        89.75,
+        90.75,
+        93.0
+      ],
+      "chosen_total_ensemble": 87.4375,
+      "rejected_total_ensemble": 91.1875,
+      "margin_ensemble": -3.75,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 151,
+      "chosen_totals_k": [
+        68.75,
+        67.5,
+        76.75,
+        78.0
+      ],
+      "rejected_totals_k": [
+        51.0,
+        46.5,
+        50.25,
+        44.5
+      ],
+      "chosen_total_ensemble": 72.75,
+      "rejected_total_ensemble": 48.0625,
+      "margin_ensemble": 24.6875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 152,
+      "chosen_totals_k": [
+        91.3,
+        95.0,
+        92.69999999999999,
+        92.0
+      ],
+      "rejected_totals_k": [
+        66.25,
+        61.75,
+        63.5,
+        67.0
+      ],
+      "chosen_total_ensemble": 92.75,
+      "rejected_total_ensemble": 64.625,
+      "margin_ensemble": 28.125,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 153,
+      "chosen_totals_k": [
+        81.75,
+        86.0,
+        83.25,
+        80.75
+      ],
+      "rejected_totals_k": [
+        91.75,
+        91.75,
+        92.0,
+        91.95
+      ],
+      "chosen_total_ensemble": 82.9375,
+      "rejected_total_ensemble": 91.8625,
+      "margin_ensemble": -8.924999999999997,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 154,
+      "chosen_totals_k": [
+        88.75,
+        88.75,
+        90.0,
+        89.75
+      ],
+      "rejected_totals_k": [
+        74.0,
+        66.75,
+        72.25,
+        74.1
+      ],
+      "chosen_total_ensemble": 89.3125,
+      "rejected_total_ensemble": 71.775,
+      "margin_ensemble": 17.537499999999994,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 155,
+      "chosen_totals_k": [
+        89.5,
+        93.5,
+        82.5,
+        93.75
+      ],
+      "rejected_totals_k": [
+        88.25,
+        81.5,
+        82.25,
+        77.75
+      ],
+      "chosen_total_ensemble": 89.8125,
+      "rejected_total_ensemble": 82.4375,
+      "margin_ensemble": 7.375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 156,
+      "chosen_totals_k": [
+        94.25,
+        91.25,
+        94.75,
+        95.75
+      ],
+      "rejected_totals_k": [
+        78.0,
+        71.75,
+        77.0,
+        79.0
+      ],
+      "chosen_total_ensemble": 94.0,
+      "rejected_total_ensemble": 76.4375,
+      "margin_ensemble": 17.5625,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 157,
+      "chosen_totals_k": [
+        90.0,
+        93.0,
+        89.75,
+        93.25
+      ],
+      "rejected_totals_k": [
+        77.75,
+        76.0,
+        73.0,
+        74.75
+      ],
+      "chosen_total_ensemble": 91.5,
+      "rejected_total_ensemble": 75.375,
+      "margin_ensemble": 16.125,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 158,
+      "chosen_totals_k": [
+        95.5,
+        95.5,
+        95.0,
+        95.75
+      ],
+      "rejected_totals_k": [
+        89.45,
+        89.75,
+        87.4,
+        90.0
+      ],
+      "chosen_total_ensemble": 95.4375,
+      "rejected_total_ensemble": 89.15,
+      "margin_ensemble": 6.287499999999994,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 159,
+      "chosen_totals_k": [
+        30.5,
+        36.75,
+        48.5,
+        35.5
+      ],
+      "rejected_totals_k": [
+        85.2,
+        87.0,
+        87.0,
+        87.5
+      ],
+      "chosen_total_ensemble": 37.8125,
+      "rejected_total_ensemble": 86.675,
+      "margin_ensemble": -48.8625,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 160,
+      "chosen_totals_k": [
+        65.5,
+        68.5,
+        67.25,
+        69.5
+      ],
+      "rejected_totals_k": [
+        8.0,
+        6.0,
+        9.0,
+        9.0
+      ],
+      "chosen_total_ensemble": 67.6875,
+      "rejected_total_ensemble": 8.0,
+      "margin_ensemble": 59.6875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 161,
+      "chosen_totals_k": [
+        70.25,
+        70.0,
+        74.75,
+        53.5
+      ],
+      "rejected_totals_k": [
+        77.25,
+        75.75,
+        76.5,
+        79.25
+      ],
+      "chosen_total_ensemble": 67.125,
+      "rejected_total_ensemble": 77.1875,
+      "margin_ensemble": -10.0625,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 162,
+      "chosen_totals_k": [
+        71.1,
+        83.25,
+        64.5,
+        68.5
+      ],
+      "rejected_totals_k": [
+        92.0,
+        92.0,
+        95.0,
+        94.0
+      ],
+      "chosen_total_ensemble": 71.8375,
+      "rejected_total_ensemble": 93.25,
+      "margin_ensemble": -21.412499999999994,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 163,
+      "chosen_totals_k": [
+        80.25,
+        81.25,
+        82.25,
+        82.0
+      ],
+      "rejected_totals_k": [
+        72.75,
+        67.5,
+        68.25,
+        72.75
+      ],
+      "chosen_total_ensemble": 81.4375,
+      "rejected_total_ensemble": 70.3125,
+      "margin_ensemble": 11.125,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 164,
+      "chosen_totals_k": [
+        66.0,
+        71.25,
+        64.25,
+        68.25
+      ],
+      "rejected_totals_k": [
+        47.25,
+        43.5,
+        50.0,
+        58.5
+      ],
+      "chosen_total_ensemble": 67.4375,
+      "rejected_total_ensemble": 49.8125,
+      "margin_ensemble": 17.625,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 165,
+      "chosen_totals_k": [
+        85.25,
+        86.25,
+        77.5,
+        83.75
+      ],
+      "rejected_totals_k": [
+        76.75,
+        82.5,
+        92.0,
+        85.75
+      ],
+      "chosen_total_ensemble": 83.1875,
+      "rejected_total_ensemble": 84.25,
+      "margin_ensemble": -1.0625,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 166,
+      "chosen_totals_k": [
+        85.75,
+        85.25,
+        84.25,
+        85.5
+      ],
+      "rejected_totals_k": [
+        93.0,
+        91.0,
+        85.25,
+        88.75
+      ],
+      "chosen_total_ensemble": 85.1875,
+      "rejected_total_ensemble": 89.5,
+      "margin_ensemble": -4.3125,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 167,
+      "chosen_totals_k": [
+        79.5,
+        80.0,
+        72.5,
+        76.25
+      ],
+      "rejected_totals_k": [
+        39.75,
+        29.5,
+        27.0,
+        32.75
+      ],
+      "chosen_total_ensemble": 77.0625,
+      "rejected_total_ensemble": 32.25,
+      "margin_ensemble": 44.8125,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 168,
+      "chosen_totals_k": [
+        78.0,
+        84.25,
+        89.0,
+        83.75
+      ],
+      "rejected_totals_k": [
+        70.5,
+        79.5,
+        66.0,
+        69.5
+      ],
+      "chosen_total_ensemble": 83.75,
+      "rejected_total_ensemble": 71.375,
+      "margin_ensemble": 12.375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 169,
+      "chosen_totals_k": [
+        91.0,
+        93.0,
+        94.75,
+        93.0
+      ],
+      "rejected_totals_k": [
+        51.0,
+        42.0,
+        50.0,
+        50.0
+      ],
+      "chosen_total_ensemble": 92.9375,
+      "rejected_total_ensemble": 48.25,
+      "margin_ensemble": 44.6875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 170,
+      "chosen_totals_k": [
+        83.94999999999999,
+        88.75,
+        77.75,
+        81.0
+      ],
+      "rejected_totals_k": [
+        27.0,
+        22.5,
+        23.0,
+        29.25
+      ],
+      "chosen_total_ensemble": 82.8625,
+      "rejected_total_ensemble": 25.4375,
+      "margin_ensemble": 57.425,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 171,
+      "chosen_totals_k": [
+        93.75,
+        93.75,
+        94.25,
+        94.25
+      ],
+      "rejected_totals_k": [
+        90.25,
+        81.75,
+        87.69999999999999,
+        86.5
+      ],
+      "chosen_total_ensemble": 94.0,
+      "rejected_total_ensemble": 86.55,
+      "margin_ensemble": 7.450000000000003,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 172,
+      "chosen_totals_k": [
+        52.5,
+        52.5,
+        49.5,
+        31.5
+      ],
+      "rejected_totals_k": [
+        33.5,
+        28.0,
+        19.0,
+        14.5
+      ],
+      "chosen_total_ensemble": 46.5,
+      "rejected_total_ensemble": 23.75,
+      "margin_ensemble": 22.75,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 173,
+      "chosen_totals_k": [
+        82.45,
+        87.55,
+        90.25,
+        91.7
+      ],
+      "rejected_totals_k": [
+        47.25,
+        44.25,
+        53.5,
+        50.0
+      ],
+      "chosen_total_ensemble": 87.9875,
+      "rejected_total_ensemble": 48.75,
+      "margin_ensemble": 39.2375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 174,
+      "chosen_totals_k": [
+        82.6,
+        87.5,
+        87.5,
+        86.0
+      ],
+      "rejected_totals_k": [
+        94.5,
+        95.0,
+        94.0,
+        93.5
+      ],
+      "chosen_total_ensemble": 85.9,
+      "rejected_total_ensemble": 94.25,
+      "margin_ensemble": -8.349999999999994,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 175,
+      "chosen_totals_k": [
+        90.5,
+        91.25,
+        93.25,
+        87.75
+      ],
+      "rejected_totals_k": [
+        78.8,
+        86.05,
+        89.25,
+        87.8
+      ],
+      "chosen_total_ensemble": 90.6875,
+      "rejected_total_ensemble": 85.475,
+      "margin_ensemble": 5.212500000000006,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 176,
+      "chosen_totals_k": [
+        45.5,
+        60.0,
+        74.0,
+        75.0
+      ],
+      "rejected_totals_k": [
+        61.5,
+        47.0,
+        64.5,
+        71.5
+      ],
+      "chosen_total_ensemble": 63.625,
+      "rejected_total_ensemble": 61.125,
+      "margin_ensemble": 2.5,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 177,
+      "chosen_totals_k": [
+        90.5,
+        91.75,
+        94.25,
+        94.25
+      ],
+      "rejected_totals_k": [
+        71.25,
+        65.75,
+        72.0,
+        68.5
+      ],
+      "chosen_total_ensemble": 92.6875,
+      "rejected_total_ensemble": 69.375,
+      "margin_ensemble": 23.3125,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 178,
+      "chosen_totals_k": [
+        32.5,
+        22.0,
+        34.75,
+        38.0
+      ],
+      "rejected_totals_k": [
+        12.75,
+        14.0,
+        13.0,
+        12.25
+      ],
+      "chosen_total_ensemble": 31.8125,
+      "rejected_total_ensemble": 13.0,
+      "margin_ensemble": 18.8125,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 179,
+      "chosen_totals_k": [
+        57.25,
+        63.5,
+        62.0,
+        56.75
+      ],
+      "rejected_totals_k": [
+        68.5,
+        57.5,
+        60.75,
+        64.0
+      ],
+      "chosen_total_ensemble": 59.875,
+      "rejected_total_ensemble": 62.6875,
+      "margin_ensemble": -2.8125,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 180,
+      "chosen_totals_k": [
+        93.0,
+        92.5,
+        90.75,
+        94.5
+      ],
+      "rejected_totals_k": [
+        85.75,
+        79.5,
+        85.0,
+        87.5
+      ],
+      "chosen_total_ensemble": 92.6875,
+      "rejected_total_ensemble": 84.4375,
+      "margin_ensemble": 8.25,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 181,
+      "chosen_totals_k": [
+        78.5,
+        75.5,
+        80.25,
+        68.25
+      ],
+      "rejected_totals_k": [
+        68.5,
+        79.5,
+        71.5,
+        67.0
+      ],
+      "chosen_total_ensemble": 75.625,
+      "rejected_total_ensemble": 71.625,
+      "margin_ensemble": 4.0,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 182,
+      "chosen_totals_k": [
+        94.2,
+        93.75,
+        92.75,
+        93.0
+      ],
+      "rejected_totals_k": [
+        91.0,
+        92.0,
+        94.0,
+        93.0
+      ],
+      "chosen_total_ensemble": 93.425,
+      "rejected_total_ensemble": 92.5,
+      "margin_ensemble": 0.9249999999999972,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 183,
+      "chosen_totals_k": [
+        97.0,
+        95.25,
+        96.75,
+        99.25
+      ],
+      "rejected_totals_k": [
+        76.25,
+        83.25,
+        76.5,
+        77.5
+      ],
+      "chosen_total_ensemble": 97.0625,
+      "rejected_total_ensemble": 78.375,
+      "margin_ensemble": 18.6875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 184,
+      "chosen_totals_k": [
+        26.25,
+        26.0,
+        51.0,
+        52.0
+      ],
+      "rejected_totals_k": [
+        35.75,
+        51.75,
+        36.0,
+        41.25
+      ],
+      "chosen_total_ensemble": 38.8125,
+      "rejected_total_ensemble": 41.1875,
+      "margin_ensemble": -2.375,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 185,
+      "chosen_totals_k": [
+        54.5,
+        45.5,
+        54.5,
+        48.25
+      ],
+      "rejected_totals_k": [
+        88.3,
+        88.75,
+        90.0,
+        89.0
+      ],
+      "chosen_total_ensemble": 50.6875,
+      "rejected_total_ensemble": 89.0125,
+      "margin_ensemble": -38.325,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 186,
+      "chosen_totals_k": [
+        92.5,
+        90.25,
+        92.5,
+        85.0
+      ],
+      "rejected_totals_k": [
+        65.0,
+        68.25,
+        59.0,
+        68.25
+      ],
+      "chosen_total_ensemble": 90.0625,
+      "rejected_total_ensemble": 65.125,
+      "margin_ensemble": 24.9375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 188,
+      "chosen_totals_k": [
+        83.5,
+        89.5,
+        90.5,
+        88.5
+      ],
+      "rejected_totals_k": [
+        12.5,
+        1.5,
+        12.0,
+        9.0
+      ],
+      "chosen_total_ensemble": 88.0,
+      "rejected_total_ensemble": 8.75,
+      "margin_ensemble": 79.25,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 189,
+      "chosen_totals_k": [
+        90.25,
+        75.25,
+        88.5,
+        82.0
+      ],
+      "rejected_totals_k": [
+        6.5,
+        18.5,
+        10.0,
+        15.5
+      ],
+      "chosen_total_ensemble": 84.0,
+      "rejected_total_ensemble": 12.625,
+      "margin_ensemble": 71.375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 190,
+      "chosen_totals_k": [
+        71.75,
+        72.5,
+        80.0,
+        84.0
+      ],
+      "rejected_totals_k": [
+        92.19999999999999,
+        95.5,
+        91.45,
+        93.5
+      ],
+      "chosen_total_ensemble": 77.0625,
+      "rejected_total_ensemble": 93.1625,
+      "margin_ensemble": -16.099999999999994,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 191,
+      "chosen_totals_k": [
+        58.5,
+        63.5,
+        66.5,
+        62.75
+      ],
+      "rejected_totals_k": [
+        88.5,
+        93.75,
+        91.25,
+        89.25
+      ],
+      "chosen_total_ensemble": 62.8125,
+      "rejected_total_ensemble": 90.6875,
+      "margin_ensemble": -27.875,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 192,
+      "chosen_totals_k": [
+        82.5,
+        82.5,
+        87.75,
+        80.5
+      ],
+      "rejected_totals_k": [
+        90.75,
+        79.25,
+        89.75,
+        91.0
+      ],
+      "chosen_total_ensemble": 83.3125,
+      "rejected_total_ensemble": 87.6875,
+      "margin_ensemble": -4.375,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 193,
+      "chosen_totals_k": [
+        73.75,
+        69.25,
+        67.25,
+        74.5
+      ],
+      "rejected_totals_k": [
+        82.5,
+        85.0,
+        86.25,
+        83.25
+      ],
+      "chosen_total_ensemble": 71.1875,
+      "rejected_total_ensemble": 84.25,
+      "margin_ensemble": -13.0625,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 194,
+      "chosen_totals_k": [
+        88.7,
+        91.0,
+        86.25,
+        90.25
+      ],
+      "rejected_totals_k": [
+        95.0,
+        92.25,
+        93.5,
+        93.25
+      ],
+      "chosen_total_ensemble": 89.05,
+      "rejected_total_ensemble": 93.5,
+      "margin_ensemble": -4.450000000000003,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 195,
+      "chosen_totals_k": [
+        36.5,
+        32.5,
+        37.0,
+        42.0
+      ],
+      "rejected_totals_k": [
+        29.0,
+        30.5,
+        14.5,
+        21.5
+      ],
+      "chosen_total_ensemble": 37.0,
+      "rejected_total_ensemble": 23.875,
+      "margin_ensemble": 13.125,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 196,
+      "chosen_totals_k": [
+        77.0,
+        71.0,
+        76.75,
+        73.0
+      ],
+      "rejected_totals_k": [
+        40.5,
+        45.75,
+        33.5,
+        35.5
+      ],
+      "chosen_total_ensemble": 74.4375,
+      "rejected_total_ensemble": 38.8125,
+      "margin_ensemble": 35.625,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 197,
+      "chosen_totals_k": [
+        90.25,
+        91.5,
+        83.0,
+        82.5
+      ],
+      "rejected_totals_k": [
+        90.5,
+        91.75,
+        92.0,
+        89.0
+      ],
+      "chosen_total_ensemble": 86.8125,
+      "rejected_total_ensemble": 90.8125,
+      "margin_ensemble": -4.0,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 198,
+      "chosen_totals_k": [
+        94.5,
+        93.75,
+        95.0,
+        93.75
+      ],
+      "rejected_totals_k": [
+        58.25,
+        66.25,
+        59.0,
+        70.15
+      ],
+      "chosen_total_ensemble": 94.25,
+      "rejected_total_ensemble": 63.4125,
+      "margin_ensemble": 30.8375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 199,
+      "chosen_totals_k": [
+        75.5,
+        73.25,
+        80.25,
+        70.25
+      ],
+      "rejected_totals_k": [
+        61.0,
+        59.75,
+        58.5,
+        56.5
+      ],
+      "chosen_total_ensemble": 74.8125,
+      "rejected_total_ensemble": 58.9375,
+      "margin_ensemble": 15.875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 200,
+      "chosen_totals_k": [
+        92.75,
+        93.75,
+        93.0,
+        92.25
+      ],
+      "rejected_totals_k": [
+        84.75,
+        85.75,
+        85.0,
+        86.5
+      ],
+      "chosen_total_ensemble": 92.9375,
+      "rejected_total_ensemble": 85.5,
+      "margin_ensemble": 7.4375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 201,
+      "chosen_totals_k": [
+        92.0,
+        95.0,
+        92.75,
+        94.0
+      ],
+      "rejected_totals_k": [
+        44.5,
+        36.75,
+        40.75,
+        34.5
+      ],
+      "chosen_total_ensemble": 93.4375,
+      "rejected_total_ensemble": 39.125,
+      "margin_ensemble": 54.3125,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 202,
+      "chosen_totals_k": [
+        90.0,
+        92.25,
+        86.05,
+        88.25
+      ],
+      "rejected_totals_k": [
+        26.25,
+        23.0,
+        16.75,
+        20.0
+      ],
+      "chosen_total_ensemble": 89.1375,
+      "rejected_total_ensemble": 21.5,
+      "margin_ensemble": 67.6375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 203,
+      "chosen_totals_k": [
+        61.5,
+        64.75,
+        63.5,
+        68.75
+      ],
+      "rejected_totals_k": [
+        95.25,
+        93.25,
+        96.25,
+        91.5
+      ],
+      "chosen_total_ensemble": 64.625,
+      "rejected_total_ensemble": 94.0625,
+      "margin_ensemble": -29.4375,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 204,
+      "chosen_totals_k": [
+        88.0,
+        82.0,
+        86.75,
+        84.0
+      ],
+      "rejected_totals_k": [
+        82.25,
+        81.0,
+        73.75,
+        79.9
+      ],
+      "chosen_total_ensemble": 85.1875,
+      "rejected_total_ensemble": 79.225,
+      "margin_ensemble": 5.962500000000006,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 205,
+      "chosen_totals_k": [
+        95.0,
+        91.0,
+        90.75,
+        93.5
+      ],
+      "rejected_totals_k": [
+        73.5,
+        72.5,
+        71.25,
+        69.5
+      ],
+      "chosen_total_ensemble": 92.5625,
+      "rejected_total_ensemble": 71.6875,
+      "margin_ensemble": 20.875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 206,
+      "chosen_totals_k": [
+        90.5,
+        90.25,
+        90.0,
+        91.5
+      ],
+      "rejected_totals_k": [
+        71.25,
+        68.5,
+        69.0,
+        67.75
+      ],
+      "chosen_total_ensemble": 90.5625,
+      "rejected_total_ensemble": 69.125,
+      "margin_ensemble": 21.4375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 207,
+      "chosen_totals_k": [
+        96.25,
+        95.0,
+        95.0,
+        92.75
+      ],
+      "rejected_totals_k": [
+        89.0,
+        92.5,
+        87.5,
+        94.75
+      ],
+      "chosen_total_ensemble": 94.75,
+      "rejected_total_ensemble": 90.9375,
+      "margin_ensemble": 3.8125,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 208,
+      "chosen_totals_k": [
+        89.5,
+        91.45,
+        86.55,
+        88.75
+      ],
+      "rejected_totals_k": [
+        2.0,
+        6.0,
+        1.6,
+        3.0
+      ],
+      "chosen_total_ensemble": 89.0625,
+      "rejected_total_ensemble": 3.15,
+      "margin_ensemble": 85.9125,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 209,
+      "chosen_totals_k": [
+        82.5,
+        83.0,
+        87.75,
+        88.25
+      ],
+      "rejected_totals_k": [
+        89.75,
+        92.0,
+        93.75,
+        93.0
+      ],
+      "chosen_total_ensemble": 85.375,
+      "rejected_total_ensemble": 92.125,
+      "margin_ensemble": -6.75,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 210,
+      "chosen_totals_k": [
+        93.5,
+        89.0,
+        93.25,
+        90.5
+      ],
+      "rejected_totals_k": [
+        93.5,
+        93.5,
+        90.0,
+        90.0
+      ],
+      "chosen_total_ensemble": 91.5625,
+      "rejected_total_ensemble": 91.75,
+      "margin_ensemble": -0.1875,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 211,
+      "chosen_totals_k": [
+        68.75,
+        77.0,
+        71.75,
+        77.5
+      ],
+      "rejected_totals_k": [
+        91.0,
+        85.5,
+        90.0,
+        92.5
+      ],
+      "chosen_total_ensemble": 73.75,
+      "rejected_total_ensemble": 89.75,
+      "margin_ensemble": -16.0,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 212,
+      "chosen_totals_k": [
+        44.5,
+        45.5,
+        48.25,
+        40.5
+      ],
+      "rejected_totals_k": [
+        92.0,
+        94.25,
+        92.5,
+        95.5
+      ],
+      "chosen_total_ensemble": 44.6875,
+      "rejected_total_ensemble": 93.5625,
+      "margin_ensemble": -48.875,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 213,
+      "chosen_totals_k": [
+        83.0,
+        83.25,
+        82.0,
+        81.0
+      ],
+      "rejected_totals_k": [
+        78.25,
+        77.0,
+        80.0,
+        79.25
+      ],
+      "chosen_total_ensemble": 82.3125,
+      "rejected_total_ensemble": 78.625,
+      "margin_ensemble": 3.6875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 214,
+      "chosen_totals_k": [
+        74.6,
+        75.75,
+        71.5,
+        79.25
+      ],
+      "rejected_totals_k": [
+        55.75,
+        63.5,
+        59.0,
+        59.0
+      ],
+      "chosen_total_ensemble": 75.275,
+      "rejected_total_ensemble": 59.3125,
+      "margin_ensemble": 15.962500000000006,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 215,
+      "chosen_totals_k": [
+        78.75,
+        83.5,
+        84.25,
+        82.75
+      ],
+      "rejected_totals_k": [
+        65.75,
+        67.75,
+        66.0,
+        67.75
+      ],
+      "chosen_total_ensemble": 82.3125,
+      "rejected_total_ensemble": 66.8125,
+      "margin_ensemble": 15.5,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 216,
+      "chosen_totals_k": [
+        96.5,
+        91.5,
+        93.5,
+        92.5
+      ],
+      "rejected_totals_k": [
+        13.75,
+        17.75,
+        8.5,
+        15.25
+      ],
+      "chosen_total_ensemble": 93.5,
+      "rejected_total_ensemble": 13.8125,
+      "margin_ensemble": 79.6875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 217,
+      "chosen_totals_k": [
+        76.75,
+        71.75,
+        80.25,
+        74.75
+      ],
+      "rejected_totals_k": [
+        88.75,
+        84.0,
+        89.75,
+        81.0
+      ],
+      "chosen_total_ensemble": 75.875,
+      "rejected_total_ensemble": 85.875,
+      "margin_ensemble": -10.0,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 218,
+      "chosen_totals_k": [
+        83.5,
+        84.25,
+        87.75,
+        84.75
+      ],
+      "rejected_totals_k": [
+        77.7,
+        74.0,
+        76.5,
+        79.75
+      ],
+      "chosen_total_ensemble": 85.0625,
+      "rejected_total_ensemble": 76.9875,
+      "margin_ensemble": 8.075000000000003,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 219,
+      "chosen_totals_k": [
+        94.5,
+        90.8,
+        93.25,
+        92.25
+      ],
+      "rejected_totals_k": [
+        92.7,
+        92.75,
+        93.25,
+        89.75
+      ],
+      "chosen_total_ensemble": 92.7,
+      "rejected_total_ensemble": 92.1125,
+      "margin_ensemble": 0.5875000000000057,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 220,
+      "chosen_totals_k": [
+        89.75,
+        87.25,
+        93.0,
+        91.5
+      ],
+      "rejected_totals_k": [
+        43.5,
+        36.0,
+        43.25,
+        41.5
+      ],
+      "chosen_total_ensemble": 90.375,
+      "rejected_total_ensemble": 41.0625,
+      "margin_ensemble": 49.3125,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 222,
+      "chosen_totals_k": [
+        92.25,
+        96.5,
+        93.25,
+        84.75
+      ],
+      "rejected_totals_k": [
+        93.5,
+        92.45,
+        92.75,
+        92.65
+      ],
+      "chosen_total_ensemble": 91.6875,
+      "rejected_total_ensemble": 92.8375,
+      "margin_ensemble": -1.1500000000000057,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 223,
+      "chosen_totals_k": [
+        93.5,
+        94.5,
+        95.5,
+        95.0
+      ],
+      "rejected_totals_k": [
+        93.5,
+        95.0,
+        87.0,
+        86.25
+      ],
+      "chosen_total_ensemble": 94.625,
+      "rejected_total_ensemble": 90.4375,
+      "margin_ensemble": 4.1875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 224,
+      "chosen_totals_k": [
+        94.5,
+        87.25,
+        94.5,
+        95.0
+      ],
+      "rejected_totals_k": [
+        94.75,
+        93.5,
+        94.25,
+        88.5
+      ],
+      "chosen_total_ensemble": 92.8125,
+      "rejected_total_ensemble": 92.75,
+      "margin_ensemble": 0.0625,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 225,
+      "chosen_totals_k": [
+        23.25,
+        22.5,
+        29.5,
+        23.0
+      ],
+      "rejected_totals_k": [
+        82.0,
+        88.25,
+        83.75,
+        85.75
+      ],
+      "chosen_total_ensemble": 24.5625,
+      "rejected_total_ensemble": 84.9375,
+      "margin_ensemble": -60.375,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 226,
+      "chosen_totals_k": [
+        94.25,
+        92.75,
+        94.5,
+        95.5
+      ],
+      "rejected_totals_k": [
+        91.75,
+        92.5,
+        93.3,
+        91.25
+      ],
+      "chosen_total_ensemble": 94.25,
+      "rejected_total_ensemble": 92.2,
+      "margin_ensemble": 2.049999999999997,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 228,
+      "chosen_totals_k": [
+        22.25,
+        24.75,
+        26.75,
+        26.0
+      ],
+      "rejected_totals_k": [
+        94.75,
+        96.25,
+        94.55,
+        94.25
+      ],
+      "chosen_total_ensemble": 24.9375,
+      "rejected_total_ensemble": 94.95,
+      "margin_ensemble": -70.0125,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 229,
+      "chosen_totals_k": [
+        4.5,
+        0.5,
+        6.5,
+        9.0
+      ],
+      "rejected_totals_k": [
+        81.75,
+        80.5,
+        75.0,
+        82.5
+      ],
+      "chosen_total_ensemble": 5.125,
+      "rejected_total_ensemble": 79.9375,
+      "margin_ensemble": -74.8125,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 230,
+      "chosen_totals_k": [
+        74.75,
+        69.0,
+        74.5,
+        74.25
+      ],
+      "rejected_totals_k": [
+        78.75,
+        73.75,
+        72.8,
+        78.5
+      ],
+      "chosen_total_ensemble": 73.125,
+      "rejected_total_ensemble": 75.95,
+      "margin_ensemble": -2.825000000000003,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 231,
+      "chosen_totals_k": [
+        8.0,
+        16.5,
+        7.0,
+        12.5
+      ],
+      "rejected_totals_k": [
+        62.75,
+        65.75,
+        55.5,
+        67.25
+      ],
+      "chosen_total_ensemble": 11.0,
+      "rejected_total_ensemble": 62.8125,
+      "margin_ensemble": -51.8125,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 232,
+      "chosen_totals_k": [
+        91.85,
+        93.5,
+        93.5,
+        90.25
+      ],
+      "rejected_totals_k": [
+        69.0,
+        70.5,
+        76.25,
+        64.5
+      ],
+      "chosen_total_ensemble": 92.275,
+      "rejected_total_ensemble": 70.0625,
+      "margin_ensemble": 22.212500000000006,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 233,
+      "chosen_totals_k": [
+        54.5,
+        55.5,
+        61.0,
+        47.0
+      ],
+      "rejected_totals_k": [
+        14.0,
+        28.0,
+        20.5,
+        28.0
+      ],
+      "chosen_total_ensemble": 54.5,
+      "rejected_total_ensemble": 22.625,
+      "margin_ensemble": 31.875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 234,
+      "chosen_totals_k": [
+        91.75,
+        92.75,
+        89.75,
+        87.75
+      ],
+      "rejected_totals_k": [
+        83.0,
+        80.0,
+        81.75,
+        82.25
+      ],
+      "chosen_total_ensemble": 90.5,
+      "rejected_total_ensemble": 81.75,
+      "margin_ensemble": 8.75,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 235,
+      "chosen_totals_k": [
+        72.75,
+        75.75,
+        75.5,
+        69.5
+      ],
+      "rejected_totals_k": [
+        81.5,
+        82.0,
+        82.5,
+        77.75
+      ],
+      "chosen_total_ensemble": 73.375,
+      "rejected_total_ensemble": 80.9375,
+      "margin_ensemble": -7.5625,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 236,
+      "chosen_totals_k": [
+        83.0,
+        81.75,
+        87.0,
+        82.5
+      ],
+      "rejected_totals_k": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "chosen_total_ensemble": 83.5625,
+      "rejected_total_ensemble": 0.0,
+      "margin_ensemble": 83.5625,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 237,
+      "chosen_totals_k": [
+        92.75,
+        93.75,
+        94.25,
+        94.75
+      ],
+      "rejected_totals_k": [
+        90.5,
+        92.0,
+        91.25,
+        93.25
+      ],
+      "chosen_total_ensemble": 93.875,
+      "rejected_total_ensemble": 91.75,
+      "margin_ensemble": 2.125,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 238,
+      "chosen_totals_k": [
+        90.15,
+        91.0,
+        91.5,
+        93.5
+      ],
+      "rejected_totals_k": [
+        83.25,
+        84.5,
+        86.5,
+        83.75
+      ],
+      "chosen_total_ensemble": 91.5375,
+      "rejected_total_ensemble": 84.5,
+      "margin_ensemble": 7.037499999999994,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 239,
+      "chosen_totals_k": [
+        90.25,
+        92.75,
+        85.5,
+        80.75
+      ],
+      "rejected_totals_k": [
+        75.5,
+        79.75,
+        74.0,
+        78.5
+      ],
+      "chosen_total_ensemble": 87.3125,
+      "rejected_total_ensemble": 76.9375,
+      "margin_ensemble": 10.375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 240,
+      "chosen_totals_k": [
+        91.0,
+        84.25,
+        84.75,
+        90.75
+      ],
+      "rejected_totals_k": [
+        26.0,
+        32.5,
+        40.0,
+        38.5
+      ],
+      "chosen_total_ensemble": 87.6875,
+      "rejected_total_ensemble": 34.25,
+      "margin_ensemble": 53.4375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 241,
+      "chosen_totals_k": [
+        40.75,
+        40.0,
+        40.0,
+        58.75
+      ],
+      "rejected_totals_k": [
+        70.75,
+        84.0,
+        72.25,
+        71.5
+      ],
+      "chosen_total_ensemble": 44.875,
+      "rejected_total_ensemble": 74.625,
+      "margin_ensemble": -29.75,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 242,
+      "chosen_totals_k": [
+        93.75,
+        95.0,
+        94.25,
+        93.75
+      ],
+      "rejected_totals_k": [
+        88.25,
+        89.39999999999999,
+        88.5,
+        89.25
+      ],
+      "chosen_total_ensemble": 94.1875,
+      "rejected_total_ensemble": 88.85,
+      "margin_ensemble": 5.337500000000006,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 243,
+      "chosen_totals_k": [
+        93.5,
+        90.75,
+        94.0,
+        92.25
+      ],
+      "rejected_totals_k": [
+        77.0,
+        78.5,
+        81.0,
+        78.5
+      ],
+      "chosen_total_ensemble": 92.625,
+      "rejected_total_ensemble": 78.75,
+      "margin_ensemble": 13.875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 244,
+      "chosen_totals_k": [
+        87.5,
+        86.5,
+        85.5,
+        87.25
+      ],
+      "rejected_totals_k": [
+        59.5,
+        56.25,
+        63.25,
+        57.0
+      ],
+      "chosen_total_ensemble": 86.6875,
+      "rejected_total_ensemble": 59.0,
+      "margin_ensemble": 27.6875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 245,
+      "chosen_totals_k": [
+        78.0,
+        77.75,
+        80.5,
+        78.25
+      ],
+      "rejected_totals_k": [
+        51.0,
+        51.0,
+        53.0,
+        51.0
+      ],
+      "chosen_total_ensemble": 78.625,
+      "rejected_total_ensemble": 51.5,
+      "margin_ensemble": 27.125,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 246,
+      "chosen_totals_k": [
+        65.75,
+        57.5,
+        67.25,
+        68.25
+      ],
+      "rejected_totals_k": [
+        82.25,
+        75.5,
+        85.0,
+        84.25
+      ],
+      "chosen_total_ensemble": 64.6875,
+      "rejected_total_ensemble": 81.75,
+      "margin_ensemble": -17.0625,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 247,
+      "chosen_totals_k": [
+        89.25,
+        91.75,
+        92.25,
+        90.5
+      ],
+      "rejected_totals_k": [
+        69.75,
+        75.0,
+        74.75,
+        70.75
+      ],
+      "chosen_total_ensemble": 90.9375,
+      "rejected_total_ensemble": 72.5625,
+      "margin_ensemble": 18.375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 248,
+      "chosen_totals_k": [
+        76.0,
+        68.0,
+        78.0,
+        70.5
+      ],
+      "rejected_totals_k": [
+        67.0,
+        72.5,
+        77.25,
+        72.25
+      ],
+      "chosen_total_ensemble": 73.125,
+      "rejected_total_ensemble": 72.25,
+      "margin_ensemble": 0.875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 249,
+      "chosen_totals_k": [
+        75.5,
+        83.0,
+        84.5,
+        77.5
+      ],
+      "rejected_totals_k": [
+        25.0,
+        27.0,
+        21.0,
+        28.0
+      ],
+      "chosen_total_ensemble": 80.125,
+      "rejected_total_ensemble": 25.25,
+      "margin_ensemble": 54.875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 250,
+      "chosen_totals_k": [
+        0.0,
+        0.0,
+        3.0,
+        0.0
+      ],
+      "rejected_totals_k": [
+        0.44999999999999996,
+        1.0,
+        0.7,
+        0.0
+      ],
+      "chosen_total_ensemble": 0.75,
+      "rejected_total_ensemble": 0.5375,
+      "margin_ensemble": 0.21250000000000002,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 251,
+      "chosen_totals_k": [
+        86.5,
+        79.5,
+        81.25,
+        87.0
+      ],
+      "rejected_totals_k": [
+        85.75,
+        89.75,
+        93.5,
+        89.0
+      ],
+      "chosen_total_ensemble": 83.5625,
+      "rejected_total_ensemble": 89.5,
+      "margin_ensemble": -5.9375,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 252,
+      "chosen_totals_k": [
+        77.5,
+        81.5,
+        77.75,
+        75.25
+      ],
+      "rejected_totals_k": [
+        67.5,
+        60.25,
+        75.75,
+        65.0
+      ],
+      "chosen_total_ensemble": 78.0,
+      "rejected_total_ensemble": 67.125,
+      "margin_ensemble": 10.875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 254,
+      "chosen_totals_k": [
+        89.5,
+        79.5,
+        89.75,
+        84.25
+      ],
+      "rejected_totals_k": [
+        51.5,
+        47.0,
+        51.25,
+        50.5
+      ],
+      "chosen_total_ensemble": 85.75,
+      "rejected_total_ensemble": 50.0625,
+      "margin_ensemble": 35.6875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 255,
+      "chosen_totals_k": [
+        90.25,
+        88.5,
+        91.5,
+        91.25
+      ],
+      "rejected_totals_k": [
+        73.5,
+        63.25,
+        68.0,
+        69.0
+      ],
+      "chosen_total_ensemble": 90.375,
+      "rejected_total_ensemble": 68.4375,
+      "margin_ensemble": 21.9375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 256,
+      "chosen_totals_k": [
+        78.75,
+        88.0,
+        85.25,
+        83.75
+      ],
+      "rejected_totals_k": [
+        86.75,
+        79.0,
+        84.5,
+        87.19999999999999
+      ],
+      "chosen_total_ensemble": 83.9375,
+      "rejected_total_ensemble": 84.3625,
+      "margin_ensemble": -0.42499999999999716,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 257,
+      "chosen_totals_k": [
+        10.0,
+        1.5,
+        3.0,
+        3.0
+      ],
+      "rejected_totals_k": [
+        70.0,
+        67.0,
+        68.0,
+        61.0
+      ],
+      "chosen_total_ensemble": 4.375,
+      "rejected_total_ensemble": 66.5,
+      "margin_ensemble": -62.125,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 258,
+      "chosen_totals_k": [
+        87.0,
+        76.25,
+        88.25,
+        78.5
+      ],
+      "rejected_totals_k": [
+        39.75,
+        40.25,
+        42.0,
+        31.5
+      ],
+      "chosen_total_ensemble": 82.5,
+      "rejected_total_ensemble": 38.375,
+      "margin_ensemble": 44.125,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 259,
+      "chosen_totals_k": [
+        61.25,
+        61.25,
+        46.0,
+        56.5
+      ],
+      "rejected_totals_k": [
+        59.0,
+        61.0,
+        66.25,
+        58.0
+      ],
+      "chosen_total_ensemble": 56.25,
+      "rejected_total_ensemble": 61.0625,
+      "margin_ensemble": -4.8125,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 260,
+      "chosen_totals_k": [
+        51.0,
+        54.75,
+        54.75,
+        49.5
+      ],
+      "rejected_totals_k": [
+        40.75,
+        51.75,
+        49.0,
+        50.25
+      ],
+      "chosen_total_ensemble": 52.5,
+      "rejected_total_ensemble": 47.9375,
+      "margin_ensemble": 4.5625,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 261,
+      "chosen_totals_k": [
+        87.0,
+        84.5,
+        86.0,
+        85.5
+      ],
+      "rejected_totals_k": [
+        88.75,
+        87.0,
+        90.44999999999999,
+        88.5
+      ],
+      "chosen_total_ensemble": 85.75,
+      "rejected_total_ensemble": 88.675,
+      "margin_ensemble": -2.924999999999997,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 262,
+      "chosen_totals_k": [
+        77.5,
+        71.0,
+        74.75,
+        66.5
+      ],
+      "rejected_totals_k": [
+        80.75,
+        80.75,
+        88.5,
+        82.0
+      ],
+      "chosen_total_ensemble": 72.4375,
+      "rejected_total_ensemble": 83.0,
+      "margin_ensemble": -10.5625,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 263,
+      "chosen_totals_k": [
+        78.5,
+        82.0,
+        80.75,
+        82.75
+      ],
+      "rejected_totals_k": [
+        77.75,
+        86.75,
+        80.75,
+        86.75
+      ],
+      "chosen_total_ensemble": 81.0,
+      "rejected_total_ensemble": 83.0,
+      "margin_ensemble": -2.0,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 264,
+      "chosen_totals_k": [
+        60.5,
+        54.5,
+        47.5,
+        62.75
+      ],
+      "rejected_totals_k": [
+        93.75,
+        92.0,
+        93.5,
+        93.25
+      ],
+      "chosen_total_ensemble": 56.3125,
+      "rejected_total_ensemble": 93.125,
+      "margin_ensemble": -36.8125,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 265,
+      "chosen_totals_k": [
+        69.25,
+        70.25,
+        77.5,
+        66.5
+      ],
+      "rejected_totals_k": [
+        67.5,
+        66.75,
+        70.5,
+        71.25
+      ],
+      "chosen_total_ensemble": 70.875,
+      "rejected_total_ensemble": 69.0,
+      "margin_ensemble": 1.875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 267,
+      "chosen_totals_k": [
+        93.25,
+        85.0,
+        92.5,
+        83.25
+      ],
+      "rejected_totals_k": [
+        93.25,
+        85.25,
+        88.0,
+        88.25
+      ],
+      "chosen_total_ensemble": 88.5,
+      "rejected_total_ensemble": 88.6875,
+      "margin_ensemble": -0.1875,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 268,
+      "chosen_totals_k": [
+        91.5,
+        89.05,
+        88.25,
+        81.25
+      ],
+      "rejected_totals_k": [
+        69.25,
+        74.75,
+        61.25,
+        72.75
+      ],
+      "chosen_total_ensemble": 87.5125,
+      "rejected_total_ensemble": 69.5,
+      "margin_ensemble": 18.012500000000003,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 269,
+      "chosen_totals_k": [
+        52.75,
+        60.25,
+        74.75,
+        61.25
+      ],
+      "rejected_totals_k": [
+        83.5,
+        82.0,
+        79.5,
+        86.5
+      ],
+      "chosen_total_ensemble": 62.25,
+      "rejected_total_ensemble": 82.875,
+      "margin_ensemble": -20.625,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 270,
+      "chosen_totals_k": [
+        93.25,
+        91.25,
+        93.0,
+        93.25
+      ],
+      "rejected_totals_k": [
+        14.0,
+        11.5,
+        0.0,
+        6.0
+      ],
+      "chosen_total_ensemble": 92.6875,
+      "rejected_total_ensemble": 7.875,
+      "margin_ensemble": 84.8125,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 271,
+      "chosen_totals_k": [
+        67.25,
+        78.75,
+        71.25,
+        76.25
+      ],
+      "rejected_totals_k": [
+        90.5,
+        91.75,
+        89.0,
+        89.25
+      ],
+      "chosen_total_ensemble": 73.375,
+      "rejected_total_ensemble": 90.125,
+      "margin_ensemble": -16.75,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 272,
+      "chosen_totals_k": [
+        65.25,
+        71.75,
+        73.25,
+        69.5
+      ],
+      "rejected_totals_k": [
+        59.25,
+        68.25,
+        61.75,
+        63.5
+      ],
+      "chosen_total_ensemble": 69.9375,
+      "rejected_total_ensemble": 63.1875,
+      "margin_ensemble": 6.75,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 273,
+      "chosen_totals_k": [
+        58.0,
+        55.5,
+        62.5,
+        72.25
+      ],
+      "rejected_totals_k": [
+        82.25,
+        83.75,
+        79.5,
+        76.75
+      ],
+      "chosen_total_ensemble": 62.0625,
+      "rejected_total_ensemble": 80.5625,
+      "margin_ensemble": -18.5,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 275,
+      "chosen_totals_k": [
+        93.75,
+        94.25,
+        91.0,
+        93.0
+      ],
+      "rejected_totals_k": [
+        77.95,
+        78.0,
+        73.25,
+        85.5
+      ],
+      "chosen_total_ensemble": 93.0,
+      "rejected_total_ensemble": 78.675,
+      "margin_ensemble": 14.325000000000003,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 276,
+      "chosen_totals_k": [
+        83.5,
+        77.75,
+        83.75,
+        72.25
+      ],
+      "rejected_totals_k": [
+        67.75,
+        57.5,
+        59.5,
+        62.25
+      ],
+      "chosen_total_ensemble": 79.3125,
+      "rejected_total_ensemble": 61.75,
+      "margin_ensemble": 17.5625,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 277,
+      "chosen_totals_k": [
+        84.5,
+        82.5,
+        87.25,
+        85.5
+      ],
+      "rejected_totals_k": [
+        78.25,
+        76.25,
+        75.5,
+        75.75
+      ],
+      "chosen_total_ensemble": 84.9375,
+      "rejected_total_ensemble": 76.4375,
+      "margin_ensemble": 8.5,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 279,
+      "chosen_totals_k": [
+        96.5,
+        96.75,
+        95.75,
+        95.25
+      ],
+      "rejected_totals_k": [
+        24.75,
+        39.0,
+        17.5,
+        28.5
+      ],
+      "chosen_total_ensemble": 96.0625,
+      "rejected_total_ensemble": 27.4375,
+      "margin_ensemble": 68.625,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 280,
+      "chosen_totals_k": [
+        77.75,
+        77.8,
+        75.25,
+        76.5
+      ],
+      "rejected_totals_k": [
+        79.5,
+        79.75,
+        80.25,
+        73.0
+      ],
+      "chosen_total_ensemble": 76.825,
+      "rejected_total_ensemble": 78.125,
+      "margin_ensemble": -1.2999999999999972,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 281,
+      "chosen_totals_k": [
+        71.0,
+        72.75,
+        77.25,
+        72.5
+      ],
+      "rejected_totals_k": [
+        67.75,
+        66.0,
+        69.25,
+        59.5
+      ],
+      "chosen_total_ensemble": 73.375,
+      "rejected_total_ensemble": 65.625,
+      "margin_ensemble": 7.75,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 282,
+      "chosen_totals_k": [
+        81.25,
+        82.75,
+        79.25,
+        82.25
+      ],
+      "rejected_totals_k": [
+        4.5,
+        14.25,
+        11.0,
+        16.0
+      ],
+      "chosen_total_ensemble": 81.375,
+      "rejected_total_ensemble": 11.4375,
+      "margin_ensemble": 69.9375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 283,
+      "chosen_totals_k": [
+        97.25,
+        95.0,
+        96.25,
+        96.25
+      ],
+      "rejected_totals_k": [
+        93.5,
+        91.05,
+        95.0,
+        91.05
+      ],
+      "chosen_total_ensemble": 96.1875,
+      "rejected_total_ensemble": 92.65,
+      "margin_ensemble": 3.5374999999999943,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 284,
+      "chosen_totals_k": [
+        77.0,
+        70.0,
+        76.25,
+        80.25
+      ],
+      "rejected_totals_k": [
+        63.0,
+        62.75,
+        61.0,
+        63.75
+      ],
+      "chosen_total_ensemble": 75.875,
+      "rejected_total_ensemble": 62.625,
+      "margin_ensemble": 13.25,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 285,
+      "chosen_totals_k": [
+        74.2,
+        84.25,
+        80.25,
+        78.75
+      ],
+      "rejected_totals_k": [
+        90.55,
+        90.0,
+        91.25,
+        89.0
+      ],
+      "chosen_total_ensemble": 79.3625,
+      "rejected_total_ensemble": 90.2,
+      "margin_ensemble": -10.837500000000006,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 286,
+      "chosen_totals_k": [
+        92.5,
+        92.25,
+        89.0,
+        84.25
+      ],
+      "rejected_totals_k": [
+        74.75,
+        71.25,
+        74.25,
+        72.25
+      ],
+      "chosen_total_ensemble": 89.5,
+      "rejected_total_ensemble": 73.125,
+      "margin_ensemble": 16.375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 288,
+      "chosen_totals_k": [
+        95.0,
+        93.5,
+        95.5,
+        94.7
+      ],
+      "rejected_totals_k": [
+        34.0,
+        28.0,
+        29.5,
+        33.5
+      ],
+      "chosen_total_ensemble": 94.675,
+      "rejected_total_ensemble": 31.25,
+      "margin_ensemble": 63.425,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 289,
+      "chosen_totals_k": [
+        82.5,
+        76.75,
+        86.5,
+        87.75
+      ],
+      "rejected_totals_k": [
+        67.25,
+        68.25,
+        65.0,
+        64.25
+      ],
+      "chosen_total_ensemble": 83.375,
+      "rejected_total_ensemble": 66.1875,
+      "margin_ensemble": 17.1875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 290,
+      "chosen_totals_k": [
+        94.5,
+        92.25,
+        89.75,
+        94.0
+      ],
+      "rejected_totals_k": [
+        69.25,
+        63.5,
+        68.0,
+        69.0
+      ],
+      "chosen_total_ensemble": 92.625,
+      "rejected_total_ensemble": 67.4375,
+      "margin_ensemble": 25.1875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 291,
+      "chosen_totals_k": [
+        87.5,
+        87.6,
+        90.0,
+        89.25
+      ],
+      "rejected_totals_k": [
+        93.5,
+        93.0,
+        92.0,
+        91.25
+      ],
+      "chosen_total_ensemble": 88.5875,
+      "rejected_total_ensemble": 92.4375,
+      "margin_ensemble": -3.8499999999999943,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 292,
+      "chosen_totals_k": [
+        38.0,
+        27.5,
+        40.5,
+        30.0
+      ],
+      "rejected_totals_k": [
+        15.25,
+        22.0,
+        18.5,
+        18.5
+      ],
+      "chosen_total_ensemble": 34.0,
+      "rejected_total_ensemble": 18.5625,
+      "margin_ensemble": 15.4375,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 293,
+      "chosen_totals_k": [
+        89.25,
+        84.2,
+        80.0,
+        90.5
+      ],
+      "rejected_totals_k": [
+        64.75,
+        64.75,
+        65.25,
+        54.0
+      ],
+      "chosen_total_ensemble": 85.9875,
+      "rejected_total_ensemble": 62.1875,
+      "margin_ensemble": 23.799999999999997,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 294,
+      "chosen_totals_k": [
+        48.0,
+        52.0,
+        41.75,
+        48.0
+      ],
+      "rejected_totals_k": [
+        12.0,
+        20.0,
+        26.5,
+        24.5
+      ],
+      "chosen_total_ensemble": 47.4375,
+      "rejected_total_ensemble": 20.75,
+      "margin_ensemble": 26.6875,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 295,
+      "chosen_totals_k": [
+        63.0,
+        53.5,
+        58.25,
+        58.0
+      ],
+      "rejected_totals_k": [
+        75.5,
+        68.75,
+        73.25,
+        74.0
+      ],
+      "chosen_total_ensemble": 58.1875,
+      "rejected_total_ensemble": 72.875,
+      "margin_ensemble": -14.6875,
+      "accuracy_ensemble": 0.0
+    },
+    {
+      "id": 296,
+      "chosen_totals_k": [
+        94.75,
+        96.0,
+        92.25,
+        93.75
+      ],
+      "rejected_totals_k": [
+        91.25,
+        92.75,
+        90.0,
+        88.25
+      ],
+      "chosen_total_ensemble": 94.1875,
+      "rejected_total_ensemble": 90.5625,
+      "margin_ensemble": 3.625,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 297,
+      "chosen_totals_k": [
+        87.05,
+        91.75,
+        90.75,
+        90.0
+      ],
+      "rejected_totals_k": [
+        78.0,
+        78.0,
+        72.75,
+        74.25
+      ],
+      "chosen_total_ensemble": 89.8875,
+      "rejected_total_ensemble": 75.75,
+      "margin_ensemble": 14.137500000000003,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 298,
+      "chosen_totals_k": [
+        73.0,
+        73.5,
+        84.5,
+        74.25
+      ],
+      "rejected_totals_k": [
+        58.25,
+        60.0,
+        56.25,
+        53.5
+      ],
+      "chosen_total_ensemble": 76.3125,
+      "rejected_total_ensemble": 57.0,
+      "margin_ensemble": 19.3125,
+      "accuracy_ensemble": 1.0
+    },
+    {
+      "id": 299,
+      "chosen_totals_k": [
+        96.25,
+        96.0,
+        96.25,
+        97.25
+      ],
+      "rejected_totals_k": [
+        78.25,
+        62.5,
+        69.5,
+        56.0
+      ],
+      "chosen_total_ensemble": 96.4375,
+      "rejected_total_ensemble": 66.5625,
+      "margin_ensemble": 29.875,
+      "accuracy_ensemble": 1.0
+    }
+  ]
+}

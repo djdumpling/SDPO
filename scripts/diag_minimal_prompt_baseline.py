@@ -45,11 +45,17 @@ Which response is better? Answer with just one letter, A or B."""
 
 
 _LETTER_RE = re.compile(r"\b([AB])\b", re.I)
+_THINK_RE = re.compile(r"</think>", re.I)
 
 
 def parse_letter(text):
     if not text: return None
-    m = _LETTER_RE.search(text.strip())
+    s = text.strip()
+    # If thinking was emitted, only look at content after </think>.
+    m_think = _THINK_RE.search(s)
+    if m_think:
+        s = s[m_think.end():].strip()
+    m = _LETTER_RE.search(s)
     return m.group(1).upper() if m else None
 
 
@@ -61,6 +67,7 @@ async def call(client, sema, model, max_tokens, user, temperature):
                 messages=[{"role": "system", "content": SYS}, {"role": "user", "content": user}],
                 max_completion_tokens=max_tokens,
                 temperature=temperature,
+                extra_body={"chat_template_kwargs": {"enable_thinking": False}},
             )
             return parse_letter(resp.choices[0].message.content)
         except Exception:
@@ -148,7 +155,7 @@ def main():
     ap.add_argument("--base-url", required=True)
     ap.add_argument("--model", required=True)
     ap.add_argument("--api-key-env", default="LOCAL_DUMMY_KEY")
-    ap.add_argument("--max-tokens", type=int, default=8)
+    ap.add_argument("--max-tokens", type=int, default=64)
     ap.add_argument("--max-concurrent", type=int, default=8)
     ap.add_argument("--temperature", type=float, default=0.0)
     ap.add_argument("--seed", type=int, default=42)

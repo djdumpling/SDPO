@@ -37,53 +37,52 @@ def main():
     K = len(runs)
     print(f"  loaded {K} resample runs")
 
-    # Each row in each run has fields including chosen_score, rejected_score, accuracy.
-    # Index by row id (use jsonl_idx or fall back to row order)
-    by_id = defaultdict(list)  # id -> list of K rows
+    # cross_judge_rubric.py rows have: idx, chosen_total, rejected_total, reward (per row)
+    by_id = defaultdict(list)
     for run_idx, run in enumerate(runs):
         for i, row in enumerate(run.get("rows", [])):
-            rid = row.get("jsonl_idx", row.get("idx", i))
+            rid = row.get("idx", i)
             by_id[rid].append(row)
+
+    def _mean(xs):
+        xs = [x for x in xs if x is not None]
+        return sum(xs) / len(xs) if xs else None
 
     rows_out = []
     individual_acc = [[] for _ in range(K)]
     ensemble_acc = []
-    individual_margins = [[] for _ in range(K)]
     ensemble_margins = []
     for rid, group in by_id.items():
         if len(group) < K:
-            continue  # keep only rows present in ALL runs
-        # Average chosen_score and rejected_score across K resamples
-        cs = [g.get("chosen_score") for g in group if g.get("chosen_score") is not None]
-        rs = [g.get("rejected_score") for g in group if g.get("rejected_score") is not None]
+            continue
+        cs = [g.get("chosen_total") for g in group if g.get("chosen_total") is not None]
+        rs = [g.get("rejected_total") for g in group if g.get("rejected_total") is not None]
         if not cs or not rs:
             continue
-        cs_ens = statistics.fmean(cs)
-        rs_ens = statistics.fmean(rs)
+        cs_ens = _mean(cs)
+        rs_ens = _mean(rs)
         margin_ens = cs_ens - rs_ens
         acc_ens = absolute_reward(margin_ens)
 
         for k_i, g in enumerate(group):
-            ch_k, rj_k = g.get("chosen_score"), g.get("rejected_score")
+            ch_k, rj_k = g.get("chosen_total"), g.get("rejected_total")
             if ch_k is not None and rj_k is not None:
                 individual_acc[k_i].append(absolute_reward(ch_k - rj_k))
-                individual_margins[k_i].append(ch_k - rj_k)
 
         ensemble_acc.append(acc_ens)
         ensemble_margins.append(margin_ens)
         rows_out.append({
             "id": rid,
-            "chosen_scores_k": cs, "rejected_scores_k": rs,
-            "chosen_score_ensemble": cs_ens,
-            "rejected_score_ensemble": rs_ens,
+            "chosen_totals_k": cs, "rejected_totals_k": rs,
+            "chosen_total_ensemble": cs_ens,
+            "rejected_total_ensemble": rs_ens,
             "margin_ensemble": margin_ens,
             "accuracy_ensemble": acc_ens,
         })
 
-    individual_means = [statistics.fmean(a) if a else None for a in individual_acc]
-    ensemble_mean = statistics.fmean(ensemble_acc) if ensemble_acc else None
-    individual_avg = statistics.fmean(
-        [m for m in individual_means if m is not None]) if individual_means else None
+    individual_means = [_mean(a) for a in individual_acc]
+    ensemble_mean = _mean(ensemble_acc)
+    individual_avg = _mean([m for m in individual_means if m is not None])
 
     headline = {
         "K": K,
